@@ -14,6 +14,19 @@ class RPCError extends Error {
   }
 }
 
+let _errorCount = 0, _errorLimit = 4, _hasBeenInitialized = false, _apiNodeIndex = 0;
+const suggestedApiNodes = ['https://api.hive.blog', 'https://anyx.io'];
+
+function notifyError()
+{
+  console.log("in notifyError()");
+  _errorCount++;
+  if (_errorCount >= _errorLimit)
+  {
+    _errorCount = 0;
+  }
+};
+
 /**
  * Makes a JSON-RPC request using `fetch` or a user-provided `fetchMethod`.
  *
