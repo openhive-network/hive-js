@@ -3,6 +3,7 @@ import Promise from 'bluebird';
 import config from '../config';
 import methods from './methods';
 import transports from './transports';
+import {RPCError} from './transports/http'
 import {
     camelCase
 } from '../utils';
@@ -19,6 +20,8 @@ import {
     sign as signRequest
 } from '@steemit/rpc-auth';
 
+const suggestedApiNodes = ['https://api.hive.blog', 'https://anyx.io'];
+
 class Steem extends EventEmitter {
     constructor(options = {}) {
         super(options);
@@ -26,6 +29,9 @@ class Steem extends EventEmitter {
         this._setLogger(options);
         this.options = options;
         this.seqNo = 0; // used for rpc calls
+        this.errorCount = 0;
+        this.errorThreshold = 3;
+        this.apiIndex = 0;
         methods.forEach(method => {
             const methodName = method.method_name || camelCase(method.method);
             const methodParams = method.params || [];
@@ -156,7 +162,7 @@ class Steem extends EventEmitter {
         }
         const id = ++this.seqNo;
         jsonRpc(this.options.uri, {method, params, id})
-            .then(res => { callback(null, res) }, err => { callback(err) });
+            .then(res => { callback(null, res) }, err => { this.notifyError(err, err instanceof RPCError); callback(err) });
     }
 
     signedCall(method, params, account, key, callback) {
@@ -173,7 +179,7 @@ class Steem extends EventEmitter {
             return;
         }
         jsonRpc(this.options.uri, request)
-            .then(res => { callback(null, res) }, err => { callback(err) });
+            .then(res => { callback(null, res) }, err => { callback(err); this.notifyError(err) });
     }
 
     setOptions(options) {
@@ -343,6 +349,37 @@ class Steem extends EventEmitter {
         },
     );
 
+    }
+
+    notifyError(err, ignore=false)
+    {
+        if (err instanceof RPCError || err.message.includes('overseer'))
+        {
+            console.log("caught an rpc error, but that likely means it's not an api problem, so not counting it for now while I investigate further");
+            return;
+        }
+
+        this.errorCount++;
+        console.log("steemd api caught an error. count is now: " + this.errorCount);
+        console.log("and the error is :", err);
+        console.log("type of error is", typeof(err));
+        if (ignore)
+        {
+            console.log("but we're being instructed to ignore this error. cherrio good chap, back to it");
+            return;
+        }
+        if (this.errorCount >= this.errorThreshold)
+        {
+            this.errorCount = 0;
+            this.apiIndex++;
+            if (this.apiIndex >= suggestedApiNodes.length)
+            {
+                this.apiIndex = 0;
+            }
+            let nextEndpoint = suggestedApiNodes[this.apiIndex];
+            this.setOptions({url: nextEndpoint});
+            console.log("switch to another api endpoint after too many failures. new endpoint is: " + nextEndpoint);
+        }
     }
 }
 

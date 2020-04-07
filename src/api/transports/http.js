@@ -5,7 +5,7 @@ import Transport from './base';
 
 const debug = newDebug('steem:http');
 
-class RPCError extends Error {
+export class RPCError extends Error {
   constructor(rpcError) {
     super(rpcError.message);
     this.name = 'RPCError';
@@ -58,6 +58,7 @@ export function jsonRpc(uri, {method, id, params, fetchMethod=fetch}) {
       throw new Error(`Invalid response id: ${ rpcRes.id }`);
     }
     if (rpcRes.error) {
+      console.log("rcpRes error means rpc threw an error. uri, payload are: ", uri, payload);
       throw new RPCError(rpcRes.error);
     }
     return rpcRes.result
