@@ -7,6 +7,6 @@
   "stage_uri": "https://api.steemitstage.com",
   "address_prefix": "STM",
   "chain_id": "0000000000000000000000000000000000000000000000000000000000000000",
-  "alternateAPIEndpoints": ["https://api.hive.blog", "https://anyx.io"],
-  "failoverThreshold": 3
+  "alternative_api_endpoints": ["https://api.hive.blog", "https://anyx.io"],
+  "failover_threshold": 3
 }

@@ -54,8 +54,8 @@ class Steem extends EventEmitter {
         });
         this.callAsync = Promise.promisify(this.call);
         this.signedCallAsync = Promise.promisify(this.signedCall);
-        console.log("Alternate endpoitns: ", this.options.alternateAPIEndpoints);
-        console.log("Error Failover Threshold: ", this.options.failoverThreshold);
+        console.log("Alternate endpoitns: ", this.options.alternative_api_endpoints);
+        console.log("Error Failover Threshold: ", this.options.failover_threshold);
 
     }
 
@@ -360,22 +360,22 @@ class Steem extends EventEmitter {
         }
 
         this.errorCount++;
-        console.log("hived api caught an error. count is now: ", this.errorCount, " and failover threshold is: ", this.options.failoverThreshold, " alternate endpoints: ", this.options.alternateAPIEndpoints);
+        console.log("hived api caught an error. count is now: ", this.errorCount, " and failover threshold is: ", this.options.failover_threshold, " alternate endpoints: ", this.options.alternative_api_endpoints);
         console.log("and the error is :", err);
         if (ignore)
         {
             console.log("but we're being instructed to ignore this error. cherrio good chap, back to it");
             return;
         }
-        if (this.errorCount >= this.options.failoverThreshold)
+        if (this.errorCount >= this.options.failover_threshold)
         {
             this.errorCount = 0;
             this.apiIndex++;
-            if (this.apiIndex >= this.options.alternateAPIEndpoints.length)
+            if (this.apiIndex >= this.options.alternative_api_endpoints.length)
             {
                 this.apiIndex = 0;
             }
-            let nextEndpoint = this.options.alternateAPIEndpoints[this.apiIndex];
+            let nextEndpoint = this.options.alternative_api_endpoints[this.apiIndex];
             this.setOptions({url: nextEndpoint});
             console.log("switching to another api endpoint after too many failures. new endpoint is: " + nextEndpoint);
         }
