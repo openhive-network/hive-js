@@ -211,9 +211,11 @@ class Steem extends EventEmitter {
                 }
             }
             this.apiIndex = index;
+            console.log("updated apiIndex to be ", this.apiIndex);
         }
 
         console.log("done setting options. new options are: ", this.options);
+        console.log("does failover_threshold still exist? ", this.options.failover_threshold === 'undefined' ? "no" : "yes");
     }
 
     setWebSocket(url) {
