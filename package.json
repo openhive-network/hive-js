@@ -1,6 +1,6 @@
 {
   "name": "hive-js-dev",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Steem.js the JavaScript API for Steem blockchain",
   "main": "lib/index.js",
   "scripts": {
