@@ -192,9 +192,19 @@ class Steem extends EventEmitter {
           config.set( 'address_prefix', options.useTestNet ? 'TST' : 'STM' )
         }
         if (options.hasOwnProperty('failover_threshold'))
+        {
+            console.log("options has failover_threshold property");
             config.set('failover_threshold', options.failover_threshold);
+        }
+        else
+            console.log("option does NOT have failover_threshold property. why?");
         if (options.hasOwnProperty('alternative_api_endpoints'))
+        {
+            console.log("options has alternative_api_endpoints property");
             config.set('alternative_api_endpoints', options.alternative_api_endpoints);
+        }
+        else
+            console.log("option does NOT have alternative_api_endpoints property. why?");
     }
 
     setWebSocket(url) {
