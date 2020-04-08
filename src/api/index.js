@@ -184,8 +184,6 @@ class Steem extends EventEmitter {
 
     setOptions(options) {
         Object.assign(this.options, options);
-        console.log("entering setOptions. options are ", options);
-        console.log("call stack is: ", new Error().stack);
         this._setLogger(options);
         this._setTransport(options);
         this.transport.setOptions(options);
@@ -195,18 +193,14 @@ class Steem extends EventEmitter {
         }
         if (options.hasOwnProperty('failover_threshold'))
         {
-            console.log("options has failover_threshold property");
             config.set('failover_threshold', options.failover_threshold);
         }
-        else
-            console.log("option does NOT have failover_threshold property. why?");
         if (options.hasOwnProperty('alternative_api_endpoints'))
         {
-            console.log("options has alternative_api_endpoints property");
             config.set('alternative_api_endpoints', options.alternative_api_endpoints);
         }
-        else
-            console.log("option does NOT have alternative_api_endpoints property. why?");
+
+        console.log("done setting options. new options are: ", this.options);
     }
 
     setWebSocket(url) {
@@ -369,18 +363,9 @@ class Steem extends EventEmitter {
 
     notifyError(err, ignore=false)
     {
-        if (err instanceof RPCError || err.message.includes('overseer'))
-        {
-            console.log("caught an rpc error, but that likely means it's not an api problem, so not counting it for now while I investigate further");
-            return;
-        }
-
         this.errorCount++;
-        console.log("hived api caught an error. count is now: ", this.errorCount, " and failover threshold is: ", this.options.failover_threshold, " alternate endpoints: ", this.options.alternative_api_endpoints);
-        console.log("and the error is :", err);
         if (ignore)
         {
-            console.log("but we're being instructed to ignore this error. cherrio good chap, back to it");
             return;
         }
         if (this.errorCount >= this.options.failover_threshold)
@@ -393,7 +378,6 @@ class Steem extends EventEmitter {
             }
             let nextEndpoint = this.options.alternative_api_endpoints[this.apiIndex];
             this.setOptions({url: nextEndpoint});
-            console.log("switching to another api endpoint after too many failures. new endpoint is: " + nextEndpoint);
         }
     }
 }
