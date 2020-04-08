@@ -199,6 +199,19 @@ class Steem extends EventEmitter {
         {
             config.set('alternative_api_endpoints', options.alternative_api_endpoints);
         }
+        if (options.hasOwnProperty('url') && this.options.hasOwnProperty('alternative_api_endpoints')))
+        {
+            let index = 0;
+            for (var i = 0; i < this.options.alternative_api_endpoints.length; i++)
+            {
+                if (this.options.url === this.options.alternative_api_endpoints[i])
+                {
+                    index = i;
+                    break;
+                }
+            }
+            this.apiIndex = index;
+        }
 
         console.log("done setting options. new options are: ", this.options);
     }
