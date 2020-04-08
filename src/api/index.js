@@ -199,7 +199,7 @@ class Steem extends EventEmitter {
         {
             config.set('alternative_api_endpoints', options.alternative_api_endpoints);
         }
-        if (options.hasOwnProperty('url') && this.options.hasOwnProperty('alternative_api_endpoints'))
+        if (options.hasOwnProperty('url') && this.options.alternative_api_endpoints !== 'undefined')
         {
             let index = 0;
             for (var i = 0; i < this.options.alternative_api_endpoints.length; i++)
