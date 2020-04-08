@@ -360,9 +360,8 @@ class Steem extends EventEmitter {
         }
 
         this.errorCount++;
-        console.log("steemd api caught an error. count is now: " + this.errorCount);
+        console.log("hived api caught an error. count is now: ", this.errorCount, " and failover threshold is: ", this.options.failoverThreshold);
         console.log("and the error is :", err);
-        console.log("type of error is", typeof(err));
         if (ignore)
         {
             console.log("but we're being instructed to ignore this error. cherrio good chap, back to it");
