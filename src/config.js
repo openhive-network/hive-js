@@ -1,5 +1,5 @@
 import each from 'lodash/each';
-const defaultConfig = require('./config.json');
+const defaultConfig = require('../config.json');
 
 class Config {
   constructor(c) {
