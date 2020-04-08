@@ -184,6 +184,7 @@ class Steem extends EventEmitter {
 
     setOptions(options) {
         Object.assign(this.options, options);
+        console.log("entering setOptions. options are ", options);
         this._setLogger(options);
         this._setTransport(options);
         this.transport.setOptions(options);
