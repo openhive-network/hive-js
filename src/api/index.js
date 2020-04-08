@@ -199,8 +199,12 @@ class Steem extends EventEmitter {
         {
             config.set('alternative_api_endpoints', options.alternative_api_endpoints);
         }
-        if (options.hasOwnProperty('url') && this.options.alternative_api_endpoints !== 'undefined')
+        if (options.hasOwnProperty('url'))
         {
+            if (this.options.alternative_api_endpoints === undefined || this.options.alternative_api_endpoints === null)
+            {
+                console.log("no alternative api endpoints found, can't update the index");
+            }
             let index = 0;
             for (var i = 0; i < this.options.alternative_api_endpoints.length; i++)
             {
