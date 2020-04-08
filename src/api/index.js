@@ -20,8 +20,6 @@ import {
     sign as signRequest
 } from '@steemit/rpc-auth';
 
-const suggestedApiNodes = ['https://api.hive.blog', 'https://anyx.io'];
-
 class Steem extends EventEmitter {
     constructor(options = {}) {
         super(options);
@@ -30,7 +28,6 @@ class Steem extends EventEmitter {
         this.options = options;
         this.seqNo = 0; // used for rpc calls
         this.errorCount = 0;
-        this.errorThreshold = 3;
         this.apiIndex = 0;
         methods.forEach(method => {
             const methodName = method.method_name || camelCase(method.method);
@@ -57,6 +54,9 @@ class Steem extends EventEmitter {
         });
         this.callAsync = Promise.promisify(this.call);
         this.signedCallAsync = Promise.promisify(this.signedCall);
+        console.log("Alternate endpoitns: ", this.options.alternateAPIEndpoints);
+        console.log("Error Failover Threshold: ", this.options.failoverThreshold);
+
     }
 
     _setTransport(options) {
@@ -368,17 +368,17 @@ class Steem extends EventEmitter {
             console.log("but we're being instructed to ignore this error. cherrio good chap, back to it");
             return;
         }
-        if (this.errorCount >= this.errorThreshold)
+        if (this.errorCount >= this.options.failoverThreshold)
         {
             this.errorCount = 0;
             this.apiIndex++;
-            if (this.apiIndex >= suggestedApiNodes.length)
+            if (this.apiIndex >= this.options.alternateAPIEndpoints.length)
             {
                 this.apiIndex = 0;
             }
-            let nextEndpoint = suggestedApiNodes[this.apiIndex];
+            let nextEndpoint = this.options.alternateAPIEndpoints[this.apiIndex];
             this.setOptions({url: nextEndpoint});
-            console.log("switch to another api endpoint after too many failures. new endpoint is: " + nextEndpoint);
+            console.log("switching to another api endpoint after too many failures. new endpoint is: " + nextEndpoint);
         }
     }
 }
