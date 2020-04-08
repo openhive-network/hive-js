@@ -56,7 +56,7 @@ class Steem extends EventEmitter {
         this.signedCallAsync = Promise.promisify(this.signedCall);
         console.log("Alternate endpoitns: ", this.options.alternative_api_endpoints);
         console.log("Error Failover Threshold: ", this.options.failover_threshold);
-
+        this.notifyError = this.notifyError.bind(this);
     }
 
     _setTransport(options) {
