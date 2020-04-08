@@ -383,6 +383,11 @@ class Steem extends EventEmitter {
         {
             return;
         }
+        if (this.options.failover_threshold === 'undefined')
+        {
+            console.log("no failover options are listed, can't failover");
+            return;
+        }
         if (this.errorCount >= this.options.failover_threshold)
         {
             console.log("failing over");
