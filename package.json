@@ -1,7 +1,7 @@
 {
-  "name": "hive-js-dev",
-  "version": "0.0.9",
-  "description": "Steem.js the JavaScript API for Steem blockchain",
+  "name": "@hiveio/hive-js",
+  "version": "0.0.2",
+  "description": "Hive.js the JavaScript API for Hive blockchain",
   "main": "lib/index.js",
   "scripts": {
     "test": "eslint --quiet src test; mocha -t 40000 --require babel-polyfill --require babel-register",

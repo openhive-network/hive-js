@@ -27,8 +27,10 @@ class Steem extends EventEmitter {
         this._setLogger(options);
         this.options = options;
         this.seqNo = 0; // used for rpc calls
-        this.errorCount = 0;
-        this.apiIndex = 0;
+        this.error_count = 0;
+        this.api_index = 0;
+        this.error_threshold = 3;
+        this.alternative_api_endpoints = ['https://api.hive.blog', 'https://anyx.io'];
         methods.forEach(method => {
             const methodName = method.method_name || camelCase(method.method);
             const methodParams = method.params || [];
@@ -184,6 +186,12 @@ class Steem extends EventEmitter {
 
     setOptions(options) {
         Object.assign(this.options, options);
+
+        if (options.hasOwnProperty('failover_threshold'))
+            this.failover_threshold = options.failover_threshold;
+        if (options.hasOwnProperty('alternative_api_endpoints'))
+            this.alternative_api_endpoints = options.alternative_api_endpoints;
+
         this._setLogger(options);
         this._setTransport(options);
         this.transport.setOptions(options);
@@ -191,35 +199,22 @@ class Steem extends EventEmitter {
         {
           config.set( 'address_prefix', options.useTestNet ? 'TST' : 'STM' )
         }
-        if (options.hasOwnProperty('failover_threshold'))
-        {
-            config.set('failover_threshold', options.failover_threshold);
-        }
-        if (options.hasOwnProperty('alternative_api_endpoints'))
-        {
-            config.set('alternative_api_endpoints', options.alternative_api_endpoints);
-        }
+
         if (options.hasOwnProperty('url'))
         {
-            if (this.options.alternative_api_endpoints === undefined || this.options.alternative_api_endpoints === null)
+            let new_index = 0;
+            for (var i = 0; i < this.alternative_api_endpoints.length; i++)
             {
-                console.log("no alternative api endpoints found, can't update the index");
-            }
-            let index = 0;
-            for (var i = 0; i < this.options.alternative_api_endpoints.length; i++)
-            {
-                if (this.options.url === this.options.alternative_api_endpoints[i])
+                let temp_endpoint = this.alternative_api_endpoints[i];
+                if (temp_endpoint === options.url)
                 {
-                    index = i;
+                    new_index = i;
                     break;
                 }
             }
-            this.apiIndex = index;
-            console.log("updated apiIndex to be ", this.apiIndex);
+            this.api_index = new_index;
+            let new_endpoint = this.alternative_api_endpoints[this.api_index];
         }
-
-        console.log("done setting options. new options are: ", this.options);
-        console.log("does failover_threshold still exist? ", this.options.failover_threshold === 'undefined' ? "no" : "yes");
     }
 
     setWebSocket(url) {
@@ -382,26 +377,31 @@ class Steem extends EventEmitter {
 
     notifyError(err, ignore=false)
     {
-        this.errorCount++;
         if (ignore)
         {
             return;
         }
-        if (this.options.failover_threshold === 'undefined')
+        if (this.failover_threshold === undefined || this.alternative_api_endpoints === undefined)
         {
-            console.log("no failover options are listed, can't failover");
             return;
         }
-        if (this.errorCount >= this.options.failover_threshold)
+        if (err && err.toString().includes("overseer"))
         {
-            console.log("failing over");
-            this.errorCount = 0;
-            this.apiIndex++;
-            if (this.apiIndex >= this.options.alternative_api_endpoints.length)
+            //overseer was a steem thing, it doesn't exist in hive so don't count this error towards failover
+            return;
+        }
+        this.error_count++;
+        if (this.error_count >= this.failover_threshold)
+        {
+            let current_url = this.options.url;
+            this.error_count = 0;
+            this.api_index++;
+            if (this.api_index >= this.alternative_api_endpoints.length)
             {
-                this.apiIndex = 0;
+                this.api_index = 0;
             }
-            let nextEndpoint = this.options.alternative_api_endpoints[this.apiIndex];
+            let nextEndpoint = this.alternative_api_endpoints[this.api_index];
+            console.log("failing over. old endpoint was: ", current_url, " new one is: ", nextEndpoint);
             this.setOptions({url: nextEndpoint});
         }
     }
