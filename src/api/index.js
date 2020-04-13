@@ -31,6 +31,7 @@ class Steem extends EventEmitter {
         this.api_index = 0;
         this.error_threshold = 3;
         this.alternative_api_endpoints = ['https://api.hive.blog', 'https://anyx.io'];
+        this.time_in_minutes_to_persist = 10;
         methods.forEach(method => {
             const methodName = method.method_name || camelCase(method.method);
             const methodParams = method.params || [];
@@ -59,6 +60,24 @@ class Steem extends EventEmitter {
         console.log("Alternate endpoitns: ", this.options.alternative_api_endpoints);
         console.log("Error Failover Threshold: ", this.options.failover_threshold);
         this.notifyError = this.notifyError.bind(this);
+
+        if (typeof window !== 'undefined')
+        {
+            let last_failover_timestamp = localStorage.getItem("last_failover_timestamp");
+            if (last_failover_timestamp !== null)
+            {
+                let current_time = new Date();
+                let difference = (current_time.getTime() - new Date(last_failover_timestamp).getTime())/(60*1000);
+                if (difference <= this.time_in_minutes_to_persist)
+                {
+                    let last_endpoint = localStorage.getItem("last_failover_endpoint");
+                    if (last_endpoint !== null)
+                    {
+                        this.setOptions({url: last_endpoint});
+                    }
+                }
+            }
+        }
     }
 
     _setTransport(options) {
@@ -213,7 +232,11 @@ class Steem extends EventEmitter {
                 }
             }
             this.api_index = new_index;
-            let new_endpoint = this.alternative_api_endpoints[this.api_index];
+        }
+
+        if (options.hasOwnProperty('time_in_minutes_to_persist'))
+        {
+            this.time_in_minutes_to_persist = options.time_in_minutes_to_persist;
         }
     }
 
@@ -403,6 +426,13 @@ class Steem extends EventEmitter {
             let nextEndpoint = this.alternative_api_endpoints[this.api_index];
             console.log("failing over. old endpoint was: ", current_url, " new one is: ", nextEndpoint);
             this.setOptions({url: nextEndpoint});
+
+            //set an entry in localStorage that identifies the current failover endpoint and what time it was updated at
+            if (typeof window !== 'undefined')
+            {
+                localStorage.setItem("last_failover_timestamp", new Date());
+                localStorage.setItem("last_failover_endpoint", nextEndpoint);
+            }
         }
     }
 }
