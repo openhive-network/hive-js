@@ -3,6 +3,7 @@ import Promise from 'bluebird';
 import config from '../config';
 import methods from './methods';
 import transports from './transports';
+import {RPCError} from './transports/http'
 import {
     camelCase
 } from '../utils';
@@ -26,6 +27,10 @@ class Steem extends EventEmitter {
         this._setLogger(options);
         this.options = options;
         this.seqNo = 0; // used for rpc calls
+        this.error_count = 0;
+        this.api_index = 0;
+        this.error_threshold = 3;
+        this.alternative_api_endpoints = ['https://api.hive.blog', 'https://anyx.io'];
         methods.forEach(method => {
             const methodName = method.method_name || camelCase(method.method);
             const methodParams = method.params || [];
@@ -51,6 +56,9 @@ class Steem extends EventEmitter {
         });
         this.callAsync = Promise.promisify(this.call);
         this.signedCallAsync = Promise.promisify(this.signedCall);
+        console.log("Alternate endpoitns: ", this.options.alternative_api_endpoints);
+        console.log("Error Failover Threshold: ", this.options.failover_threshold);
+        this.notifyError = this.notifyError.bind(this);
     }
 
     _setTransport(options) {
@@ -156,7 +164,7 @@ class Steem extends EventEmitter {
         }
         const id = ++this.seqNo;
         jsonRpc(this.options.uri, {method, params, id})
-            .then(res => { callback(null, res) }, err => { callback(err) });
+            .then(res => { callback(null, res) }, err => { this.notifyError(err, err instanceof RPCError); callback(err) });
     }
 
     signedCall(method, params, account, key, callback) {
@@ -173,17 +181,39 @@ class Steem extends EventEmitter {
             return;
         }
         jsonRpc(this.options.uri, request)
-            .then(res => { callback(null, res) }, err => { callback(err) });
+            .then(res => { callback(null, res) }, err => { callback(err); this.notifyError(err) });
     }
 
     setOptions(options) {
         Object.assign(this.options, options);
+
+        if (options.hasOwnProperty('failover_threshold'))
+            this.failover_threshold = options.failover_threshold;
+        if (options.hasOwnProperty('alternative_api_endpoints'))
+            this.alternative_api_endpoints = options.alternative_api_endpoints;
+
         this._setLogger(options);
         this._setTransport(options);
         this.transport.setOptions(options);
         if( options.hasOwnProperty('useTestNet') )
         {
           config.set( 'address_prefix', options.useTestNet ? 'TST' : 'STM' )
+        }
+
+        if (options.hasOwnProperty('url'))
+        {
+            let new_index = 0;
+            for (var i = 0; i < this.alternative_api_endpoints.length; i++)
+            {
+                let temp_endpoint = this.alternative_api_endpoints[i];
+                if (temp_endpoint === options.url)
+                {
+                    new_index = i;
+                    break;
+                }
+            }
+            this.api_index = new_index;
+            let new_endpoint = this.alternative_api_endpoints[this.api_index];
         }
     }
 
@@ -343,6 +373,37 @@ class Steem extends EventEmitter {
         },
     );
 
+    }
+
+    notifyError(err, ignore=false)
+    {
+        if (ignore)
+        {
+            return;
+        }
+        if (this.failover_threshold === undefined || this.alternative_api_endpoints === undefined)
+        {
+            return;
+        }
+        if (err && err.toString().includes("overseer"))
+        {
+            //overseer was a steem thing, it doesn't exist in hive so don't count this error towards failover
+            return;
+        }
+        this.error_count++;
+        if (this.error_count >= this.failover_threshold)
+        {
+            let current_url = this.options.url;
+            this.error_count = 0;
+            this.api_index++;
+            if (this.api_index >= this.alternative_api_endpoints.length)
+            {
+                this.api_index = 0;
+            }
+            let nextEndpoint = this.alternative_api_endpoints[this.api_index];
+            console.log("failing over. old endpoint was: ", current_url, " new one is: ", nextEndpoint);
+            this.setOptions({url: nextEndpoint});
+        }
     }
 }
 

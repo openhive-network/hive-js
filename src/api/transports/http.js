@@ -5,7 +5,7 @@ import Transport from './base';
 
 const debug = newDebug('steem:http');
 
-class RPCError extends Error {
+export class RPCError extends Error {
   constructor(rpcError) {
     super(rpcError.message);
     this.name = 'RPCError';
