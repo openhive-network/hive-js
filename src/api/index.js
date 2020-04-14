@@ -68,7 +68,8 @@ class Steem extends EventEmitter {
             {
                 let current_time = new Date();
                 let difference = (current_time.getTime() - new Date(last_failover_timestamp).getTime())/(60*1000);
-                if (difference <= this.time_in_minutes_to_persist)
+                //if the time_in_minutes_to_persist option is 0, then always persist
+                if (this.time_in_minutes_to_persist > 0 && difference <= this.time_in_minutes_to_persist)
                 {
                     let last_endpoint = localStorage.getItem("last_failover_endpoint");
                     if (last_endpoint !== null)
