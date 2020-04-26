@@ -157,6 +157,9 @@ Types.asset = {
             amount = res[0]
             symbol = res[1]
 
+            // Hive workaround for now
+            symbol = symbol == "HIVE" ? "STEEM" : symbol == "HBD" ? "SBD" : symbol
+
             if(symbol.startsWith("@@"))
             {
                 // NAI Case
