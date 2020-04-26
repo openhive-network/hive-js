@@ -1,6 +1,6 @@
 {
   "name": "@hiveio/hive-js",
-  "version": "0.0.2",
+  "version": "0.0.5",
   "description": "Hive.js the JavaScript API for Hive blockchain",
   "main": "lib/index.js",
   "scripts": {
@@ -17,20 +17,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/steemit/steem-js.git"
+    "url": "git+https://gitlab.syncad.com/hive/hive-js.git"
   },
   "keywords": [
-    "steem",
-    "steemit",
+    "hive",
+    "hiveblog",
     "blockchain",
-    "steemjs"
+    "hivejs"
   ],
   "author": "Fabien (https://github.com/bonustrack)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/steemit/steem-js/issues"
+    "url": "https://gitlab.syncad.com/hive/hive-js/issues"
   },
-  "homepage": "https://github.com/steemit/steem-js#readme",
+  "homepage": "https://gitlab.syncad.com/hive/hive-js#readme",
   "dependencies": {
     "@steemit/rpc-auth": "^1.1.1",
     "bigi": "^1.4.2",
