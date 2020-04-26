@@ -6,7 +6,7 @@ const config = require("./config");
 const formatter = require("./formatter")(api);
 const utils = require("./utils");
 
-const steem = {
+const hive = {
   api,
   auth,
   memo,
@@ -17,11 +17,11 @@ const steem = {
 };
 
 if (typeof window !== "undefined") {
-  window.steem = steem;
+  window.hive = hive;
 }
 
 if (typeof global !== "undefined") {
-  global.steem = steem;
+  global.hive = hive;
 }
 
-exports = module.exports = steem;
+exports = module.exports = hive;
