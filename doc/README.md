@@ -45,6 +45,7 @@ as
 hive.api.setOptions({ url: 'https://anyx.io' });
 hive.config.set('address_prefix','STM');
 hive.config.set('chain_id','0000000000000000000000000000000000000000000000000000000000000000');
+hive.config.set('alternative_api_endpoints', ['https://api.hive.blog', 'https://anyx.io']);
 ```
 ### set
 ```
