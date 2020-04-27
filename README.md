@@ -43,7 +43,7 @@ hive.api.getAccounts(['mahdiyari', 'hiveio'], function(err, response){
 ## CDN
 https://cdn.jsdelivr.net/npm/@hiveio/hive-js/dist/hive.min.js<br/>
 ```html
-<script src="hhttps://cdn.jsdelivr.net/npm/@hiveio/hive-js/dist/hive.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@hiveio/hive-js/dist/hive.min.js"></script>
 ```
 
 ## Webpack
