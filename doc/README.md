@@ -929,8 +929,12 @@ console.log(reputation);
 ```
 
 ### Vest To Hive
+
+**Warning:** hive.formatter.vestToSteem() is deprecated and will be removed in the future releases.
+Use the following method instead:
+
 ```
-var hivePower = hive.formatter.vestToSteem(vestingShares, totalVestingShares, totalVestingFundHive);
+var hivePower = hive.formatter.vestToHive(vestingShares, totalVestingShares, totalVestingFundHive);
 console.log(hivePower);
 ```
 

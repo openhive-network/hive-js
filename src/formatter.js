@@ -174,6 +174,7 @@ module.exports = steemAPI => {
       return out;
     },
 
+    // Deprecated - Remove on future releases
     vestToSteem: function(
       vestingShares,
       totalVestingShares,
@@ -181,6 +182,18 @@ module.exports = steemAPI => {
     ) {
       return (
         parseFloat(totalVestingFundSteem) *
+        (parseFloat(vestingShares) / parseFloat(totalVestingShares))
+      );
+    },
+
+    // Same as vestToSteem
+    vestToHive: function(
+      vestingShares,
+      totalVestingShares,
+      totalVestingFundHive
+    ) {
+      return (
+        parseFloat(totalVestingFundHive) *
         (parseFloat(vestingShares) / parseFloat(totalVestingShares))
       );
     },
