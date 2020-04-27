@@ -11,7 +11,7 @@ build/Release
 node_modules
 .tern-port
 
-dist/steem-tests.min.js*
+dist/hive-tests.min.js*
 # node-dist
 .tern-port
 .envrc

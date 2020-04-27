@@ -1,6 +1,6 @@
 {
   "name": "@hiveio/hive-js",
-  "version": "0.0.5",
+  "version": "0.1.0",
   "description": "Hive.js the JavaScript API for Hive blockchain",
   "main": "lib/index.js",
   "scripts": {
@@ -75,7 +75,8 @@
     "Fabien (https://github.com/bonustrack)",
     "James Calfee (https://github.com/jcalfee)",
     "Nilesh Suthar (https://github.com/nil1511)",
-    "Pedro Tacla Yamada (https://github.com/yamadapc)"
+    "Pedro Tacla Yamada (https://github.com/yamadapc)",
+    "MahdiYari (https://github.com/mahdiyari)"
   ],
   "directories": {
     "doc": "doc",
