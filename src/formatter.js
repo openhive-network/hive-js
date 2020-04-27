@@ -180,6 +180,7 @@ module.exports = steemAPI => {
       totalVestingShares,
       totalVestingFundSteem
     ) {
+      console.warn('vestToSteem() is deprecated and will be removed in the future releases. Use vestToHive() instead.')
       return (
         parseFloat(totalVestingFundSteem) *
         (parseFloat(vestingShares) / parseFloat(totalVestingShares))
