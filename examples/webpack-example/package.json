@@ -1,5 +1,5 @@
 {
-  "name": "steem-js-webpack-example",
+  "name": "hive-js-webpack-example",
   "scripts": {
     "build": "npm run build-web && npm run build-node",
     "build-web": "webpack",
@@ -10,6 +10,6 @@
     "webpack": "^3.0.0"
   },
   "dependencies": {
-    "steem": "^0.5.20"
+    "hive": "^0.0.5"
   }
 }

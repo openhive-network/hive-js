@@ -2,19 +2,19 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Steem.js</title>
+  <title>Hive.js</title>
 </head>
 <body>
 
-<script src="../dist/steem.min.js"></script>
+<script src="../dist/hive.min.js"></script>
 <script>
-steem.api.getConfig(function(err, response){
+hive.api.getConfig(function(err, response){
   console.log(err, response);
 });
-steem.api.getAccounts(['ned', 'dan'], function(err, response){
+hive.api.getAccounts(['hiveio', 'mahdiyari'], function(err, response){
   console.log(err, response);
 });
-steem.api.getAccountCount(function(err, response){
+hive.api.getAccountCount(function(err, response){
   console.log(err, response);
 });
 </script>
