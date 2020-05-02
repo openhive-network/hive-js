@@ -492,22 +492,22 @@ export default [
       "params": []
     },
     {
-      "api": "condenser_api",
+      "api": "database_api",
       "method": "find_proposals",
       "params": ["id_set"]
     },
     {
-      "api": "condenser_api",
+      "api": "database_api",
       "method": "list_proposals",
       "params": ["start", "limit", "order_by", "order_direction", "status"]
     },
     {
-      "api": "condenser_api",
+      "api": "database_api",
       "method": "list_proposal_votes",
       "params": ["start", "limit", "order_by", "order_direction", "status"]
     },
     {
-      "api": "condenser_api",
+      "api": "database_api",
       "method": "get_nai_pool",
       "params": []
     }
