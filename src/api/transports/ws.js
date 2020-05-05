@@ -76,10 +76,6 @@ export default class WsTransport extends Transport {
         }
       });
 
-      if (this.options.useAppbaseApi) {
-        api = 'condenser_api';
-      }
-
       const _request = {
         deferral,
         startedAt: Date.now(),
