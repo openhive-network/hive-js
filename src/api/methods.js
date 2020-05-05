@@ -510,5 +510,10 @@ export default [
       "api": "database_api",
       "method": "get_nai_pool",
       "params": []
+    },
+    {
+      "api": "condensor_api",
+      "method": "get_expiring_vesting_delegations",
+      "params": ["account","after"]
     }
 ];
