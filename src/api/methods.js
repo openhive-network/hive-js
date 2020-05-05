@@ -512,6 +512,21 @@ export default [
       "params": []
     },
     {
+      "api": "rc_api",
+      "method": "find_rc_accounts",
+      "params": ["accounts"]
+    },
+    {
+      "api": "rc_api",
+      "method": "get_resource_params",
+      "params": []
+    },
+    {
+      "api": "rc_api",
+      "method": "get_resource_pool",
+      "params": []
+    },
+    {
       "api": "condensor_api",
       "method": "get_expiring_vesting_delegations",
       "params": ["account","after"]
