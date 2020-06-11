@@ -8,6 +8,11 @@ import steemApi from '../api';
 import steemAuth from '../auth';
 import { camelCase } from '../utils';
 
+const config = require('../config')
+
+const HF23_CHAIN_ID = '0000000000000000000000000000000000000000000000000000000000000000'
+const HF24_CHAIN_ID = 'beeab0de00000000000000000000000000000000000000000000000000000000'
+
 const debug = newDebug('steem:broadcast');
 const noop = function() {}
 const formatter = formatterFactory(steemApi);
@@ -51,19 +56,27 @@ steemBroadcast._prepareTransaction = function steemBroadcast$_prepareTransaction
   const propertiesP = steemApi.getDynamicGlobalPropertiesAsync();
   return propertiesP
     .then((properties) => {
-      // Set defaults on the transaction
-      const chainDate = new Date(properties.time + 'Z');
-      const refBlockNum = (properties.last_irreversible_block_num - 1) & 0xFFFF;
-      return steemApi.getBlockHeaderAsync(properties.last_irreversible_block_num).then((block) => {
-        const headBlockId = block ? block.previous : '0000000000000000000000000000000000000000';
-        return Object.assign({
-          ref_block_num: refBlockNum,
-          ref_block_prefix: new Buffer(headBlockId, 'hex').readUInt32LE(4),
-          expiration: new Date(
-            chainDate.getTime() +
-            600 * 1000
-          ),
-        }, tx);
+      const hfVersion = steemApi.getHardforkVersionAsync();
+      return hfVersion.then(HFV => {
+        if (HFV == '0.23.0') {
+          config.set('chain_id', HF23_CHAIN_ID)
+        } else {
+          config.set('chain_id', HF24_CHAIN_ID)
+        }
+        // Set defaults on the transaction
+        const chainDate = new Date(properties.time + 'Z');
+        const refBlockNum = (properties.last_irreversible_block_num - 1) & 0xFFFF;
+        return steemApi.getBlockHeaderAsync(properties.last_irreversible_block_num).then((block) => {
+          const headBlockId = block ? block.previous : '0000000000000000000000000000000000000000';
+          return Object.assign({
+            ref_block_num: refBlockNum,
+            ref_block_prefix: new Buffer(headBlockId, 'hex').readUInt32LE(4),
+            expiration: new Date(
+              chainDate.getTime() +
+              600 * 1000
+            ),
+          }, tx);
+        });
       });
     });
 };
