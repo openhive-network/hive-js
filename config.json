@@ -6,7 +6,7 @@
   "dev_uri": "",
   "stage_uri": "",
   "address_prefix": "STM",
-  "chain_id": "0000000000000000000000000000000000000000000000000000000000000000",
+  "chain_id": "beeab0de00000000000000000000000000000000000000000000000000000000",
   "alternative_api_endpoints": ["https://api.hive.blog", "https://anyx.io"],
   "failover_threshold": 3
 }
