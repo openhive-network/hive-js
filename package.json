@@ -1,6 +1,6 @@
 {
   "name": "@hiveio/hive-js",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "description": "Hive.js the JavaScript API for Hive blockchain",
   "main": "lib/index.js",
   "scripts": {
