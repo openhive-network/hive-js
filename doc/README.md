@@ -581,6 +581,7 @@ hive.broadcast.accountWitnessVote(wif, account, witness, approve, function(err, 
 hive.broadcast.witnessSetProperties(signingKey, owner, props, extensions, function(err, result) {
   console.log(err, result);
 });
+```
 
 |Parameter|Description|Datatype|Notes|
 |---|---|---|---|
@@ -588,7 +589,7 @@ hive.broadcast.witnessSetProperties(signingKey, owner, props, extensions, functi
 |owner|The name of witness account|String||
 |props|Witness properties|Array| Use `hive.utils.buildWitnessUpdateOp(owner, props)` to build the values|
 |extensions|empty array []|Array||
-```
+
 ### Challenge Authority
 ```
 hive.broadcast.challengeAuthority(wif, challenger, challenged, requireOwner, function(err, result) {
