@@ -49,7 +49,7 @@ Auth.generateKeys = function (name, password, roles) {
 /**
 	@arg {string} name - blockchain account name
 	@arg {string} password - very strong password typically no shorter than a private key
-	@arg {array} roles - defaults to standard Steem blockchain-level roles
+	@arg {array} roles - defaults to standard Hive blockchain-level roles
 */
 Auth.getPrivateKeys = function (name, password, roles = ['owner', 'active', 'posting', 'memo']) {
 	var privKeys = {};
