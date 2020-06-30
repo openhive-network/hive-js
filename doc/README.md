@@ -44,9 +44,12 @@ as
 ```js
 hive.api.setOptions({ url: 'https://anyx.io' });
 hive.config.set('address_prefix','STM');
-hive.config.set('chain_id','0000000000000000000000000000000000000000000000000000000000000000');
+hive.config.set('chain_id','beeab0de00000000000000000000000000000000000000000000000000000000');
 hive.config.set('alternative_api_endpoints', ['https://api.hive.blog', 'https://anyx.io']);
 ```
+### rebranded_api
+Set `rebranded_api` to `true` for connecting to eclipse (hf24) RPC nodes.
+
 ### set
 ```
 hive.config.set('address_prefix','STM');
