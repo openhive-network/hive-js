@@ -2,8 +2,8 @@ import get from "lodash/get";
 import { key_utils } from "./auth/ecc";
 import config from "./config"
 
-const HiveVar = config.get("rebranded_node") ? "hive" : "steem"
-const HbdVar = config.get("rebranded_node") ? "hbd" : "sbd"
+const HiveVar = config.get("rebranded_api") ? "hive" : "steem"
+const HbdVar = config.get("rebranded_api") ? "hbd" : "sbd"
 
 module.exports = hiveAPI => {
   function numberWithCommas(x) {
@@ -79,7 +79,7 @@ module.exports = hiveAPI => {
     let orders, savings;
 
     // TODO: remove vesting_steem
-    // this is necessary to work with unbranded nodes
+    // this is necessary to work with unbranded apis
     if (vesting_steem) {
       vesting_hive = vesting_steem
     }
