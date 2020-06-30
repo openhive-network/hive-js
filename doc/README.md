@@ -975,8 +975,10 @@ const props = {
   "account_subsidy_budget": 10000, // optional
   "account_subsidy_decay": 330782, // optional
   "maximum_block_size": 65536, // optional
-  "sbd_interest_rate": "0.000 HIVE", // optional
-  "sbd_exchange_rate": {"base": "0.250 HBD", "quote": "1.000 HIVE"}, // optional
+  // "sbd_interest_rate": "0.000 HIVE", // for old api nodes - optional
+  "hbd_interest_rate": "0.000 HIVE", // optional
+  // "sbd_exchange_rate": {"base": "0.250 HBD", "quote": "1.000 HIVE"}, // for old api nodes - optional
+  "hbd_exchange_rate": {"base": "0.250 HBD", "quote": "1.000 HIVE"}, // optional
   "url": "https://testurl", // optional
   "new_signing_key": "Public Signing Key" // optional
 }
