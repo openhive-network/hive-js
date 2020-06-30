@@ -1,6 +1,6 @@
 import EventEmitter from 'events';
 import Promise from 'bluebird';
-import config from '../config';
+import Config from '../config';
 import methods from './methods';
 import transports from './transports';
 import {RPCError} from './transports/http'
@@ -197,7 +197,7 @@ class Steem extends EventEmitter {
         this.transport.setOptions(options);
         if( options.hasOwnProperty('useTestNet') )
         {
-          config.set( 'address_prefix', options.useTestNet ? 'TST' : 'STM' )
+          Config.set( 'address_prefix', options.useTestNet ? 'TST' : 'STM' )
         }
 
         if (options.hasOwnProperty('url'))
@@ -408,6 +408,6 @@ class Steem extends EventEmitter {
 }
 
 // Export singleton instance
-const steem = new Steem(config);
+const steem = new Steem(Config);
 exports = module.exports = steem;
 exports.Steem = Steem;
