@@ -1,5 +1,8 @@
 import types from "./auth/serializer/src/types"
 import Serializer from "./auth/serializer/src/serializer"
+import hiveApi from './api';
+import config from './config';
+
 const ByteBuffer = require('bytebuffer')
 
 const {
@@ -122,4 +125,16 @@ export function buildWitnessUpdateOp(
   }
   data.props.sort((a, b) => a[0].localeCompare(b[0]));
   return ["witness_set_properties", data];
+}
+
+export function autoDetectApiVersion() {
+  hiveApi.getVersionAsync().then(res => {
+    if (res.blockchain_version !== "0.23.0") {
+      config.set("rebranded_api", true)
+      return { rebranded_api: true }
+    } else {
+      config.set("rebranded_api", false)
+      return { rebranded_api: false }
+    }
+  })
 }
