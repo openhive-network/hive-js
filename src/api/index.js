@@ -20,7 +20,7 @@ import {
     sign as signRequest
 } from '@steemit/rpc-auth';
 
-class Steem extends EventEmitter {
+class Hive extends EventEmitter {
     constructor(options = {}) {
         super(options);
         this._setTransport(options);
@@ -408,6 +408,6 @@ class Steem extends EventEmitter {
 }
 
 // Export singleton instance
-const steem = new Steem(Config);
-exports = module.exports = steem;
-exports.Steem = Steem;
+const hive = new Hive(Config);
+exports = module.exports = hive;
+exports.Hive = Hive;
