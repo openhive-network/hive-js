@@ -10,7 +10,7 @@ const chain_types = require('./ChainTypes')
 
 import { PublicKey, Address, ecc_config } from "../../ecc"
 import { fromImpliedDecimal } from "./number_utils"
-import Config from "../../../config.js"
+import config from "../../../config.js"
 
 const Types = {}
 module.exports = Types
@@ -132,11 +132,11 @@ Types.asset = {
           {
             case "@@000000021":
               precision = 3
-              symbol = Config.get( "address_prefix" ) == "STM" ? "STEEM" : "TESTS"
+              symbol = config.get( "address_prefix" ) == "STM" ? "STEEM" : "TESTS"
               break
             case "@@000000013":
               precision = 3
-              symbol = Config.get( "address_prefix" ) == "STM" ? "SBD" : "TBD"
+              symbol = config.get( "address_prefix" ) == "STM" ? "SBD" : "TBD"
               break
             case "@@000000037":
               precision = 6
@@ -252,11 +252,11 @@ Types.asset_symbol = {
         {
           case "@@000000021":
             precision = 3
-              symbol = Config.get( "address_prefix" ) == "STM" ? "STEEM" : "TESTS"
+              symbol = config.get( "address_prefix" ) == "STM" ? "STEEM" : "TESTS"
             break
           case "@@000000013":
             precision = 3
-            symbol = Config.get( "address_prefix" ) == "STM" ? "SBD" : "TBD"
+            symbol = config.get( "address_prefix" ) == "STM" ? "SBD" : "TBD"
             break
           case "@@000000037":
             precision = 6

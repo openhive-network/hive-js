@@ -1,6 +1,6 @@
 import EventEmitter from 'events';
 import Promise from 'bluebird';
-import Config from '../config';
+import config from '../config';
 import methods from './methods';
 import transports from './transports';
 import {RPCError} from './transports/http'
@@ -197,7 +197,7 @@ class Hive extends EventEmitter {
         this.transport.setOptions(options);
         if( options.hasOwnProperty('useTestNet') )
         {
-          Config.set( 'address_prefix', options.useTestNet ? 'TST' : 'STM' )
+          config.set( 'address_prefix', options.useTestNet ? 'TST' : 'STM' )
         }
 
         if (options.hasOwnProperty('url'))
@@ -408,6 +408,6 @@ class Hive extends EventEmitter {
 }
 
 // Export singleton instance
-const hive = new Hive(Config);
+const hive = new Hive(config);
 exports = module.exports = hive;
 exports.Hive = Hive;

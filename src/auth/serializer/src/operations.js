@@ -33,10 +33,10 @@ static_variant [
 
 import types from "./types"
 import SerializerImpl from "./serializer"
-import Config from "../../../config"
+import config from "../../../config"
 
-const hiveVar = Config.get("rebranded_api") ? "hive" : "steem"
-const hbdVar = Config.get("rebranded_api") ? "hbd" : "sbd"
+const hiveVar = config.get("rebranded_api") ? "hive" : "steem"
+const hbdVar = config.get("rebranded_api") ? "hbd" : "sbd"
 
 const {
     //id_type,

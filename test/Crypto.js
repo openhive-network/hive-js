@@ -1,4 +1,4 @@
-import Config from "../src/config"
+import config from "../src/config"
 import { Aes, PrivateKey, PublicKey, Signature } from "../src/auth/ecc"
 import assert from "assert"
 
@@ -27,7 +27,7 @@ describe("steem.auth: Crypto", function() {
 })
 
 describe("steem.auth: derives", ()=> {
-    let prefix = Config.get("address_prefix")
+    let prefix = config.get("address_prefix")
     let one_time_private = PrivateKey.fromHex("8fdfdde486f696fd7c6313325e14d3ff0c34b6e2c390d1944cbfe150f4457168")
     let to_public = PublicKey.fromStringOrThrow(prefix + "7vbxtK1WaZqXsiCHPcjVFBewVj8HFRd5Z5XZDpN6Pvb2dZcMqK")
     let secret = one_time_private.get_shared_secret( to_public )

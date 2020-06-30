@@ -1,9 +1,9 @@
 import get from "lodash/get";
 import { key_utils } from "./auth/ecc";
-import Config from "./config"
+import config from "./config"
 
-const HiveVar = Config.get("rebranded_api") ? "hive" : "steem"
-const HbdVar = Config.get("rebranded_api") ? "hbd" : "sbd"
+const HiveVar = config.get("rebranded_api") ? "hive" : "steem"
+const HbdVar = config.get("rebranded_api") ? "hbd" : "sbd"
 
 module.exports = hiveAPI => {
   function numberWithCommas(x) {
