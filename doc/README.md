@@ -576,6 +576,20 @@ hive.broadcast.accountWitnessVote(wif, account, witness, approve, function(err, 
   console.log(err, result);
 });
 ```
+### Witness Set Properties
+```
+hive.broadcast.witnessSetProperties(signingKey, owner, props, extensions, function(err, result) {
+  console.log(err, result);
+});
+```
+
+|Parameter|Description|Datatype|Notes|
+|---|---|---|---|
+|signingKey|Private signing key of the witness|String||
+|owner|The name of witness account|String||
+|props|Witness properties|Array| Use `hive.utils.buildWitnessUpdateOp(owner, props)` to build the values|
+|extensions|empty array []|Array||
+
 ### Challenge Authority
 ```
 hive.broadcast.challengeAuthority(wif, challenger, challenged, requireOwner, function(err, result) {
@@ -951,3 +965,26 @@ var isValidUsername = hive.utils.validateAccountName('a1');
 console.log(isValidUsername);
 // => 'Account name should be longer.'
 ```
+
+### Build Witness Update Properties
+```
+const owner = 'mahdiyari'
+const props = {
+  "key": "Public Signing Key" // REQUIRED
+  "account_creation_fee": "0.000 HIVE", // optional
+  "account_subsidy_budget": 10000, // optional
+  "account_subsidy_decay": 330782, // optional
+  "maximum_block_size": 65536, // optional
+  "sbd_interest_rate": "0.000 HIVE", // optional
+  "sbd_exchange_rate": {"base": "0.250 HBD", "quote": "1.000 HIVE"}, // optional
+  "url": "https://testurl", // optional
+  "new_signing_key": "Public Signing Key" // optional
+}
+
+const witnessOps = hive.utils.buildWitnessUpdateOp(owner, props);
+
+hive.broadcast.witnessSetProperties('Private Signing Key', owner, witnessOps.props, [], function(err, result) {
+  console.log(err, result);
+});
+```
+
