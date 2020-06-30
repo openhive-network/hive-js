@@ -1,23 +1,29 @@
 import get from "lodash/get";
 import { key_utils } from "./auth/ecc";
+import config from "./config"
 
-module.exports = steemAPI => {
+const HiveVar = config.get("rebranded_node") ? "hive" : "steem"
+const HbdVar = config.get("rebranded_node") ? "hbd" : "sbd"
+
+module.exports = hiveAPI => {
   function numberWithCommas(x) {
     return x.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
 
+  // Deprecating - Replacement: vestingHive
   function vestingSteem(account, gprops) {
     const vests = parseFloat(account.vesting_shares.split(" ")[0]);
     const total_vests = parseFloat(gprops.total_vesting_shares.split(" ")[0]);
-    const total_vest_steem = parseFloat(
-      gprops.total_vesting_fund_steem.split(" ")[0]
+    const total_vest_hive = parseFloat(
+      gprops['total_vesting_fund_' + HiveVar].split(" ")[0]
     );
-    const vesting_steemf = total_vest_steem * (vests / total_vests);
-    return vesting_steemf;
+    const vesting_hivef = total_vest_hive * (vests / total_vests);
+    return vesting_hivef;
   }
+  const vestingHive = vestingSteem
 
   function processOrders(open_orders, assetPrecision) {
-    const sbdOrders = !open_orders
+    const hbdOrders = !open_orders
       ? 0
       : open_orders.reduce((o, order) => {
           if (order.sell_price.base.indexOf("HBD") !== -1) {
@@ -26,7 +32,7 @@ module.exports = steemAPI => {
           return o;
         }, 0) / assetPrecision;
 
-    const steemOrders = !open_orders
+    const hiveOrders = !open_orders
       ? 0
       : open_orders.reduce((o, order) => {
           if (order.sell_price.base.indexOf("HIVE") !== -1) {
@@ -35,57 +41,65 @@ module.exports = steemAPI => {
           return o;
         }, 0) / assetPrecision;
 
-    return { steemOrders, sbdOrders };
+    return { hiveOrders, hbdOrders };
   }
 
   function calculateSaving(savings_withdraws) {
     let savings_pending = 0;
-    let savings_sbd_pending = 0;
+    let savings_hbd_pending = 0;
     savings_withdraws.forEach(withdraw => {
       const [amount, asset] = withdraw.amount.split(" ");
       if (asset === "HIVE") savings_pending += parseFloat(amount);
       else {
-        if (asset === "HBD") savings_sbd_pending += parseFloat(amount);
+        if (asset === "HBD") savings_hbd_pending += parseFloat(amount);
       }
     });
-    return { savings_pending, savings_sbd_pending };
+    return { savings_pending, savings_hbd_pending };
   }
 
+  // Deprecating - Replacement: pricePerHive
   function pricePerSteem(feed_price) {
-    let price_per_steem = undefined;
+    let price_per_hive = undefined;
     const { base, quote } = feed_price;
     if (/ HBD$/.test(base) && / HIVE$/.test(quote)) {
-      price_per_steem = parseFloat(base.split(" ")[0]) / parseFloat(quote.split(" ")[0]);
+      price_per_hive = parseFloat(base.split(" ")[0]) / parseFloat(quote.split(" ")[0]);
     }
-    return price_per_steem;
+    return price_per_hive;
   }
+  const pricePerHive = pricePerSteem
 
+  // TODO: remove vesting_steem
   function estimateAccountValue(
     account,
-    { gprops, feed_price, open_orders, savings_withdraws, vesting_steem } = {}
+    { gprops, feed_price, open_orders, savings_withdraws, vesting_steem, vesting_hive } = {}
   ) {
     const promises = [];
     const username = account.name;
     const assetPrecision = 1000;
     let orders, savings;
 
-    if (!vesting_steem || !feed_price) {
+    // TODO: remove vesting_steem
+    // this is necessary to work with unbranded nodes
+    if (vesting_steem) {
+      vesting_hive = vesting_steem
+    }
+    if (!vesting_hive || !feed_price) {
       if (!gprops || !feed_price) {
         promises.push(
-          steemAPI.getStateAsync(`/@${username}`).then(data => {
+          hiveAPI.getStateAsync(`/@${username}`).then(data => {
             gprops = data.props;
             feed_price = data.feed_price;
-            vesting_steem = vestingSteem(account, gprops);
+            vesting_hive = vestingHive(account, gprops);
           })
         );
       } else {
-        vesting_steem = vestingSteem(account, gprops);
+        vesting_hive = vestingHive(account, gprops);
       }
     }
 
     if (!open_orders) {
       promises.push(
-        steemAPI.getOpenOrdersAsync(username).then(open_orders => {
+        hiveAPI.getOpenOrdersAsync(username).then(open_orders => {
           orders = processOrders(open_orders, assetPrecision);
         })
       );
@@ -95,7 +109,7 @@ module.exports = steemAPI => {
 
     if (!savings_withdraws) {
       promises.push(
-        steemAPI
+        hiveAPI
           .getSavingsWithdrawFromAsync(username)
           .then(savings_withdraws => {
             savings = calculateSaving(savings_withdraws);
@@ -106,14 +120,14 @@ module.exports = steemAPI => {
     }
 
     return Promise.all(promises).then(() => {
-      let price_per_steem = pricePerSteem(feed_price);
+      let price_per_hive = pricePerHive(feed_price);
 
       const savings_balance = account.savings_balance;
-      const savings_sbd_balance = account.savings_sbd_balance;
-      const balance_steem = parseFloat(account.balance.split(" ")[0]);
-      const saving_balance_steem = parseFloat(savings_balance.split(" ")[0]);
-      const sbd_balance = parseFloat(account.sbd_balance);
-      const sbd_balance_savings = parseFloat(savings_sbd_balance.split(" ")[0]);
+      const savings_hbd_balance = account["savings_" + HbdVar + "_balance"];
+      const balance_hive = parseFloat(account.balance.split(" ")[0]);
+      const saving_balance_hive = parseFloat(savings_balance.split(" ")[0]);
+      const hbd_balance = parseFloat(account[HbdVar + "_balance"]);
+      const hbd_balance_savings = parseFloat(savings_hbd_balance.split(" ")[0]);
 
       let conversionValue = 0;
       const currentTime = new Date().getTime();
@@ -130,21 +144,21 @@ module.exports = steemAPI => {
         conversionValue += amount;
       }, []);
 
-      const total_sbd =
-        sbd_balance +
-        sbd_balance_savings +
-        savings.savings_sbd_pending +
-        orders.sbdOrders +
+      const total_hbd =
+        hbd_balance +
+        hbd_balance_savings +
+        savings.savings_hbd_pending +
+        orders.hbdOrders +
         conversionValue;
 
-      const total_steem =
-        vesting_steem +
-        balance_steem +
-        saving_balance_steem +
+      const total_hive =
+        vesting_hive +
+        balance_hive +
+        saving_balance_hive +
         savings.savings_pending +
-        orders.steemOrders;
+        orders.hiveOrders;
 
-      return (total_steem * price_per_steem + total_sbd).toFixed(2);
+      return (total_hive * price_per_hive + total_hbd).toFixed(2);
     });
   }
 
@@ -204,8 +218,10 @@ module.exports = steemAPI => {
     },
     numberWithCommas,
     vestingSteem,
+    vestingHive,
     estimateAccountValue,
     createSuggestedPassword,
-    pricePerSteem
+    pricePerSteem,
+    pricePerHive
   };
 };
