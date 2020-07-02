@@ -411,7 +411,7 @@ let comment_options = new Serializer(
     author: string,
     permlink: string,
     max_accepted_payout: asset,
-    ["percent_" + hiveVar + "_dollars"]: uint16,
+    ["percent_" + hiveVar ? "hbd" : "steem_dollars"]: uint16,
     allow_votes: bool,
     allow_curation_rewards: bool,
     extensions: set(static_variant([
