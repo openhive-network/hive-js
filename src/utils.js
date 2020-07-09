@@ -127,7 +127,7 @@ export function buildWitnessUpdateOp(
   return ["witness_set_properties", data];
 }
 
-export function async autoDetectApiVersion() {
+export async function autoDetectApiVersion() {
   const res = await hiveApi.getVersionAsync()
   if (res.blockchain_version !== "0.23.0") {
     config.set("rebranded_api", true)
