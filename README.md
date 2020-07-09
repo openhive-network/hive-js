@@ -25,6 +25,9 @@ Hive.js the Official JavaScript API for Hive blockchain
 - [Broadcast API](https://gitlab.syncad.com/hive/hive-js/tree/master/doc#broadcast-api)
 - [Broadcast](https://gitlab.syncad.com/hive/hive-js/tree/master/doc#broadcast)
 - [Auth](https://gitlab.syncad.com/hive/hive-js/tree/master/doc#auth)
+- [Formatter](https://gitlab.syncad.com/hive/hive-js/tree/master/doc#formatter)
+- [Utils](https://gitlab.syncad.com/hive/hive-js/tree/master/doc#utils)
+- [Tutorials](https://gitlab.syncad.com/hive/hive-js/tree/master/doc#tutorials)
 
 
 Here is full documentation:
