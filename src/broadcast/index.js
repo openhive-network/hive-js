@@ -84,9 +84,11 @@ hiveBroadcast._prepareTransaction = function hiveBroadcast$_prepareTransaction(t
 
 // Generate operations from operations.json
 const updateOperations = () => {
+  // This function declaration + module redeclaration can be removed after hf24
   delete require.cache[require.resolve('./operations')];
-  var operations = require('./operations');
+  operations = require('./operations');
   hiveAuth.updateOperations();
+  // end module redeclaration
   operations.forEach((operation) => {
     const operationName = camelCase(operation.operation);
     const operationParams = operation.params || [];
