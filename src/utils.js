@@ -127,14 +127,13 @@ export function buildWitnessUpdateOp(
   return ["witness_set_properties", data];
 }
 
-export function autoDetectApiVersion() {
-  hiveApi.getVersionAsync().then(res => {
-    if (res.blockchain_version !== "0.23.0") {
-      config.set("rebranded_api", true)
-      return { rebranded_api: true }
-    } else {
-      config.set("rebranded_api", false)
-      return { rebranded_api: false }
-    }
-  })
+export function async autoDetectApiVersion() {
+  const res = await hiveApi.getVersionAsync()
+  if (res.blockchain_version !== "0.23.0") {
+    config.set("rebranded_api", true)
+    return { rebranded_api: true }
+  } else {
+    config.set("rebranded_api", false)
+    return { rebranded_api: false }
+  }
 }

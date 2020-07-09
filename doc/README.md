@@ -998,7 +998,7 @@ Get API version and update `rebranded_api` in config.
 Note: this will update the config too based on the result.
 
 ```
-var apiVersion = hive.utils.autoDetectApiVersion();
+var apiVersion = await hive.utils.autoDetectApiVersion();
 console.log(apiVersion);
 // => { rebranded_api: true }
 ```
