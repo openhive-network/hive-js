@@ -1,6 +1,6 @@
 const config = require("../config")
-const HiveVar = config.get("rebranded_api") ? "hive" : "steem"
-const HbdVar = config.get("rebranded_api") ? "hbd" : "sbd"
+const hiveVar = () => config.get("rebranded_api") ? "hive" : "steem"
+const hbdVar = () => config.get("rebranded_api") ? "hbd" : "sbd"
 
 module.exports = [
   {
@@ -196,7 +196,7 @@ module.exports = [
       "author",
       "permlink",
       "max_accepted_payout",
-      "percent_" + HiveVar ? "hbd" : "steem_dollars",
+      "percent_" + hiveVar() === 'hive' ? "hbd" : "steem_dollars",
       "allow_votes",
       "allow_curation_rewards",
       "extensions"
@@ -284,8 +284,8 @@ module.exports = [
       "to",
       "agent",
       "escrow_id",
-      HbdVar + "_amount",
-      HiveVar + "_amount",
+      hbdVar() + "_amount",
+      hiveVar() + "_amount",
       "fee",
       "ratification_deadline",
       "escrow_expiration",
@@ -313,8 +313,8 @@ module.exports = [
       "who",
       "receiver",
       "escrow_id",
-      HbdVar + "_amount",
-      HiveVar + "_amount"
+      hbdVar() + "_amount",
+      hiveVar() + "_amount"
     ]
   },
   {
@@ -405,8 +405,8 @@ module.exports = [
     "operation": "claim_reward_balance",
     "params": [
       "account",
-      "reward_" + HiveVar,
-      "reward_" + HbdVar,
+      "reward_" + hiveVar(),
+      "reward_" + hbdVar(),
       "reward_vests"
     ]
   },
@@ -532,7 +532,7 @@ module.exports = [
       "contribution_begin_time",
       "contribution_end_time",
       "launch_time",
-      HiveVar + "_units_min",
+      hiveVar() + "_units_min",
       "min_unit_ratio",
       "max_unit_ratio",
       "extensions"
@@ -566,7 +566,7 @@ module.exports = [
     "params": [
       "control_account",
       "symbol",
-      HiveVar + "_units_cap",
+      hiveVar() + "_units_cap",
       "generation_policy",
       "remove",
       "extensions"

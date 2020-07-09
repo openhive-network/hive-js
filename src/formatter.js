@@ -2,8 +2,8 @@ import get from "lodash/get";
 import { key_utils } from "./auth/ecc";
 import config from "./config"
 
-const HiveVar = config.get("rebranded_api") ? "hive" : "steem"
-const HbdVar = config.get("rebranded_api") ? "hbd" : "sbd"
+const hiveVar = () => config.get("rebranded_api") ? "hive" : "steem"
+const hbdVar = () => config.get("rebranded_api") ? "hbd" : "sbd"
 
 module.exports = hiveAPI => {
   function numberWithCommas(x) {
@@ -15,7 +15,7 @@ module.exports = hiveAPI => {
     const vests = parseFloat(account.vesting_shares.split(" ")[0]);
     const total_vests = parseFloat(gprops.total_vesting_shares.split(" ")[0]);
     const total_vest_hive = parseFloat(
-      gprops['total_vesting_fund_' + HiveVar].split(" ")[0]
+      gprops['total_vesting_fund_' + hiveVar()].split(" ")[0]
     );
     const vesting_hivef = total_vest_hive * (vests / total_vests);
     return vesting_hivef;
@@ -123,10 +123,10 @@ module.exports = hiveAPI => {
       let price_per_hive = pricePerHive(feed_price);
 
       const savings_balance = account.savings_balance;
-      const savings_hbd_balance = account["savings_" + HbdVar + "_balance"];
+      const savings_hbd_balance = account["savings_" + hbdVar() + "_balance"];
       const balance_hive = parseFloat(account.balance.split(" ")[0]);
       const saving_balance_hive = parseFloat(savings_balance.split(" ")[0]);
-      const hbd_balance = parseFloat(account[HbdVar + "_balance"]);
+      const hbd_balance = parseFloat(account[hbdVar() + "_balance"]);
       const hbd_balance_savings = parseFloat(savings_hbd_balance.split(" ")[0]);
 
       let conversionValue = 0;
