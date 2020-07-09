@@ -22,6 +22,8 @@
 - [Broadcast](#broadcast)
 - [Auth](#auth)
 - [Formatter](#formatter)
+- [Utils](#utils)
+- [Tutorials](#tutorials)
 
 # Install
 ```
@@ -38,6 +40,12 @@ hive.api.getAccounts(['mahdiyari', 'hiveio'], function(err, response){
 </script>
 ```
 
+## CDN
+https://cdn.jsdelivr.net/npm/@hiveio/hive-js/dist/hive.min.js<br/>
+```html
+<script src="https://cdn.jsdelivr.net/npm/@hiveio/hive-js/dist/hive.min.js"></script>
+```
+
 ## Config
 Default config should work with Hive. However you can change default config.
 as 
@@ -49,6 +57,15 @@ hive.config.set('alternative_api_endpoints', ['https://api.hive.blog', 'https://
 ```
 ### rebranded_api
 Set `rebranded_api` to `true` for connecting to eclipse (hf24) RPC nodes.
+
+**It is highly recommended to change this option in the config.json file!**
+
+OR
+
+```
+hive.config.set('rebranded_api','true');
+hive.broadcast.updateOperations(); // Necessary to update the already loaded operations
+```
 
 ### set
 ```
@@ -1001,5 +1018,10 @@ Note: this will update the config too based on the result.
 var apiVersion = await hive.utils.autoDetectApiVersion();
 console.log(apiVersion);
 // => { rebranded_api: true }
+
+hive.broadcast.updateOperations(); // Necessary to update the already loaded operations
 ```
+
+## Tutorials
+[How to use HiveJs on React Native](https://peakd.com/hive-139531/@stoodkev/how-to-use-hivejs-or-other-modules-referencing-core-node-js-modules-on-react-native)
 
