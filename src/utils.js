@@ -1,10 +1,10 @@
 import types from "./auth/serializer/src/types"
 import Serializer from "./auth/serializer/src/serializer"
-import hiveApi from './api';
-import config from './config';
+import config from './config'
+import { Promise } from 'bluebird';
 
 const ByteBuffer = require('bytebuffer')
-
+const hiveApi = require('./api')
 const {
   uint16,
   uint32,
