@@ -84,47 +84,53 @@ hiveBroadcast._prepareTransaction = function hiveBroadcast$_prepareTransaction(t
 // Generated wrapper ----------------------------------------------------------
 
 // Generate operations from operations.json
-operations.forEach((operation) => {
-  const operationName = camelCase(operation.operation);
-  const operationParams = operation.params || [];
+const updateOperations = () => {
+  operations.forEach((operation) => {
+    const operationName = camelCase(operation.operation);
+    const operationParams = operation.params || [];
 
-  const useCommentPermlink =
-    operationParams.indexOf('parent_author') !== -1 &&
-    operationParams.indexOf('parent_permlink') !== -1;
+    const useCommentPermlink =
+      operationParams.indexOf('parent_author') !== -1 &&
+      operationParams.indexOf('parent_permlink') !== -1;
 
-  hiveBroadcast[`${operationName}With`] =
-    function hiveBroadcast$specializedSendWith(wif, options, callback) {
-      debug(`Sending operation "${operationName}" with`, {options, callback});
-      const keys = {};
-      if (operation.roles && operation.roles.length) {
-        keys[operation.roles[0]] = wif; // TODO - Automatically pick a role? Send all?
-      }
-      return hiveBroadcast.send({
-        extensions: [],
-        operations: [[operation.operation, Object.assign(
-          {},
-          options,
-          options.json_metadata != null ? {
-            json_metadata: toString(options.json_metadata),
-          } : {},
-          useCommentPermlink && options.permlink == null ? {
-            permlink: formatter.commentPermlink(options.parent_author, options.parent_permlink),
-          } : {}
-        )]],
-      }, keys, callback);
-    };
+    hiveBroadcast[`${operationName}With`] =
+      function hiveBroadcast$specializedSendWith(wif, options, callback) {
+        debug(`Sending operation "${operationName}" with`, {options, callback});
+        const keys = {};
+        if (operation.roles && operation.roles.length) {
+          keys[operation.roles[0]] = wif; // TODO - Automatically pick a role? Send all?
+        }
+        return hiveBroadcast.send({
+          extensions: [],
+          operations: [[operation.operation, Object.assign(
+            {},
+            options,
+            options.json_metadata != null ? {
+              json_metadata: toString(options.json_metadata),
+            } : {},
+            useCommentPermlink && options.permlink == null ? {
+              permlink: formatter.commentPermlink(options.parent_author, options.parent_permlink),
+            } : {}
+          )]],
+        }, keys, callback);
+      };
 
-  hiveBroadcast[operationName] =
-    function hiveBroadcast$specializedSend(wif, ...args) {
-      debug(`Parsing operation "${operationName}" with`, {args});
-      const options = operationParams.reduce((memo, param, i) => {
-        memo[param] = args[i]; // eslint-disable-line no-param-reassign
-        return memo;
-      }, {});
-      const callback = args[operationParams.length];
-      return hiveBroadcast[`${operationName}With`](wif, options, callback);
-    };
-});
+    hiveBroadcast[operationName] =
+      function hiveBroadcast$specializedSend(wif, ...args) {
+        debug(`Parsing operation "${operationName}" with`, {args});
+        const options = operationParams.reduce((memo, param, i) => {
+          memo[param] = args[i]; // eslint-disable-line no-param-reassign
+          return memo;
+        }, {});
+        const callback = args[operationParams.length];
+        return hiveBroadcast[`${operationName}With`](wif, options, callback);
+      };
+  });
+};
+
+hiveBroadcast.updateOperations = updateOperations
+updateOperations()
+
 
 const toString = obj => typeof obj === 'object' ? JSON.stringify(obj) : obj;
 broadcastHelpers(hiveBroadcast);
