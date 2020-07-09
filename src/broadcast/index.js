@@ -1,13 +1,12 @@
 import Promise from 'bluebird';
 import newDebug from 'debug';
-
 import broadcastHelpers from './helpers';
 import formatterFactory from '../formatter';
-import operations from './operations';
 import hiveApi from '../api';
 import hiveAuth from '../auth';
 import { camelCase } from '../utils';
 
+var operations = require('./operations');
 const config = require('../config')
 
 const HF23_CHAIN_ID = '0000000000000000000000000000000000000000000000000000000000000000'
@@ -85,6 +84,9 @@ hiveBroadcast._prepareTransaction = function hiveBroadcast$_prepareTransaction(t
 
 // Generate operations from operations.json
 const updateOperations = () => {
+  delete require.cache[require.resolve('./operations')];
+  var operations = require('./operations');
+  hiveAuth.updateOperations();
   operations.forEach((operation) => {
     const operationName = camelCase(operation.operation);
     const operationParams = operation.params || [];

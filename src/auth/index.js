@@ -11,8 +11,14 @@ var bigi = require('bigi'),
   hash = require('./ecc/src/hash');
 
 var Auth = {};
-var transaction = operations.transaction;
-var signed_transaction = operations.signed_transaction;
+const updateOperations = () => {
+  delete require.cache[require.resolve('./serializer/src/operations')];
+  var operations = require('./serializer/src/operations');
+  var transaction = operations.transaction;
+  var signed_transaction = operations.signed_transaction;
+}
+updateOperations()
+Auth.updateOperations = updateOperations
 
 Auth.verify = function (name, password, auths) {
 	var hasKey = false;
