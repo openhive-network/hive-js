@@ -11,11 +11,15 @@ var bigi = require('bigi'),
   hash = require('./ecc/src/hash');
 
 var Auth = {};
+var transaction = operations.transaction;
+var signed_transaction = operations.signed_transaction;
+
+// this function can be removed after hf24
 const updateOperations = () => {
   delete require.cache[require.resolve('./serializer/src/operations')];
-  var operations = require('./serializer/src/operations');
-  var transaction = operations.transaction;
-  var signed_transaction = operations.signed_transaction;
+  operations = require('./serializer/src/operations');
+  transaction = operations.transaction;
+  signed_transaction = operations.signed_transaction;
 }
 updateOperations()
 Auth.updateOperations = updateOperations
