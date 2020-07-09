@@ -1,7 +1,7 @@
 import types from "./auth/serializer/src/types"
 import Serializer from "./auth/serializer/src/serializer"
-import { Hive } from './api'
 import config from './config'
+import { jsonRpc } from './api/transports/http'
 
 const ByteBuffer = require('bytebuffer')
 
@@ -127,11 +127,10 @@ export function buildWitnessUpdateOp(
   return ["witness_set_properties", data];
 }
 
-// doesn't work - hiveApi is empty - couldn't import api here - feel free to try
 export function autoDetectApiVersion() {
   return new Promise((resolve, reject) => {
-    const hiveApi = new Hive(config)
-    hiveApi.getVersionAsync().then(res => {
+    jsonRpc(config.get('uri'), { method: 'condenser_api.get_version', params: [], id: 1 }).then(res => {
+      console.log(res)
       if (res.blockchain_version !== "0.23.0") {
         config.set("rebranded_api", true)
         resolve({ rebranded_api: true })
