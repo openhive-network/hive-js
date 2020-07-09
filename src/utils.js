@@ -1,10 +1,10 @@
 import types from "./auth/serializer/src/types"
 import Serializer from "./auth/serializer/src/serializer"
+import { Hive } from './api'
 import config from './config'
-import { Promise } from 'bluebird';
 
 const ByteBuffer = require('bytebuffer')
-const hiveApi = require('./api')
+
 const {
   uint16,
   uint32,
@@ -127,8 +127,10 @@ export function buildWitnessUpdateOp(
   return ["witness_set_properties", data];
 }
 
+// doesn't work - hiveApi is empty - couldn't import api here - feel free to try
 export function autoDetectApiVersion() {
   return new Promise((resolve, reject) => {
+    const hiveApi = new Hive(config)
     hiveApi.getVersionAsync().then(res => {
       if (res.blockchain_version !== "0.23.0") {
         config.set("rebranded_api", true)
