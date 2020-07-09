@@ -1,5 +1,8 @@
 import types from "./auth/serializer/src/types"
 import Serializer from "./auth/serializer/src/serializer"
+import config from './config'
+import { jsonRpc } from './api/transports/http'
+
 const ByteBuffer = require('bytebuffer')
 
 const {
@@ -95,13 +98,21 @@ export function buildWitnessUpdateOp(
       case "maximum_block_size":
         type = uint32;
         break;
+      // TODO: remove sbd_interest_rate
       case "sbd_interest_rate":
+        type = uint16;
+        break;
+      case "hbd_interest_rate":
         type = uint16;
         break;
       case "url":
         type = string;
         break;
+      // TODO: remove sbd_exchange_rate
       case "sbd_exchange_rate":
+        type = price;
+        break;
+      case "hbd_exchange_rate":
         type = price;
         break;
       case "account_creation_fee":
@@ -114,4 +125,18 @@ export function buildWitnessUpdateOp(
   }
   data.props.sort((a, b) => a[0].localeCompare(b[0]));
   return ["witness_set_properties", data];
+}
+
+export function autoDetectApiVersion() {
+  return new Promise((resolve, reject) => {
+    jsonRpc(config.get('url'), { method: 'condenser_api.get_version', params: [], id: 1 }).then(res => {
+      if (res.blockchain_version !== "0.23.0") {
+        config.set("rebranded_api", true)
+        resolve({ rebranded_api: true })
+      } else {
+        config.set("rebranded_api", false)
+        resolve({ rebranded_api: false })
+      }
+    })
+  })
 }

@@ -44,9 +44,12 @@ as
 ```js
 hive.api.setOptions({ url: 'https://anyx.io' });
 hive.config.set('address_prefix','STM');
-hive.config.set('chain_id','0000000000000000000000000000000000000000000000000000000000000000');
+hive.config.set('chain_id','beeab0de00000000000000000000000000000000000000000000000000000000');
 hive.config.set('alternative_api_endpoints', ['https://api.hive.blog', 'https://anyx.io']);
 ```
+### rebranded_api
+Set `rebranded_api` to `true` for connecting to eclipse (hf24) RPC nodes.
+
 ### set
 ```
 hive.config.set('address_prefix','STM');
@@ -975,8 +978,10 @@ const props = {
   "account_subsidy_budget": 10000, // optional
   "account_subsidy_decay": 330782, // optional
   "maximum_block_size": 65536, // optional
-  "sbd_interest_rate": "0.000 HIVE", // optional
-  "sbd_exchange_rate": {"base": "0.250 HBD", "quote": "1.000 HIVE"}, // optional
+  // "sbd_interest_rate": "0.000 HIVE", // for old api nodes - optional
+  "hbd_interest_rate": "0.000 HIVE", // optional
+  // "sbd_exchange_rate": {"base": "0.250 HBD", "quote": "1.000 HIVE"}, // for old api nodes - optional
+  "hbd_exchange_rate": {"base": "0.250 HBD", "quote": "1.000 HIVE"}, // optional
   "url": "https://testurl", // optional
   "new_signing_key": "Public Signing Key" // optional
 }
@@ -986,5 +991,15 @@ const witnessOps = hive.utils.buildWitnessUpdateOp(owner, props);
 hive.broadcast.witnessSetProperties('Private Signing Key', owner, witnessOps.props, [], function(err, result) {
   console.log(err, result);
 });
+```
+
+### Auto Detect API Version
+Get API version and update `rebranded_api` in config.
+Note: this will update the config too based on the result.
+
+```
+var apiVersion = await hive.utils.autoDetectApiVersion();
+console.log(apiVersion);
+// => { rebranded_api: true }
 ```
 

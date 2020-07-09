@@ -14,6 +14,16 @@ var Auth = {};
 var transaction = operations.transaction;
 var signed_transaction = operations.signed_transaction;
 
+// this function can be removed after hf24
+const updateOperations = () => {
+  delete require.cache[require.resolve('./serializer/src/operations')];
+  operations = require('./serializer/src/operations');
+  transaction = operations.transaction;
+  signed_transaction = operations.signed_transaction;
+}
+updateOperations()
+Auth.updateOperations = updateOperations
+
 Auth.verify = function (name, password, auths) {
 	var hasKey = false;
 	var roles = [];
@@ -49,7 +59,7 @@ Auth.generateKeys = function (name, password, roles) {
 /**
 	@arg {string} name - blockchain account name
 	@arg {string} password - very strong password typically no shorter than a private key
-	@arg {array} roles - defaults to standard Steem blockchain-level roles
+	@arg {array} roles - defaults to standard Hive blockchain-level roles
 */
 Auth.getPrivateKeys = function (name, password, roles = ['owner', 'active', 'posting', 'memo']) {
 	var privKeys = {};
