@@ -56,8 +56,8 @@ class Hive extends EventEmitter {
         });
         this.callAsync = Promise.promisify(this.call);
         this.signedCallAsync = Promise.promisify(this.signedCall);
-        console.log("Alternate endpoints: ", this.options.alternative_api_endpoints);
-        console.log("Failover Threshold (errors): ", this.options.failover_threshold);
+        // console.log("Alternate endpoints: ", this.options.alternative_api_endpoints);
+        // console.log("Failover Threshold (errors): ", this.options.failover_threshold);
         this.notifyError = this.notifyError.bind(this);
     }
 
@@ -401,7 +401,7 @@ class Hive extends EventEmitter {
                 this.api_index = 0;
             }
             let nextEndpoint = this.alternative_api_endpoints[this.api_index];
-            console.log("failing over. old endpoint was: ", current_url, " new one is: ", nextEndpoint);
+            // console.log("failing over. old endpoint was: ", current_url, " new one is: ", nextEndpoint);
             this.setOptions({url: nextEndpoint});
         }
     }
