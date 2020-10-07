@@ -83,6 +83,23 @@ export function encode(private_key, public_key, memo, testNonce) {
     return '#' + base58.encode(new Buffer(memo, 'binary'))
 }
 
+/** Get public keys of both sender and receiver */
+export function getPubKeys(memo) {
+  assert(memo, 'memo is required')
+  assert.equal(typeof memo, 'string', 'memo')
+  if(!/^#/.test(memo)) return []
+  memo = memo.substring(1)
+
+  checkEncryption()
+
+  memo = base58.decode(memo)
+  memo = encMemo.fromBuffer(new Buffer(memo, 'binary'))
+
+  const {from, to} = memo
+
+  return [from.toString(), to.toString()]
+}
+
 let encodeTest = undefined
 
 /**
