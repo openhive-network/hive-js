@@ -16,4 +16,8 @@ module.exports = {
     template: require('./src/template'),
 
     number_utils: require('./src/number_utils'),
+
+    ChainTypes: require ('./src/ChainTypes'),
+
+    makeBitMaskFilter: require('./src/makeBitMaskFilter'),
 }
