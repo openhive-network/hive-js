@@ -1,6 +1,4 @@
-var ChainTypes;
-
-module.exports = ChainTypes = {};
+var ChainTypes = {};
 
 ChainTypes.reserved_spaces = {
   relative_protocol_ids: 0,
@@ -86,3 +84,5 @@ ChainTypes.object_type = {
   "null": 0,
   base: 1,
 };
+
+module.exports = ChainTypes;
