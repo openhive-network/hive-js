@@ -212,11 +212,6 @@ export default [
     {
       "api": "database_api",
       "method": "get_account_history",
-      "params": ["account", "from", "limit"]
-    },
-    {
-      "api": "database_api",
-      "method": "get_account_history",
       "params": ["account", "from", "limit", "operation_filter_low", "operation_filter_high"],
     },
     {
