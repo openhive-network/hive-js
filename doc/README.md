@@ -337,7 +337,7 @@ hive.api.getConversionRequests(accountName, function(err, result) {
 ```
 ### Get Account History
 ```
-hive.api.getAccountHistory(account, from, limit, function(err, result) {
+hive.api.getAccountHistory(account, from, limit, operation_filter_low, operation_filter_high, function(err, result) {
   console.log(err, result);
 });
 ```
