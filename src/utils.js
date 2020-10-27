@@ -120,5 +120,5 @@ export function buildWitnessUpdateOp(
 }
 
 export function autoDetectApiVersion() {
-  console.log('Warning: autoDetectApiVersion() removed - it is not necessary anymore')
+  console.log('Warning: call to autoDetectApiVersion() is deprecated and can safely be removed')
 }

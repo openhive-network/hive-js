@@ -116,7 +116,7 @@ operations.forEach((operation) => {
 });
 
 hiveBroadcast.updateOperations = () => {
-  console.log('Warning: updateOperations() is not necessary anymore')
+  console.log('Warning: call to updateOperations() is deprecated and can safely be removed')
 }
 
 const toString = obj => typeof obj === 'object' ? JSON.stringify(obj) : obj;
