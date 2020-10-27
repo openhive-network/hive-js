@@ -55,27 +55,19 @@ hiveBroadcast._prepareTransaction = function hiveBroadcast$_prepareTransaction(t
   const propertiesP = hiveApi.getDynamicGlobalPropertiesAsync();
   return propertiesP
     .then((properties) => {
-      const hfVersion = hiveApi.getHardforkVersionAsync();
-      return hfVersion.then(HFV => {
-        if (HFV == '0.23.0') {
-          config.set('chain_id', HF23_CHAIN_ID)
-        } else {
-          config.set('chain_id', HF24_CHAIN_ID)
-        }
-        // Set defaults on the transaction
-        const chainDate = new Date(properties.time + 'Z');
-        const refBlockNum = (properties.last_irreversible_block_num - 1) & 0xFFFF;
-        return hiveApi.getBlockHeaderAsync(properties.last_irreversible_block_num).then((block) => {
-          const headBlockId = block ? block.previous : '0000000000000000000000000000000000000000';
-          return Object.assign({
-            ref_block_num: refBlockNum,
-            ref_block_prefix: new Buffer(headBlockId, 'hex').readUInt32LE(4),
-            expiration: new Date(
-              chainDate.getTime() +
-              600 * 1000
-            ),
-          }, tx);
-        });
+      // Set defaults on the transaction
+      const chainDate = new Date(properties.time + 'Z');
+      const refBlockNum = (properties.last_irreversible_block_num - 1) & 0xFFFF;
+      return hiveApi.getBlockHeaderAsync(properties.last_irreversible_block_num).then((block) => {
+        const headBlockId = block ? block.previous : '0000000000000000000000000000000000000000';
+        return Object.assign({
+          ref_block_num: refBlockNum,
+          ref_block_prefix: new Buffer(headBlockId, 'hex').readUInt32LE(4),
+          expiration: new Date(
+            chainDate.getTime() +
+            600 * 1000
+          ),
+        }, tx);
       });
     });
 };
