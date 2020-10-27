@@ -35,9 +35,6 @@ import types from "./types"
 import SerializerImpl from "./serializer"
 import config from "../../../config"
 
-const hiveVar = () => config.get("rebranded_api") ? "hive" : "steem"
-const hbdVar = () => config.get("rebranded_api") ? "hbd" : "sbd"
-
 const {
     //id_type,
     //varint32, uint8, int64, fixed_array, object_id_type, vote_id, address,
@@ -92,7 +89,7 @@ const allowed_vote_assets = new Serializer(1, {
 
 const smt_generation_unit = new Serializer(
   "smt_generation_unit", {
-  [hiveVar() + "_unit"]: map((string), (uint16)),
+  hive_unit: map((string), (uint16)),
   token_unit: map((string), (uint16))
 });
 
@@ -336,7 +333,7 @@ let chain_properties = new Serializer(
     "chain_properties", {
     account_creation_fee: asset,
     maximum_block_size: uint32,
-    [hbdVar() + "_interest_rate"]: uint16
+    hbd_interest_rate: uint16
 }
 );
 
@@ -411,7 +408,7 @@ let comment_options = new Serializer(
     author: string,
     permlink: string,
     max_accepted_payout: asset,
-    ["percent_" + (hiveVar() === "hive" ? "hbd" : "steem_dollars")]: uint16,
+    percent_hbd: uint16,
     allow_votes: bool,
     allow_curation_rewards: bool,
     extensions: set(static_variant([
@@ -492,8 +489,8 @@ let escrow_transfer = new Serializer(
     "escrow_transfer", {
     from: string,
     to: string,
-    [hbdVar() + "_amount"]: asset,
-    [hiveVar() + "_amount"]: asset,
+    hbd_amount: asset,
+    hive_amount: asset,
     escrow_id: uint32,
     agent: string,
     fee: asset,
@@ -521,8 +518,8 @@ let escrow_release = new Serializer(
     who: string,
     receiver: string,
     escrow_id: uint32,
-    [hbdVar() + "_amount"]: asset,
-    [hiveVar() + "_amount"]: asset
+    hbd_amount: asset,
+    hive_amount: asset
 }
 );
 
@@ -633,8 +630,8 @@ let set_reset_account = new Serializer(
 let claim_reward_balance = new Serializer(
     "claim_reward_balance", {
     account: string,
-    ["reward_" + hiveVar()]: asset,
-    ["reward_" + hbdVar()]: asset,
+    reward_hive: asset,
+    reward_hbd: asset,
     reward_vests: asset
 }
 );
@@ -749,7 +746,7 @@ let smt_setup = new Serializer(
   contribution_begin_time: time_point_sec,
   contribution_end_time: time_point_sec,
   launch_time: time_point_sec,
-  [hiveVar() + "_units_min"]: int64,
+  hive_units_min: int64,
   min_unit_ratio: uint32,
   max_unit_ratio: uint32,
   extensions: set(future_extensions)
@@ -781,7 +778,7 @@ let smt_setup_ico_tier = new Serializer(
     "smt_setup_ico_tier", {
     control_account: string,
     symbol: asset_symbol,
-    [hiveVar() + "_units_cap"]: int64,
+    hive_units_cap: int64,
     generation_policy: static_variant([
         smt_capped_generation_policy
     ]),
@@ -838,8 +835,8 @@ let author_reward = new Serializer(
     "author_reward", {
     author: string,
     permlink: string,
-    [hbdVar() + "_payout"]: asset,
-    [hiveVar() + "_payout"]: asset,
+    hbd_payout: asset,
+    hive_payout: asset,
     vesting_payout: asset
 }
 );
