@@ -98,19 +98,11 @@ export function buildWitnessUpdateOp(
       case "maximum_block_size":
         type = uint32;
         break;
-      // TODO: remove sbd_interest_rate
-      case "sbd_interest_rate":
-        type = uint16;
-        break;
       case "hbd_interest_rate":
         type = uint16;
         break;
       case "url":
         type = string;
-        break;
-      // TODO: remove sbd_exchange_rate
-      case "sbd_exchange_rate":
-        type = price;
         break;
       case "hbd_exchange_rate":
         type = price;
