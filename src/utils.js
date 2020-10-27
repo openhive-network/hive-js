@@ -98,19 +98,11 @@ export function buildWitnessUpdateOp(
       case "maximum_block_size":
         type = uint32;
         break;
-      // TODO: remove sbd_interest_rate
-      case "sbd_interest_rate":
-        type = uint16;
-        break;
       case "hbd_interest_rate":
         type = uint16;
         break;
       case "url":
         type = string;
-        break;
-      // TODO: remove sbd_exchange_rate
-      case "sbd_exchange_rate":
-        type = price;
         break;
       case "hbd_exchange_rate":
         type = price;
@@ -128,15 +120,5 @@ export function buildWitnessUpdateOp(
 }
 
 export function autoDetectApiVersion() {
-  return new Promise((resolve, reject) => {
-    jsonRpc(config.get('url'), { method: 'condenser_api.get_version', params: [], id: 1 }).then(res => {
-      if (res.blockchain_version !== "0.23.0") {
-        config.set("rebranded_api", true)
-        resolve({ rebranded_api: true })
-      } else {
-        config.set("rebranded_api", false)
-        resolve({ rebranded_api: false })
-      }
-    })
-  })
+  console.log('Warning: autoDetectApiVersion() removed - it is not necessary anymore')
 }

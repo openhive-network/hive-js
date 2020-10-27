@@ -14,16 +14,6 @@ var Auth = {};
 var transaction = operations.transaction;
 var signed_transaction = operations.signed_transaction;
 
-// this function can be removed after hf24
-const updateOperations = () => {
-  delete require.cache[require.resolve('./serializer/src/operations')];
-  operations = require('./serializer/src/operations');
-  transaction = operations.transaction;
-  signed_transaction = operations.signed_transaction;
-}
-updateOperations()
-Auth.updateOperations = updateOperations
-
 Auth.verify = function (name, password, auths) {
 	var hasKey = false;
 	var roles = [];

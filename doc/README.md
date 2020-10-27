@@ -55,17 +55,6 @@ hive.config.set('address_prefix','STM');
 hive.config.set('chain_id','beeab0de00000000000000000000000000000000000000000000000000000000');
 hive.config.set('alternative_api_endpoints', ['https://api.hive.blog', 'https://anyx.io']);
 ```
-### rebranded_api
-Set `rebranded_api` to `true` for connecting to eclipse (hf24) RPC nodes.
-
-**It is highly recommended to change this option in the config.json file!**
-
-OR
-
-```
-hive.config.set('rebranded_api','true');
-hive.broadcast.updateOperations(); // Necessary to update the already loaded operations
-```
 
 ### set
 ```
@@ -1008,18 +997,6 @@ const witnessOps = hive.utils.buildWitnessUpdateOp(owner, props);
 hive.broadcast.witnessSetProperties('Private Signing Key', owner, witnessOps.props, [], function(err, result) {
   console.log(err, result);
 });
-```
-
-### Auto Detect API Version
-Get API version and update `rebranded_api` in config.
-Note: this will update the config too based on the result.
-
-```
-var apiVersion = await hive.utils.autoDetectApiVersion();
-console.log(apiVersion);
-// => { rebranded_api: true }
-
-hive.broadcast.updateOperations(); // Necessary to update the already loaded operations
 ```
 
 ## Tutorials
