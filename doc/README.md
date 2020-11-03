@@ -2318,9 +2318,10 @@ hive.api.getAccounts(["username"], function(e1, accounts) {
     .catch(function (err) { console.log(err); })
     .then(function (data) { console.log(data); });
 });
+```
 
 ### Reputation
-```
+```js
 var reputation = hive.formatter.reputation(3512485230915);
 console.log(reputation);
 // => 56
