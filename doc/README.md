@@ -25,13 +25,11 @@
 - [Utils](#utils)
 - [Tutorials](#tutorials)
 
-- - - - - - - - - - - - - - - - - -
 # Install
 ```
 $ npm install @hiveio/hive-js --save
 ```
 
-- - - - - - - - - - - - - - - - - -
 # Browser 
 ```html 
 <script src="./hive.min.js"></script>
@@ -42,14 +40,12 @@ hive.api.getAccounts(['mahdiyari', 'hiveio'], function(err, response){
 </script>
 ```
 
-- - - - - - - - - - - - - - - - - -
 ## CDN
 https://cdn.jsdelivr.net/npm/@hiveio/hive-js/dist/hive.min.js<br/>
 ```html
 <script src="https://cdn.jsdelivr.net/npm/@hiveio/hive-js/dist/hive.min.js"></script>
 ```
 
-- - - - - - - - - - - - - - - - - -
 ## Config
 Default config should work with Hive. However you can change default config.
 as 
@@ -60,26 +56,21 @@ hive.config.set('chain_id','beeab0de00000000000000000000000000000000000000000000
 hive.config.set('alternative_api_endpoints', ['https://api.hive.blog', 'https://anyx.io']);
 ```
 
-- - - - - - - - - - - - - - - - - -
 ### set
 ```
 hive.config.set('address_prefix','STM');
 ```
-
-- - - - - - - - - - - - - - - - - -
 ### get
 ```
 hive.config.get('chain_id');
 ```
 
-- - - - - - - - - - - - - - - - - -
 ## JSON-RPC
 Here is how to activate JSON-RPC transport:
 ```js
 hive.api.setOptions({ url: 'https://api.hive.blog' });
 ```
 
-- - - - - - - - - - - - - - - - - -
 # API
 
 ## Subscriptions
@@ -90,7 +81,6 @@ hive.api.setSubscribeCallback(callback, clearFilter, function(err, result) {
   console.log(err, result);
 });
 ```
-- - - - - - - - - - - - - - - - - -
 ### Set Pending Transaction Callback
 ```
 hive.api.setPendingTransactionCallback(cb, function(err, result) {
