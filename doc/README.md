@@ -692,6 +692,34 @@ hive.api.getCurrentMedianHistoryPrice(function(err, result) {
   console.log(err, result);
 });
 ```
+### Get Ticker
+Gets the lates summorized data from the hive market.
+
+```js
+hive.api.getTicker(callback);
+```
+
+|Parameter|Datatype|Description|
+|---------|--------|-----------|
+|callback|function|function(err, data) {/*code*/}|
+
+
+Call Example:
+```js
+hive.api.getTicker(function(err, data) {
+	console.log(err, data);
+});
+```
+
+Return Example:
+```js
+{ latest: '0.89732142857142860',
+  lowest_ask: '0.89684014869888484',
+  highest_bid: '0.89600000000000002',
+  percent_change: '-14.56712923228768730',
+  hive_volume: '7397.697 HIVE',
+  hbd_volume: '6662.316 HBD' }
+```
 ### Get Hardfork Version
 ```js
 hive.api.getHardforkVersion(function(err, result) {
@@ -699,19 +727,19 @@ hive.api.getHardforkVersion(function(err, result) {
 });
 ```
 ### Get Next Scheduled Hardfork
-```
+```js
 hive.api.getNextScheduledHardfork(function(err, result) {
   console.log(err, result);
 });
 ```
 ### Get Reward Fund
-```
+```js
 hive.api.getRewardFund(name, function(err, result) {
   console.log(err, result);
 });
 ```
 ### Get Vesting Delegations
-```
+```js
 hive.api.getVestingDelegations(account, from, limit, function(err, result) {
   console.log(err, result);
 });
