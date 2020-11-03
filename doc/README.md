@@ -841,6 +841,43 @@ hive.api.getRewardFund(name, function(err, result) {
   console.log(err, result);
 });
 ```
+### Claim Reward Balance
+Claims pending rewards, be they HIVE, HBD or VESTS.
+
+```js
+hive.broadcast.claimRewardBalance(wif, account, reward_hive, reward_hbd, reward_vests, callback);
+```
+
+|Parameter|Datatype|Description|
+|---------|--------|-----------|
+|wif|string|Use hive.auth.toWif(user, pass, type)|
+|account|string|a hive username|
+|reward_hive|string|balance like "0.000 HIVE"|
+|reward_hbd|string|balance like "0.000 HBD"|
+|reward_vests|string|balance like "0.000006 VESTS"|
+|callback|function|function(err, data) {/*code*/}|
+
+
+Call Example:
+```js
+hive.broadcast.claimRewardBalance("5Hupd....pp7vGY", "username", "0.000 HIVE", "0.000 HBD", "0.000006 VESTS", function(err, data) {
+	console.log(err, data);
+});
+```
+
+Return Example:
+```js
+{ id: '052f.......c6c2f',
+  block_num: 19756287,
+  trx_num: 40,
+  expired: false,
+  ref_block_num: 29928,
+  ref_block_prefix: 808836877,
+  expiration: '2018-02-10T20:12:15',
+  operations: [ [ 'claim_reward_balance', [Object] ] ],
+  extensions: [],
+  signatures: [ '205......614e' ] }
+```
 ### Get Vesting Delegations
 ```js
 hive.api.getVestingDelegations(account, from, limit, function(err, result) {
