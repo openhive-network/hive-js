@@ -197,6 +197,35 @@ Return Example:
 ]
 ```
 
+### Get Blog Authors
+Gets a list of all people who wrote in someones blog, along with how many times they wrote in that blog.
+
+```js
+hive.api.getBlogAuthors(blogAccount, callback);
+```
+
+|Parameter|Datatype|Description|
+|---------|--------|-----------|
+|blogAccount|string|a hive username|
+|callback|function|function(err, data) {/*code*/}|
+
+
+Call Example:
+```js
+hive.api.getBlogAuthors("username", function(err, data) {
+	console.log(err, data);
+});
+```
+
+Return Example:
+```js
+[ [ 'username1', 1 ],
+  [ 'username2', 1 ],
+  [ 'username3', 3 ],
+  [ 'username4', 2 ],
+  [ 'username5', 1 ] ]
+```
+
 ### Get Discussions By Trending
 ```js
 hive.api.getDiscussionsByTrending(query, function(err, result) {
