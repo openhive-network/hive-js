@@ -517,11 +517,62 @@ Return Example:
 
 ```
 ### Get State
+Gets a lot of information about the state of `path`
+
 ```js
 hive.api.getState(path, function(err, result) {
   console.log(err, result);
 });
 ```
+|Parameter|Datatype|Description|
+|---------|--------|-----------|
+|path|string| like "/@username". This is the extension from the Hive URL. It can be used on users, posts, comments, comments-by-user, replies-to-user and so on|
+|callback|function|function(err, data) {/*code*/}|
+
+
+Call Example:
+```js
+hive.api.getState("/@username", function(err, data) {
+	console.log(err, data);
+});
+
+// Here are some valid calls:
+
+hive.api.getState("/@username", function(err, data) { console.log(data); });
+
+hive.api.getState("/@username/permlink-of-post", function(err, data) { console.log(data); });
+
+hive.api.getState("/@username/comments", function(err, data) { console.log(data); });
+
+hive.api.getState("/@username/recent-replies", function(err, data) { console.log(data); });
+
+hive.api.getState("/trending", function(err, data) { console.log(data); });
+
+hive.api.getState("/trending/collorchallenge", function(err, data) { console.log(data); });
+
+// and others....
+```
+
+Return Example:
+```js
+// The result is huge, and can have many variations depending on what you are getting the state of. It can't be documented briefly. Here is some basic information:
+{	accounts: {username: {...}}
+	content: {
+		username/permlink1: {...},
+		username/permlink2: {...}, 
+		username/permlink3: {...} …}
+	current_route:"/@username"
+	discussion_idx: {...}
+	error:""
+	feed_price: {base: "3.889 HBD", quote: "1.000 HIVE"}
+	pow_queue: []
+	props: {...}
+	tag_idx: { trending: [...] }
+	tags:{...}
+	witness_schedule: {...}
+	witnesses: {...}	}
+```
+
 ### Get Trending Categories
 ```js
 hive.api.getTrendingCategories(after, limit, function(err, result) {
