@@ -73,6 +73,21 @@ hive.api.setOptions({ url: 'https://api.hive.blog' });
 
 # API
 
+## API CALL
+Can be used for all the possible API calls.
+
+```js
+hive.api.call(method, params, callback);
+// or
+hive.api.callAsync(method, params).then(res => {});
+```
+
+Example:
+```js
+hive.api.callAsync('condenser_api.get_accounts', [['mahdiyari']])
+  .then((res) => console.log(res))
+````
+
 ## Subscriptions
 
 ### Set Subscribe Callback
@@ -575,6 +590,7 @@ Return Example:
 ```
 
 ### Get State With Options
+**Warning:** getState calls are getting deprecated.
 
 ```js
 hive.api.getStateWith(options, callback);
