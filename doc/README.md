@@ -1654,7 +1654,7 @@ hive.api.broadcastBlock(b, function(err, result) {
 ```
 
 # Broadcast
-
+The `steem.broadcast` methods cause permanent changes on the blockchain.
 ### Account Create
 ```js
 hive.broadcast.accountCreate(wif, fee, creator, newAccountName, owner, active, posting, memoKey, jsonMetadata, function(err, result) {
@@ -1668,31 +1668,32 @@ hive.broadcast.accountCreateWithDelegation(wif, fee, delegation, creator, newAcc
 });
 ```
 ### Delegate Vesting Shares
+Delegates STEEM POWER, denominated in VESTS, from a `delegator` to the `delegatee`. Requires the `delegator`'s private WIF key. Set the delegation to 0 to undelegate.
 ```js
 hive.broadcast.delegateVestingShares(wif, delegator, delegatee, vesting_shares, function(err, result) {
   console.log(err, result);
 });
 ```
 ### Account Update
-```
+```js
 hive.broadcast.accountUpdate(wif, account, owner, active, posting, memoKey, jsonMetadata, function(err, result) {
   console.log(err, result);
 });
 ```
 ### Account Witness Proxy
-```
+```js
 hive.broadcast.accountWitnessProxy(wif, account, proxy, function(err, result) {
   console.log(err, result);
 });
 ```
 ### Account Witness Vote
-```
+```js
 hive.broadcast.accountWitnessVote(wif, account, witness, approve, function(err, result) {
   console.log(err, result);
 });
 ```
 ### Witness Set Properties
-```
+```js
 hive.broadcast.witnessSetProperties(signingKey, owner, props, extensions, function(err, result) {
   console.log(err, result);
 });
@@ -1706,13 +1707,13 @@ hive.broadcast.witnessSetProperties(signingKey, owner, props, extensions, functi
 |extensions|empty array []|Array||
 
 ### Challenge Authority
-```
+```js
 hive.broadcast.challengeAuthority(wif, challenger, challenged, requireOwner, function(err, result) {
   console.log(err, result);
 });
 ```
 ### Change Recovery Account
-```
+```js
 hive.broadcast.changeRecoveryAccount(wif, accountToRecover, newRecoveryAccount, extensions, function(err, result) {
   console.log(err, result);
 });
