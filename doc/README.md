@@ -763,6 +763,34 @@ Return Example:
     current_pays: '6.908 HBD',
     open_pays: '17.375 HIVE' } ] 
 ```
+### Get Version
+Gets the version of the Hive blockchain you are connected to.
+
+```js
+hive.api.getVersion(callback);
+```
+
+|Parameter|Datatype|Description|
+|---------|--------|-----------|
+|callback|function|function(err, data) {/*code*/}|
+
+
+Call Example:
+```js
+hive.api.getVersion(function(err, data) {
+	console.log(err, data);
+});
+```
+
+Return Example:
+```js
+{
+  blockchain_version: '1.24.4',
+  chain_id: 'beeab0de00000000000000000000000000000000000000000000000000000000',
+  fc_revision: 'b91e5d490e3647cc816748a5565452b663c6aa73',
+  hive_revision: 'b91e5d490e3647cc816748a5565452b663c6aa73'
+}
+```
 ### Get Hardfork Version
 ```js
 hive.api.getHardforkVersion(function(err, result) {
