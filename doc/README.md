@@ -919,10 +919,45 @@ Return Example:
   signatures: [ '1f61a..........4f3d7' ] }
 ```
 ### Get Vesting Delegations
+Returns a list of delegations made from one `account`. Denominated in VESTS.
 ```js
 hive.api.getVestingDelegations(account, from, limit, function(err, result) {
   console.log(err, result);
 });
+```
+|Parameter|Description|Datatype|Notes|
+|---|---|---|---|
+|account|Account who is making the delegations|String||
+|from|The name of the last account to begin from|String|Use the empty string `''` to start the list. Subsequent calls can use the last delegatee's account name|
+|limit|The maximum number of delegation records to return|Integer||
+|function()|Your callback|function|Tip: use `console.log(err, result)` to see the result|
+
+
+Call Example:
+```js
+hive.api.getVestingDelegations('mahdiyari', '', 2, function(err, result) {
+  console.log(err, result);
+});
+```
+
+Return Example:
+```js
+[
+  {
+    delegatee: 'dblog-io',
+    delegator: 'mahdiyari',
+    id: 980695,
+    min_delegation_time: '2018-08-03T20:33:21',
+    vesting_shares: '29429.940343 VESTS'
+  },
+  {
+    delegatee: 'lokio',
+    delegator: 'mahdiyari',
+    id: 1359266,
+    min_delegation_time: '2020-10-21T12:15:18',
+    vesting_shares: '28832.135025 VESTS'
+  }
+]
 ```
 
 ## Keys
