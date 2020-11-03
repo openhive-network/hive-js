@@ -1071,6 +1071,33 @@ hive.api.getRecoveryRequest(account, function(err, result) {
 });
 ```
 
+### Get Account Reputations
+Gets the reputation points of `limit` accounts with names most similar to `lowerBoundName`.
+
+```js
+hive.api.getAccountReputations(lowerBoundName, limit, callback);
+```
+
+|Parameter|Datatype|Description|
+|---------|--------|-----------|
+|lowerBoundName|string|a hive username query|
+|limit|number|a positive number|
+|callback|function|function(err, data) {/*code*/}|
+
+
+Call Example:
+```js
+hive.api.getAccountReputations("username", 2, function(err, data) {
+	console.log(err, data);
+});
+```
+
+Return Example:
+```js
+ [ { account: 'username', reputation: '26727073581' },
+   { account: 'username-taken', reputation: 0 } ]
+```
+
 ## Market
 
 ### Get Order Book
