@@ -1815,49 +1815,77 @@ hive.api.getEscrow("username", 23456789, function(err, data) {
 });
 ```
 ### Feed Publish
-```
+```js
 hive.broadcast.feedPublish(wif, publisher, exchangeRate, function(err, result) {
   console.log(err, result);
 });
 ```
 ### Pow2
-```
+```js
 hive.broadcast.pow2(wif, work, newOwnerKey, props, function(err, result) {
   console.log(err, result);
 });
 ```
 ### Fill Convert Request
-```
+```js
 hive.broadcast.fillConvertRequest(wif, owner, requestid, amountIn, amountOut, function(err, result) {
   console.log(err, result);
 });
 ```
 ### Fill Order
-```
+```js
 hive.broadcast.fillOrder(wif, currentOwner, currentOrderid, currentPays, openOwner, openOrderid, openPays, function(err, result) {
   console.log(err, result);
 });
 ```
 ### Fill Vesting Withdraw
-```
+```js
 hive.broadcast.fillVestingWithdraw(wif, fromAccount, toAccount, withdrawn, deposited, function(err, result) {
   console.log(err, result);
 });
 ```
-### Interest
+### Get Withdraw Routes
+Gets withdraw routes (hive power withdraws).
+
+```js
+hive.api.getWithdrawRoutes(account, withdrawRouteType, callback);
 ```
+
+|Parameter|Datatype|Description|
+|---------|--------|-----------|
+|account|string|a hive username|
+|withdrawRouteType|number|a number representing a value from an enumeration. Must be 0, 1 or 2|
+|callback|function|function(err, data) {/*code*/}|
+
+
+Call Example:
+```js
+hive.api.getWithdrawRoutes("username", 1, function(err, data) {
+	console.log(err, data);
+});
+```
+
+Return Example:
+```js
+[ { from_account: 'username',
+    to_account: 'receiver',
+    percent: 10000,
+    auto_vest: false } ]
+```
+### Interest
+```js
 hive.broadcast.interest(wif, owner, interest, function(err, result) {
   console.log(err, result);
 });
 ```
 ### Limit Order Cancel
-```
+```js
 hive.broadcast.limitOrderCancel(wif, owner, orderid, function(err, result) {
   console.log(err, result);
 });
 ```
 ### Limit Order Create
-```
+```js
 hive.broadcast.limitOrderCreate(wif, owner, orderid, amountToSell, minToReceive, fillOrKill, expiration, function(err, result) {
   console.log(err, result);
 });
