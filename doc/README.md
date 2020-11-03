@@ -1494,11 +1494,49 @@ hive.api.getApiByName(apiName, function(err, result) {
 ## Follow API
 
 ### Get Followers
-```
+```js
 hive.api.getFollowers(following, startFollower, followType, limit, function(err, result) {
   console.log(err, result);
 });
 ```
+|Parameter|Description|Datatype|Notes|
+|---|---|---|---|
+|following|The followers of which account|String|No leading @ symbol|
+|startFollower|Start the list from which follower?|String|No leading @symbol. Use the empty string `''` to start the list. Subsequent calls can use the name of the last follower|
+|followType|??|??|Set to 0 or 'blog' - either works|
+|limit|The maximum number of followers to return|Integer||
+|function()|Your callback|function|Tip: use `console.log(err, result)` to see the result|
+
+Call Example:
+```js
+steem.api.getFollowers('username', '', 'blog', 2, function(err, result) {
+  console.log(err, result);
+});
+```
+
+Return Example:
+```js
+[ { follower: 'user1', following: 'username', what: [ 'blog' ] },
+  { follower: 'user2', following: 'username', what: [ 'blog' ] } ]
+```
+
+Using the Result:
+```js
+// Extract followers from the result into an array of account name strings
+var f = result.map(function(item) { return item.follower; });
+console.log(f);
+
+// Get the last follower for subsequent calls to getFollowers
+//   or use: f[f.length - 1]   if you used the extraction code above.
+var lastKnownFollower = result[result.length - 1].follower;
+
+// Use the last known follower to get the next group of followers
+hive.api.getFollowers('username', lastKnownFollower, 'blog', 2, function(err, result) {
+  console.log(err, result);
+});
+```
+See also: [getFollowing](#get-following), [getFollowCount](#get-follow-count)
+
 ### Get Following
 ```
 hive.api.getFollowing(follower, startFollowing, followType, limit, function(err, result) {
