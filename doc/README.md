@@ -517,6 +517,7 @@ Return Example:
 
 ```
 ### Get State
+**Warning:** getState calls are getting deprecated.
 Gets a lot of information about the state of `path`
 
 ```js
