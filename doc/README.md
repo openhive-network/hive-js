@@ -2232,11 +2232,34 @@ hive.auth.wifToPublic(privWif);
 ```
 
 ### Sign Transaction
-```
+```js
 hive.auth.signTransaction(trx, keys);
 ```
 
 # Formatter
+
+### Amount
+Formats number and currency to the valid way for sending (for example - it trims the number's floating point remainer to 3 digits only).
+
+```js
+hive.formatter.amount(_amount, asset);
+```
+
+|Parameter|Datatype|Description|
+|---------|--------|-----------|
+|_amount|number|A positive number|
+|asset|string|The name of a hive asset (hive, hbd)|
+
+
+Call Example:
+```js
+hive.formatter.amount(53.442346, "HIVE");
+```
+
+Return Example:
+```js
+ "53.442 HIVE" 
+```
 
 ### Create Suggested Password
 ```
