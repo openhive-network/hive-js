@@ -1606,6 +1606,39 @@ See also: [getFollowers](#get-followers), [getFollowing](#get-following)
 
 ## Broadcast API
 
+### Broadcast Block With Options
+Broadcast a new block on the hive blockchain.
+
+```js
+hive.api.broadcastBlockWith(options, callback);
+```
+
+|Parameter|Datatype|Description|
+|---------|--------|-----------|
+|options|object|like { b: blockObject } where blockObject contains the information on the block you are trying to broadcast|
+|callback|function|function(err, data) {/*code*/}|
+
+
+Call Example:
+```js
+var options = { 
+    b: {
+        previous:"0000000000000000000000000000000000000000",
+        timestamp:"1970-01-01T00:00:00",
+        witness:"",
+        transaction_merkle_root:"0000000000000000000000000000000000000000",
+        extensions:[],
+        witness_signature:
+            "00000000000000000000000000000000000000000000000000000000000000000"+
+            "00000000000000000000000000000000000000000000000000000000000000000",
+        transactions: []
+    }
+};
+
+hive.api.broadcastBlockWith(options, function(err, data) {
+	console.log(err, data);
+});
+
 ### Broadcast Transaction Synchronous
 ```js
 hive.api.broadcastTransactionSynchronous(trx, function(err, result) {
