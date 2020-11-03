@@ -289,8 +289,8 @@ hive.api.getDiscussionsByTrending(query, function(err, result) {
 
 Call Example:
 ```js
-var query = { limit : 3, tag : "steem" };
-steem.api.getDiscussionsByTrending30(query, function(err, data) {
+var query = { limit : 3, tag : "hive" };
+hive.api.getDiscussionsByTrending30(query, function(err, data) {
 	console.log(err, data);
 });
 
@@ -365,6 +365,38 @@ hive.api.getDiscussionsByBlog(query, function(err, result) {
 hive.api.getDiscussionsByComments(query, function(err, result) {
   console.log(err, result);
 });
+```
+
+### Get Discussions By Promoted
+Gets the recent posts ordered by how much was spent to promote them
+
+```js
+hive.api.getDiscussionsByPromoted(query, callback);
+```
+
+|Parameter|Datatype|Description|
+|---------|--------|-----------|
+|query|object|an object containing different options for querying, like 'limit' and 'tag'|
+|callback|function|function(err, data) {/*code*/}|
+
+
+Call Example:
+```js
+var query = { limit : 3, tag : "hive" };
+hive.api.getDiscussionsByPromoted(query, function(err, data) {
+	console.log(err, data);
+});
+
+// NOTE! The default limit is 0. Not setting a limit will get you an empty result.
+```
+
+Return Example:
+```js
+// the result is an array of big objects representing the comments
+
+ [ { /* ommited for simplicity */ },
+   { /* ommited for simplicity */ },
+   { /* ommited for simplicity */ } ]
 ```
 
 ## Blocks and transactions
