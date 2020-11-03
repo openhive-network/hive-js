@@ -1218,6 +1218,28 @@ hive.api.getLiquidityQueue(startAccount, limit, function(err, result) {
   console.log(err, result);
 });
 ```
+### Get Market History Buckets
+
+```js
+hive.api.getMarketHistoryBuckets(callback);
+```
+
+|Parameter|Datatype|Description|
+|---------|--------|-----------|
+|callback|function|function(err, data) {/*code*/}|
+
+
+Call Example:
+```js
+hive.api.getMarketHistoryBuckets(function(err, data) {
+	console.log(err, data);
+});
+```
+
+Return Example:
+```js
+ [ 15, 60, 300, 3600, 86400 ]
+```
 
 ## Authority / validation
 
