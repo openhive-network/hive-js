@@ -103,11 +103,50 @@ hive.api.cancelAllSubscriptions(function(err, result) {
 ## Tags
 
 ### Get Trending Tags
+Returns a list of the currently trending tags in descending order by value.
 ```
 hive.api.getTrendingTags(afterTag, limit, function(err, result) {
   console.log(err, result);
 });
 ```
+
+|Parameter|Description|Datatype|Notes|
+|---|---|---|---|
+|afterTag|The name of the last tag to begin from|String|Use the empty string `''` to start the list. Subsequent calls can use the last tag name|
+|limit|The maximum number of tags to return|Integer||
+|function()|Your callback|function|Tip: use `console.log(err, result)` to see the result|
+
+Call Example:
+```js
+hive.api.getTrendingTags('', 2, function(err, result) {
+  console.log(err, result);
+});
+```
+
+Return Example:
+```js
+[ { name: '', total_payouts: '37610793.383 SBD', net_votes: 4211122, top_posts: 411832, comments: 1344461, trending: '5549490701' },
+  { name: 'life', total_payouts: '8722947.658 SBD', net_votes: 1498401, top_posts: 127103, comments: 54049, trending: '570954588' } ]
+```
+
+Using the Result:
+```js
+// Extract tags from the result into an array of tag name strings
+var f = result.map(function(item) { return item.name; });
+console.log(f);
+
+// Get the last tag for subsequent calls to `getTrendingTags`
+//   or use: f[f.length - 1]   if you used the extraction code above.
+var lastKnownTag = result[result.length - 1].name;
+
+// Use the last known tag to get the next group of tags
+hive.api.TrendingTags(lastKnownTag, 2, function(err, result) {
+  console.log(err, result);
+});
+```
+
+See also: [getTrendingCategories](#get-trending-categories)
+
 ### Get Discussions By Trending
 ```
 hive.api.getDiscussionsByTrending(query, function(err, result) {
