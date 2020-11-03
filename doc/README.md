@@ -2332,7 +2332,7 @@ console.log(reputation);
 **Warning:** hive.formatter.vestToSteem() is deprecated and will be removed in the future releases.
 Use the following method instead:
 
-```
+```js
 var hivePower = hive.formatter.vestToHive(vestingShares, totalVestingShares, totalVestingFundHive);
 console.log(hivePower);
 ```
@@ -2340,7 +2340,7 @@ console.log(hivePower);
 # Utils
 
 ### Validate Username
-```
+```js
 var isValidUsername = hive.utils.validateAccountName('test1234');
 console.log(isValidUsername);
 // => 'null'
@@ -2351,7 +2351,7 @@ console.log(isValidUsername);
 ```
 
 ### Build Witness Update Properties
-```
+```js
 const owner = 'mahdiyari'
 const props = {
   "key": "Public Signing Key" // REQUIRED
@@ -2370,6 +2370,28 @@ const witnessOps = hive.utils.buildWitnessUpdateOp(owner, props);
 hive.broadcast.witnessSetProperties('Private Signing Key', owner, witnessOps.props, [], function(err, result) {
   console.log(err, result);
 });
+```
+
+### Camel Case
+Formats a string with '_' characters to follow the CamelCase notation instead.
+
+```js
+hive.utils.camelCase(str);
+```
+
+|Parameter|Datatype|Description|
+|---------|--------|-----------|
+|str|string|the string will be converted to camelCase like "exampleString"|
+
+
+Call Example:
+```js
+hive.utils.camelCase("example_string");
+```
+
+Return Example:
+```js
+"exampleString"
 ```
 
 ## Tutorials
