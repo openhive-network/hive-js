@@ -878,6 +878,46 @@ Return Example:
   extensions: [],
   signatures: [ '205......614e' ] }
 ```
+### Claim Reward Balance With Options
+Claims pending rewards, be they HIVE, HBD or VESTS.
+
+```js
+hive.broadcast.claimRewardBalanceWith(wif, options, callback);
+```
+
+|Parameter|Datatype|Description|
+|---------|--------|-----------|
+|wif|string|Use < hive.auth.toWif(user, pass, type) >|
+|options|object|an object containing the calim parameters. Look at the example below.|
+|callback|function|function(err, data) {/*code*/}|
+
+
+Call Example:
+```js
+var options = {
+    account:"username",
+    reward_hbd:"0.000 HBD",
+    reward_hive:"0.000 HIVE",
+    reward_vests:"0.000006 VESTS"
+}
+hive.broadcast.claimRewardBalanceWith("5Hupd....pp7vGY", options, function(err, data) {
+	console.log(err, data);
+});
+```
+
+Return Example:
+```js
+ { id: '4b7b........034c7',
+  block_num: 19756322,
+  trx_num: 3,
+  expired: false,
+  ref_block_num: 29965,
+  ref_block_prefix: 4245658614,
+  expiration: '2018-02-10T20:14:00',
+  operations: [ [ 'claim_reward_balance', [Object] ] ],
+  extensions: [],
+  signatures: [ '1f61a..........4f3d7' ] }
+```
 ### Get Vesting Delegations
 ```js
 hive.api.getVestingDelegations(account, from, limit, function(err, result) {
