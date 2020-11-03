@@ -1996,25 +1996,26 @@ hive.broadcast.setWithdrawVestingRoute(wif, fromAccount, toAccount, percent, aut
 });
 ```
 ### Transfer
-```
+Transfers assets, such as HIVE or HBD, from one account to another.
+```js
 hive.broadcast.transfer(wif, from, to, amount, memo, function(err, result) {
   console.log(err, result);
 });
 ```
 ### Transfer To Vesting
-```
+```js
 hive.broadcast.transferToVesting(wif, from, to, amount, function(err, result) {
   console.log(err, result);
 });
 ```
 ### Vote
-```
+```js
 hive.broadcast.vote(wif, voter, author, permlink, weight, function(err, result) {
   console.log(err, result);
 });
 ```
 ### Withdraw Vesting
-```
+```js
 hive.broadcast.withdrawVesting(wif, account, vestingShares, function(err, result) {
   console.log(err, result);
 });
