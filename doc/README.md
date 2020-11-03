@@ -329,7 +329,35 @@ hive.api.getConversionRequests(accountName, function(err, result) {
 hive.api.getAccountHistory(account, from, limit, operation_filter_low, operation_filter_high, function(err, result) {
   console.log(err, result);
 });
+```  
+Example:  
+
 ```
+const { ChainTypes, makeBitMaskFilter } = require('@hiveio/hive-js/lib/auth/serializer')
+const op = ChainTypes.operations
+const walletOperationsBitmask = makeBitMaskFilter([
+  op.transfer,
+  op.transfer_to_vesting,
+  op.withdraw_vesting,
+  op.interest,
+  op.liquidity_reward,
+  op.transfer_to_savings,
+  op.transfer_from_savings,
+  op.escrow_transfer,
+  op.cancel_transfer_from_savings,
+  op.escrow_approve,
+  op.escrow_dispute,
+  op.escrow_release,
+  op.fill_convert_request,
+  op.fill_order,
+  op.claim_reward_balance
+])
+hive.api.getAccountHistory(account, from, limit, ...walletOperationsBitmask, function(err, result) {
+  console.log(err, result)
+})
+```  
+
+
 ### Get Owner History
 ```
 hive.api.getOwnerHistory(account, function(err, result) {
