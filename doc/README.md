@@ -1492,8 +1492,10 @@ hive.api.getApiByName(apiName, function(err, result) {
 ```
 
 ## Follow API
+The follower API queries information about follow relationships between accounts. The API is read-only and does not create changes on the blockchain.
 
 ### Get Followers
+Returns an alphabetical ordered array of the accounts that are following a particular account.
 ```js
 hive.api.getFollowers(following, startFollower, followType, limit, function(err, result) {
   console.log(err, result);
@@ -1538,13 +1540,45 @@ hive.api.getFollowers('username', lastKnownFollower, 'blog', 2, function(err, re
 See also: [getFollowing](#get-following), [getFollowCount](#get-follow-count)
 
 ### Get Following
-```
+Returns an alphabetical ordered Array of the accounts that are followed by a particular account.
+```js
 hive.api.getFollowing(follower, startFollowing, followType, limit, function(err, result) {
   console.log(err, result);
 });
 ```
-### Get Follow Count
+
+|Parameter|Description|Datatype|Notes|
+|---|---|---|---|
+|follower|The account to get the following for|String|No leading @ symbol|
+|startFollowing|Start the list at which followed account?|String|No leading @symbol. Use the empty string `''` to start the list|
+|followType|??|??|Set to 0 or 'blog' - either works|
+|limit|The maximum number of items to return|Integer||
+|function()|Your callback|function|Tip: use `console.log(err, result)` to see the result|
+
+Call Example:
+```js
+hvie.api.getFollowing('username', '', 'blog', 2, function(err, result) {
+  console.log(err, result);
+});
 ```
+
+Return Example:
+```js
+[ { follower: 'username', following: 'user1', what: [ 'blog' ] },
+  { follower: 'username', following: 'user2', what: [ 'blog' ] } ]
+```
+
+Using the Result:
+```js
+// Extract followed accounts from the result into an array of account name strings
+var f = result.map(function(item) { return item.following; });
+```
+See the usage examples for [getFollowers](#get-followers) because the behaviour is very similar.
+
+See also: [getFollowers](#get-followers), [getFollowCount](#get-follow-count)
+
+### Get Follow Count
+```js
 hive.api.getFollowCount(account, function(err, result) {
   console.log(err, result);
 });
@@ -1553,13 +1587,13 @@ hive.api.getFollowCount(account, function(err, result) {
 ## Broadcast API
 
 ### Broadcast Transaction Synchronous
-```
+```js
 hive.api.broadcastTransactionSynchronous(trx, function(err, result) {
   console.log(err, result);
 });
 ```
 ### Broadcast Block
-```
+```js
 hive.api.broadcastBlock(b, function(err, result) {
   console.log(err, result);
 });
