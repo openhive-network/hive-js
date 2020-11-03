@@ -130,7 +130,7 @@ Return Example:
 ```
 
 Using the Result:
-```
+```js
 // Extract tags from the result into an array of tag name strings
 var f = result.map(function(item) { return item.name; });
 console.log(f);
