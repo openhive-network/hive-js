@@ -791,6 +791,30 @@ Return Example:
   hive_revision: 'b91e5d490e3647cc816748a5565452b663c6aa73'
 }
 ```
+### Get Volume
+Gets the Hive and Hive Dollar volumes
+
+```js
+hive.api.getVolume(callback);
+```
+
+|Parameter|Datatype|Description|
+|---------|--------|-----------|
+|callback|function|function(err, data) {/*code*/}|
+
+
+Call Example:
+```js
+hive.api.getVolume(function(err, data) {
+	console.log(err, data);
+});
+```
+
+Return Example:
+```js
+{ hive_volume: '8101.888 HIVE',
+	hbd_volume: '7287.268 HBD' }
+```
 ### Get Hardfork Version
 ```js
 hive.api.getHardforkVersion(function(err, result) {
