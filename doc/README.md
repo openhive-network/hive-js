@@ -1638,6 +1638,7 @@ var options = {
 hive.api.broadcastBlockWith(options, function(err, data) {
 	console.log(err, data);
 });
+```
 
 ### Broadcast Transaction Synchronous
 ```js
@@ -1655,19 +1656,19 @@ hive.api.broadcastBlock(b, function(err, result) {
 # Broadcast
 
 ### Account Create
-```
+```js
 hive.broadcast.accountCreate(wif, fee, creator, newAccountName, owner, active, posting, memoKey, jsonMetadata, function(err, result) {
   console.log(err, result);
 });
 ```
 ### Account Create With Delegation
-```
+```js
 hive.broadcast.accountCreateWithDelegation(wif, fee, delegation, creator, newAccountName, owner, active, posting, memoKey, jsonMetadata, extensions, function(err, result) {
   console.log(err, result);
 });
 ```
 ### Delegate Vesting Shares
-```
+```js
 hive.broadcast.delegateVestingShares(wif, delegator, delegatee, vesting_shares, function(err, result) {
   console.log(err, result);
 });
