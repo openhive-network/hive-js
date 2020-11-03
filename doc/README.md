@@ -1948,49 +1948,49 @@ See also: [getOrderBook](#get-order-book), [getOpenOrders](#get-open-orders), [l
 
 
 ### Liquidity Reward
-```
+```js
 hive.broadcast.liquidityReward(wif, owner, payout, function(err, result) {
   console.log(err, result);
 });
 ```
 ### Pow
-```
+```js
 hive.broadcast.pow(wif, worker, input, signature, work, function(err, result) {
   console.log(err, result);
 });
 ```
 ### Prove Authority
-```
+```js
 hive.broadcast.proveAuthority(wif, challenged, requireOwner, function(err, result) {
   console.log(err, result);
 });
 ```
 ### Recover Account
-```
+```js
 hive.broadcast.recoverAccount(wif, accountToRecover, newOwnerAuthority, recentOwnerAuthority, extensions, function(err, result) {
   console.log(err, result);
 });
 ```
 ### Report Over Production
-```
+```js
 hive.broadcast.reportOverProduction(wif, reporter, firstBlock, secondBlock, function(err, result) {
   console.log(err, result);
 });
 ```
 ### Request Account Recovery
-```
+```js
 hive.broadcast.requestAccountRecovery(wif, recoveryAccount, accountToRecover, newOwnerAuthority, extensions, function(err, result) {
   console.log(err, result);
 });
 ```
 ### Escrow Approve
-```
+```js
 hive.broadcast.escrowApprove(wif, from, to, agent, who, escrowId, approve, function(err, result) {
   console.log(err, result);
 });
 ```
 ### Set Withdraw Vesting Route
-```
+```js
 hive.broadcast.setWithdrawVestingRoute(wif, fromAccount, toAccount, percent, autoVest, function(err, result) {
   console.log(err, result);
 });
