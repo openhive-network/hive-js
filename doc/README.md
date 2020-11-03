@@ -621,37 +621,37 @@ hive.api.getRecentCategories(after, limit, function(err, result) {
 ## Globals
 
 ### Get Config
-```
+```js
 hive.api.getConfig(function(err, result) {
   console.log(err, result);
 });
 ```
 ### Get Dynamic Global Properties
-```
+```js
 hive.api.getDynamicGlobalProperties(function(err, result) {
   console.log(err, result);
 });
 ```
 ### Get Chain Properties
-```
+```js
 hive.api.getChainProperties(function(err, result) {
   console.log(err, result);
 });
 ```
 ### Get Feed History
-```
+```js
 hive.api.getFeedHistory(function(err, result) {
   console.log(err, result);
 });
 ```
 ### Get Current Median History Price
-```
+```js
 hive.api.getCurrentMedianHistoryPrice(function(err, result) {
   console.log(err, result);
 });
 ```
 ### Get Hardfork Version
-```
+```js
 hive.api.getHardforkVersion(function(err, result) {
   console.log(err, result);
 });
