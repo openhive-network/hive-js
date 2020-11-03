@@ -1316,6 +1316,35 @@ hive.api.getDiscussionsByAuthorBeforeDate(author, startPermlink, beforeDate, lim
   console.log(err, result);
 });
 ```
+### Get Reblogged By
+Gives a list of the users that reblogged a given post
+
+```js
+hive.api.getRebloggedBy(author, permlink, callback);
+```
+
+|Parameter|Datatype|Description|
+|---------|--------|-----------|
+|author|string|a hive username|
+|permlink|string|a permalink of comment or post|
+|callback|function|function(err, data) {/*code*/}|
+
+
+Call Example:
+```js
+hive.api.getRebloggedBy("author", "example-permlink", function(err, data) {
+	console.log(err, data);
+});
+```
+
+Return Example:
+```js
+ [ 'author',
+  'user1',
+  'user2',
+  'user3',
+  'user4' ]
+```
 ### Get Replies By Last Update
 ```js
 hive.api.getRepliesByLastUpdate(startAuthor, startPermlink, limit, function(err, result) {
