@@ -2159,19 +2159,19 @@ hive.broadcast.commentPayout(wif, author, permlink, payout, function(err, result
 });
 ```
 ### Transfer To Savings
-```
+```js
 hive.broadcast.transferToSavings(wif, from, to, amount, memo, function(err, result) {
   console.log(err, result);
 });
 ```
 ### Transfer From Savings
-```
+```js
 hive.broadcast.transferFromSavings(wif, from, requestId, to, amount, memo, function(err, result) {
   console.log(err, result);
 });
 ```
 ### Cancel Transfer From Savings
-```
+```js
 hive.broadcast.cancelTransferFromSavings(wif, from, requestId, function(err, result) {
   console.log(err, result);
 });
@@ -2179,7 +2179,7 @@ hive.broadcast.cancelTransferFromSavings(wif, from, requestId, function(err, res
 
 ### Multisig
 You can use multisignature to broadcast an operation.
-```
+```js
 hive.broadcast.send({
   extensions: [],
   operations: [
@@ -2197,37 +2197,37 @@ hive.broadcast.send({
 # Auth
 
 ### Verify
-```
+```js
 hive.auth.verify(name, password, auths);
 ```
 
 ### Generate Keys
-```
+```js
 hive.auth.generateKeys(name, password, roles);
 ```
 
 ### Get Private Keys
-```
+```js
 hive.auth.getPrivateKeys(name, password, roles);
 ```
 
 ### Is Wif
-```
+```js
 hive.auth.isWif(privWif);
 ```
 
 ### To Wif
-```
+```js
 hive.auth.toWif(name, password, role);
 ```
 
 ### Wif Is Valid
-```
+```js
 hive.auth.wifIsValid(privWif, pubWif);
 ```
 
 ### Wif To Public
-```
+```js
 hive.auth.wifToPublic(privWif);
 ```
 
