@@ -2102,6 +2102,31 @@ hive.broadcast.fillTransferFromSavings(wif, from, to, amount, requestId, memo, f
   console.log(err, result);
 });
 ```
+### Get Savings Withdraw From
+Gets a list of savings withdraws from `account`.
+
+```js
+hive.api.getSavingsWithdrawFrom(account, callback);
+```
+
+|Parameter|Datatype|Description|
+|---------|--------|-----------|
+|account|string|a hive username|
+|callback|function|function(err, data) {/*code*/}|
+
+
+Call Example:
+```js
+hive.api.getSavingsWithdrawFrom("username", function(err, data) {
+	console.log(err, data);
+});
+```
+
+Return Example:
+```js
+ [ /* list of withdraws from savings */ ]
+```
+
 ### Comment Payout
 ```js
 hive.broadcast.commentPayout(wif, author, permlink, payout, function(err, result) {
