@@ -1106,6 +1106,63 @@ hive.api.getOrderBook(limit, function(err, result) {
   console.log(err, result);
 });
 ```
+### Get Market Order Book
+Takes the top-most `limit` entries in the market order book for both buy and sell orders.
+
+```js
+hive.api.getMarketOrderBook(limit, callback);
+```
+
+|Parameter|Datatype|Description|
+|---------|--------|-----------|
+|limit|number|a positive number|
+|callback|function|function(err, data) {/*code*/}|
+
+
+Call Example:
+```js
+hive.api.getMarketOrderBook(2, function(err, data) {
+	console.log(err, data);
+});
+```
+
+Return Example:
+```js
+{
+  asks: [
+    {
+      created: '2020-11-03T15:24:54',
+      hbd: 227,
+      hive: 1915,
+      order_price: [Object],
+      real_price: '0.11853785900783290'
+    },
+    {
+      created: '2020-11-03T15:20:51',
+      hbd: 1244,
+      hive: 10463,
+      order_price: [Object],
+      real_price: '0.11889515435343592'
+    }
+  ],
+  bids: [
+    {
+      created: '2020-11-03T15:23:03',
+      hbd: 2000,
+      hive: 16948,
+      order_price: [Object],
+      real_price: '0.11800802454566911'
+    },
+    {
+      created: '2020-11-03T15:21:51',
+      hbd: 44673,
+      hive: 378585,
+      order_price: [Object],
+      real_price: '0.11799992075755775'
+    }
+  ]
+}
+```
 ### Get Open Orders
 ```js
 hive.api.getOpenOrders(owner, function(err, result) {
