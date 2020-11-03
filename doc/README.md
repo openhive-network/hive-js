@@ -2127,6 +2127,31 @@ Return Example:
  [ /* list of withdraws from savings */ ]
 ```
 
+### Get Savings Withdraw To
+Gets a list of savings withdraws from `account`.
+
+```js
+hive.api.getSavingsWithdrawTo(account, callback);
+```
+
+|Parameter|Datatype|Description|
+|---------|--------|-----------|
+|account|string|a hive username|
+|callback|function|function(err, data) {/*code*/}|
+
+
+Call Example:
+```js
+hive.api.getSavingsWithdrawTo("username", function(err, data) {
+	console.log(err, data);
+});
+```
+
+Return Example:
+```js
+ [ /* list of withdraws from savings */ ]
+```
+
 ### Comment Payout
 ```js
 hive.broadcast.commentPayout(wif, author, permlink, payout, function(err, result) {
