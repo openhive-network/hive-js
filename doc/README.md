@@ -130,7 +130,7 @@ Return Example:
 ```
 
 Using the Result:
-```js
+```
 // Extract tags from the result into an array of tag name strings
 var f = result.map(function(item) { return item.name; });
 console.log(f);
@@ -150,7 +150,7 @@ See also: [getTrendingCategories](#get-trending-categories)
 ### Get Blog
 Gets the last `limit` number of posts of `account` before the post with index `entryId`
 
-```js
+```
 hive.api.getBlog(account, entryId, limit, callback);
 ```
 
@@ -163,7 +163,7 @@ hive.api.getBlog(account, entryId, limit, callback);
 
 
 Call Example:
-```js
+```
 hive.api.getBlog("username", 10, 3, function(err, data) {
 	console.log(err, data);
 });
@@ -174,8 +174,9 @@ hive.api.getBlog("username", 10, 3, function(err, data) {
 ```
 
 Return Example:
-```js
-[ {
+```
+[
+  {
 		blog:"username"
 		comment: { /* Omited for simplicity */ }
 		entry_id: 10
@@ -192,7 +193,8 @@ Return Example:
 		comment: { /* Omited for simplicity */ }
 		entry_id: 8
 		reblog_on:"1970-01-01T00:00:00"
-	} ]
+  }
+]
 ```
 
 ### Get Discussions By Trending
