@@ -273,11 +273,39 @@ Return Example:
 ```
 
 ### Get Discussions By Trending
+Gets the hive posts as they would be shown in the trending tab of hive.blog.
+
 ```js
 hive.api.getDiscussionsByTrending(query, function(err, result) {
   console.log(err, result);
 });
 ```
+
+|Parameter|Datatype|Description|
+|---------|--------|-----------|
+|query|object|an object containing different options for querying, like 'limit' and 'tag'|
+|callback|function|function(err, data) {/*code*/}|
+
+
+Call Example:
+```js
+var query = { limit : 3, tag : "steem" };
+steem.api.getDiscussionsByTrending30(query, function(err, data) {
+	console.log(err, data);
+});
+
+// NOTE! The default limit is 0. Not setting a limit will get you an empty result.
+```
+
+Return Example:
+```js
+// the result is an array of big objects representing the comments
+
+ [ { /* ommited for simplicity */ },
+   { /* ommited for simplicity */ },
+   { /* ommited for simplicity */ } ]
+```
+
 ### Get Discussions By Created
 ```
 hive.api.getDiscussionsByCreated(query, function(err, result) {
