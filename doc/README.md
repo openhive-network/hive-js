@@ -2261,6 +2261,31 @@ Return Example:
  "53.442 HIVE" 
 ```
 
+### Number With Commas
+Formats a big number, by adding a comma on every 3 digits.
+Attention - only works on strings. No numbers can be passed directly.
+
+```js
+hive.formatter.numberWithCommas(x);
+```
+
+|Parameter|Datatype|Description|
+|---------|--------|-----------|
+|x|string|Number to format as string|
+
+
+Call Example:
+```js
+hive.formatter.numberWithCommas(53304432342.432.toString());
+// or
+hive.formatter.numberWithCommas("53304432342.432");
+```
+
+Return Example:
+```js
+ "53,304,432,342.432" 
+```
+
 ### Create Suggested Password
 ```
 var password = hive.formatter.createSuggestedPassword();
