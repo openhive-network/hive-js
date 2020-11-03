@@ -1244,37 +1244,37 @@ Return Example:
 ## Authority / validation
 
 ### Get Transaction Hex
-```
+```js
 hive.api.getTransactionHex(trx, function(err, result) {
   console.log(err, result);
 });
 ```
 ### Get Transaction
-```
+```js
 hive.api.getTransaction(trxId, function(err, result) {
   console.log(err, result);
 });
 ```
 ### Get Required Signatures
-```
+```js
 hive.api.getRequiredSignatures(trx, availableKeys, function(err, result) {
   console.log(err, result);
 });
 ```
 ### Get Potential Signatures
-```
+```js
 hive.api.getPotentialSignatures(trx, function(err, result) {
   console.log(err, result);
 });
 ```
 ### Verify Authority
-```
+```js
 hive.api.verifyAuthority(trx, function(err, result) {
   console.log(err, result);
 });
 ```
 ### Verify Account Authority
-```
+```js
 hive.api.verifyAccountAuthority(nameOrId, signers, function(err, result) {
   console.log(err, result);
 });
@@ -1283,7 +1283,7 @@ hive.api.verifyAccountAuthority(nameOrId, signers, function(err, result) {
 ## Votes
 
 ### Get Active Votes
-```
+```js
 hive.api.getActiveVotes(author, permlink, function(err, result) {
   console.log(err, result);
 });
