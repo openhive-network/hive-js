@@ -816,11 +816,19 @@ Return Example:
 	hbd_volume: '7287.268 HBD' }
 ```
 ### Get Hardfork Version
+Gets the current hardfork version of the Hive blockchain.
 ```js
 hive.api.getHardforkVersion(function(err, result) {
   console.log(err, result);
 });
 ```
+Return Example:
+```js
+'1.24.0'
+```
+This returns a string and not JSON.
+
+See also: [getNextScheduledHardfork](#get-next-scheduled-hardfork), [getConfig](#get-config)
 ### Get Next Scheduled Hardfork
 ```js
 hive.api.getNextScheduledHardfork(function(err, result) {
