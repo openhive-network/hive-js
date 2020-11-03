@@ -1924,11 +1924,29 @@ Risky tip: The Internal Market seems to always try and get the best price from t
 See also: [getOrderBook](#get-order-book), [getOpenOrders](#get-open-orders), [limitOrderCancel](#limit-order-cancel), [limitOrderCreate2](#limit-order-create2)
 
 ### Limit Order Create2
-```
+Creates a limit order on the [internal market](https://wallet.hive.blog/market) to trade one asset for another using an exchange rate.  Orders can be set attempt to fill immediately and or to go to the orderbook. Orders in the order book remain until filled or the expiration time is reached.
+
+```js
 hive.broadcast.limitOrderCreate2(wif, owner, orderid, amountToSell, exchangeRate, fillOrKill, expiration, function(err, result) {
   console.log(err, result);
 });
 ```
+
+|Parameter|Description|Datatype|Notes|
+|---|---|---|---|
+|wif|Active private key|String||
+|owner|Account name|String|No leading @ symbol|
+|orderid|User defined order identifier|Integer|Used to cancel orders|
+|amountToSell|Amount to sell|String|"X.XXX ASSET" must have 3 decimal places. e.g. "25.100 HBD"|
+|exchangeRate|The exchange rate|Integer|`amountToSell` is multiplied by the `exchangeRate` to have the same effect as `minToReceive`|
+|fillOrKill|Fill order from current order book or kill the order|Boolean|`false` places the order into the Order Book until either canceled, filled, or the expiration time is reached|
+|expiration|Time when order expires|Integer|Unit milliseconds. Zero is UNIX epoch|
+|function()|Your callback|function||
+
+
+See also: [getOrderBook](#get-order-book), [getOpenOrders](#get-open-orders), [limitOrderCancel](#limit-order-cancel), [limitOrderCreate](#limit-order-create2)
+
+
 ### Liquidity Reward
 ```
 hive.broadcast.liquidityReward(wif, owner, payout, function(err, result) {
