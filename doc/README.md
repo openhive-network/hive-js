@@ -1719,81 +1719,99 @@ hive.broadcast.changeRecoveryAccount(wif, accountToRecover, newRecoveryAccount, 
 });
 ```
 ### Comment
-```
+```js
 hive.broadcast.comment(wif, parentAuthor, parentPermlink, author, permlink, title, body, jsonMetadata, function(err, result) {
   console.log(err, result);
 });
 ```
 ### Comment Options
-```
+```js
 hive.broadcast.commentOptions(wif, author, permlink, maxAcceptedPayout, percentHiveDollars, allowVotes, allowCurationRewards, extensions, function(err, result) {
   console.log(err, result);
 });
 ```
 ### Comment Payout
-```
+```js
 hive.broadcast.commentPayout(wif, author, permlink, payout, function(err, result) {
   console.log(err, result);
 });
 ```
 ### Comment Reward
-```
+```js
 hive.broadcast.commentReward(wif, author, permlink, hbdPayout, vestingPayout, function(err, result) {
   console.log(err, result);
 });
 ```
 ### Convert
-```
+```js
 hive.broadcast.convert(wif, owner, requestid, amount, function(err, result) {
   console.log(err, result);
 });
 ```
 ### Curate Reward
-```
+```js
 hive.broadcast.curateReward(wif, curator, reward, commentAuthor, commentPermlink, function(err, result) {
   console.log(err, result);
 });
 ```
 ### Custom
-```
+```js
 hive.broadcast.custom(wif, requiredAuths, id, data, function(err, result) {
   console.log(err, result);
 });
 ```
 ### Custom Binary
-```
+```js
 hive.broadcast.customBinary(wif, id, data, function(err, result) {
   console.log(err, result);
 });
 ```
 ### Custom Json
-```
+```js
 hive.broadcast.customJson(wif, requiredAuths, requiredPostingAuths, id, json, function(err, result) {
   console.log(err, result);
 });
 ```
 ### Delete Comment
-```
+```js
 hive.broadcast.deleteComment(wif, author, permlink, function(err, result) {
   console.log(err, result);
 });
 ```
 ### Escrow Dispute
-```
+```js
 hive.broadcast.escrowDispute(wif, from, to, agent, who, escrowId, function(err, result) {
   console.log(err, result);
 });
 ```
 ### Escrow Release
-```
+```js
 hive.broadcast.escrowRelease(wif, from, to, agent, who, receiver, escrowId, hbdAmount, hiveAmount, function(err, result) {
   console.log(err, result);
 });
 ```
 ### Escrow Transfer
-```
+```js
 hive.broadcast.escrowTransfer(wif, from, to, agent, escrowId, hbdAmount, hiveAmount, fee, ratificationDeadline, escrowExpiration, jsonMeta, function(err, result) {
   console.log(err, result);
+});
+```
+### Get Escrow
+```js
+hive.api.getEscrow(from, escrowId, callback);
+```
+
+|Parameter|Datatype|Description|
+|---------|--------|-----------|
+|from|string|a hive username|
+|escrowId|number|id of the specific escrow transfer|
+|callback|function|function(err, data) {/*code*/}|
+
+
+Call Example:
+```js
+hive.api.getEscrow("username", 23456789, function(err, data) {
+	console.log(err, data);
 });
 ```
 ### Feed Publish
