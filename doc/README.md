@@ -720,6 +720,49 @@ Return Example:
   hive_volume: '7397.697 HIVE',
   hbd_volume: '6662.316 HBD' }
 ```
+### Get Trade History
+Gets the trade history for a given period between a `start` date and an `end` date
+
+```js
+hive.api.getTradeHistory(start, end, limit, callback);
+```
+
+|Parameter|Datatype|Description|
+|---------|--------|-----------|
+|start|string|Datetime string in the format "2018-01-01T00:00:00"|
+|end|string|Datetime string in the format "2018-01-01T00:00:00"|
+|limit|number|a positive number|
+|callback|function|function(err, data) {/*code*/}|
+
+
+Call Example:
+```js
+var start = "2018-01-01T00:00:00";
+var end = "2018-01-02T00:00:00";
+
+hive.api.getTradeHistory(start, end, 5, function(err, data) {
+	console.log(err, data);
+});
+```
+
+Return Example:
+```js
+ [ { date: '2018-01-01T00:00:09',
+    current_pays: '10.192 HBD',
+    open_pays: '25.650 HIVE' },
+  { date: '2018-01-01T00:00:09',
+    current_pays: '2.000 HBD',
+    open_pays: '5.033 HIVE' },
+  { date: '2018-01-01T00:00:12',
+    current_pays: '13.560 HBD',
+    open_pays: '34.128 HIVE' },
+  { date: '2018-01-01T00:00:12',
+    current_pays: '3.057 HBD',
+    open_pays: '7.690 HIVE' },
+  { date: '2018-01-01T00:00:12',
+    current_pays: '6.908 HBD',
+    open_pays: '17.375 HIVE' } ] 
+```
 ### Get Hardfork Version
 ```js
 hive.api.getHardforkVersion(function(err, result) {
