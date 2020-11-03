@@ -638,6 +638,48 @@ hive.api.getChainProperties(function(err, result) {
   console.log(err, result);
 });
 ```
+### Get Feed Entries
+Gets the posts in the feed of a user.
+The feed displays posts of followed users, as well as what they reblogged.
+
+```js
+hive.api.getFeedEntries(account, entryId, limit, callback);
+```
+
+|Parameter|Datatype|Description|
+|---------|--------|-----------|
+|account|string|a hive username|
+|entryId|number|the post id from which to start counting. Write '0' to start from newest post|
+|limit|number|a positive number|
+|callback|function|function(err, data) {/*code*/}|
+
+
+Call Example:
+```js
+hive.api.getFeedEntries("username", 0, 2, function(err, data) {
+	console.log(err, data);
+});
+```
+
+Return Example:
+```js
+[
+  {
+    author: 'otherusername',
+    permlink: 'permlink',
+    reblog_by: ['mahdiyari'], //full when post is in feed because it's reblogged
+    reblog_on: '2018-02-11T18:42:54',
+    entry_id: 10260
+  },
+  {
+    author: 'otherusername',
+    permlink: 'permlink',
+    reblog_by: [], // false when post is in feed because user follows it's author
+    reblog_on: '2018-02-11T18:39:24',
+    entry_id: 10259
+  }
+]
+```
 ### Get Feed History
 ```js
 hive.api.getFeedHistory(function(err, result) {
