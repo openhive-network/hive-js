@@ -399,6 +399,38 @@ Return Example:
    { /* ommited for simplicity */ } ]
 ```
 
+### Get Comment Discussions By Payout
+Gets the recent comments (not posts) ordered by their pending payout.
+
+```js
+hive.api.getCommentDiscussionsByPayout(query, callback);
+```
+
+|Parameter|Datatype|Description|
+|---------|--------|-----------|
+|query|object|an object containing different options for querying, like 'limit' and 'tag'|
+|callback|function|function(err, data) {/*code*/}|
+
+
+Call Example:
+```js
+var query = { limit : 3, tag : "hive" };
+hive.api.getCommentDiscussionsByPayout(query, function(err, data) {
+	console.log(err, data);
+});
+
+// NOTE! The default limit is 0. Not setting a limit will get you an empty result.
+```
+
+Return Example:
+```js
+// the result is an array of big objects representing the comments
+
+ [ { /* ommited for simplicity */ },
+   { /* ommited for simplicity */ },
+   { /* ommited for simplicity */ } ]
+```
+
 ## Blocks and transactions
 
 ### Get Block Header
