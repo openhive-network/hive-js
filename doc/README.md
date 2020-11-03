@@ -959,6 +959,23 @@ Return Example:
   }
 ]
 ```
+Using the Result:
+```js
+// Extract delegatee names from the result into an array of account name strings
+var f = result.map(function(item) { return item.delegatee; });
+console.log(f);
+
+// Get the last tag for subsequent calls to `getVestingDelegations`
+//   or use: f[f.length - 1]   if you used the extraction code above.
+var lastKnownDelegatee = result[result.length - 1].delegatee;
+
+// Use the last known delegatee to get the next group of delegatees
+hive.api.TrendingTags('mahdiyari', lastKnownDelegatee, 2, function(err, result) {
+  console.log(err, result);
+});
+```
+
+See also: [accountCreateWithDelegation](#account-create-with-delegation), [delegateVestingShares](#delegate-vesting-shares)
 
 ## Keys
 
