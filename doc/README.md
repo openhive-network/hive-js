@@ -2044,31 +2044,66 @@ hive.broadcast.withdrawVesting(wif, account, vestingShares, function(err, result
 });
 ```
 ### Witness Update
-```
+```js
 hive.broadcast.witnessUpdate(wif, owner, url, blockSigningKey, props, fee, function(err, result) {
   console.log(err, result);
 });
 ```
 ### Fill Vesting Withdraw
-```
+```js
 hive.broadcast.fillVestingWithdraw(wif, fromAccount, toAccount, withdrawn, deposited, function(err, result) {
   console.log(err, result);
 });
 ```
 ### Fill Order
-```
+```js
 hive.broadcast.fillOrder(wif, currentOwner, currentOrderid, currentPays, openOwner, openOrderid, openPays, function(err, result) {
   console.log(err, result);
 });
 ```
-### Fill Transfer From Savings
+### Get Recent Trades
+Gets a list of the last `limit` trades from the market.
+
+```js
+hive.api.getRecentTrades(limit, callback);
 ```
+
+|Parameter|Datatype|Description|
+|---------|--------|-----------|
+|limit|number|a positive number|
+|callback|function|function(err, data) {/*code*/}|
+
+
+Call Example:
+```js
+hive.api.getRecentTrades(2, function(err, data) {
+	console.log(err, data);
+});
+```
+
+Return Example:
+```js
+[
+  {
+    date: '2020-11-03T16:08:51',
+    current_pays: '51.754 HIVE',
+    open_pays: '6.085 HBD'
+  },
+  {
+    date: '2020-11-03T16:08:48',
+    current_pays: '1.134 HBD',
+    open_pays: '9.503 HIVE'
+  }
+]
+```
+### Fill Transfer From Savings
+```js
 hive.broadcast.fillTransferFromSavings(wif, from, to, amount, requestId, memo, function(err, result) {
   console.log(err, result);
 });
 ```
 ### Comment Payout
-```
+```js
 hive.broadcast.commentPayout(wif, author, permlink, payout, function(err, result) {
   console.log(err, result);
 });
