@@ -1471,12 +1471,6 @@ hive.api.getActiveWitnesses(function(err, result) {
   console.log(err, result);
 });
 ```
-### Get Miner Queue
-```js
-hive.api.getMinerQueue(function(err, result) {
-  console.log(err, result);
-});
-```
 
 ## Login API
 
