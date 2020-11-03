@@ -477,6 +477,45 @@ hive.api.getBlock(blockNum, function(err, result) {
   console.log(err, result);
 });
 ```
+### Get Ops In Block
+Gets all operations in a given block
+
+```js
+hive.api.getOpsInBlock(blockNum, onlyVirtual, callback);
+```
+
+|Parameter|Datatype|Description|
+|---------|--------|-----------|
+|blockNum|number|A positive number|
+|onlyVirtual|bool|'false' to get all operations. 'true' to only get virtual operations|
+|callback|function|function(err, data) {/*code*/}|
+
+
+Call Example:
+```js
+hive.api.getOpsInBlock(10000001, false, function(err, data) {
+	console.log(err, data);
+});
+```
+
+Return Example:
+```js
+[ { trx_id: '4b688c13940fd5b4bb11356286ef12061f71976c',
+    block: 10000001,
+    trx_in_block: 0,
+    op_in_trx: 0,
+    virtual_op: 0,
+    timestamp: '2017-03-08T17:34:24',
+    op: [ 'vote', [Object] ] },
+  { trx_id: 'a450debc8332c3b27935b3307891dfc509669edc',
+    block: 10000001,
+    trx_in_block: 2,
+    op_in_trx: 0,
+    virtual_op: 0,
+    timestamp: '2017-03-08T17:34:24',
+    op: [ 'vote', [Object] ] } ]
+
+```
 ### Get State
 ```js
 hive.api.getState(path, function(err, result) {
