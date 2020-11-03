@@ -573,6 +573,26 @@ Return Example:
 	witnesses: {...}	}
 ```
 
+### Get State With Options
+
+```js
+hive.api.getStateWith(options, callback);
+```
+
+|Parameter|Datatype|Description|
+|---------|--------|-----------|
+|options|object|like { path : "/@username"} where the path is an extension from a Hive URL. It can be used on users, posts, comments, comments-by-user, replies-to-user and so on|
+|callback|function|function(err, data) {/*code*/}|
+
+
+Call Example:
+```js
+hive.api.getStateWith({ path : "/@username" }, function(err, data) {
+	console.log(err, data);
+});
+```
+See `hive.api.getState` for more examples...
+
 ### Get Trending Categories
 ```js
 hive.api.getTrendingCategories(after, limit, function(err, result) {
