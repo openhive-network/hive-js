@@ -1879,7 +1879,7 @@ hive.broadcast.interest(wif, owner, interest, function(err, result) {
 });
 ```
 ### Limit Order Cancel
-Cancels an open limit order on the [internal market](http://steemit.com/market). Be aware that the order might be filled, or partially filled, before this call completes.
+Cancels an open limit order on the [internal market](http://wallet.hive.blog/market). Be aware that the order might be filled, or partially filled, before this call completes.
 
 ```js
 hive.broadcast.limitOrderCancel(wif, owner, orderid, function(err, result) {
