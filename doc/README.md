@@ -147,6 +147,54 @@ hive.api.TrendingTags(lastKnownTag, 2, function(err, result) {
 
 See also: [getTrendingCategories](#get-trending-categories)
 
+### Get Blog
+Gets the last `limit` number of posts of `account` before the post with index `entryId`
+
+```js
+hive.api.getBlog(account, entryId, limit, callback);
+```
+
+|Parameter|Datatype|Description|
+|---------|--------|-----------|
+|account|string|a hive username|
+|entryId|number|a positive number - the index from which to start counting (the index is zero based)|
+|limit|number|a positive number - the max count of posts to be returned|
+|callback|function|function(err, data) {/*code*/}|
+
+
+Call Example:
+```js
+hive.api.getBlog("username", 10, 3, function(err, data) {
+	console.log(err, data);
+});
+
+// In this case we have a call to get [3] posts, the newest of which is the one with index [10]
+//			(that's the 11-th post, because the post indexes are zero based)
+// That means that the results will be posts [10, 9 and 8]
+```
+
+Return Example:
+```js
+[ {
+		blog:"username"
+		comment: { /* Omited for simplicity */ }
+		entry_id: 10
+		reblog_on:"1970-01-01T00:00:00"
+	},
+	{
+		blog:"username"
+		comment: { /* Omited for simplicity */ }
+		entry_id: 9
+		reblog_on:"1970-01-01T00:00:00"
+	},
+	{
+		blog:"username"
+		comment: { /* Omited for simplicity */ }
+		entry_id: 8
+		reblog_on:"1970-01-01T00:00:00"
+	} ]
+```
+
 ### Get Discussions By Trending
 ```
 hive.api.getDiscussionsByTrending(query, function(err, result) {
