@@ -466,43 +466,43 @@ Return Example:
 ## Blocks and transactions
 
 ### Get Block Header
-```
+```js
 hive.api.getBlockHeader(blockNum, function(err, result) {
   console.log(err, result);
 });
 ```
 ### Get Block
-```
+```js
 hive.api.getBlock(blockNum, function(err, result) {
   console.log(err, result);
 });
 ```
 ### Get State
-```
+```js
 hive.api.getState(path, function(err, result) {
   console.log(err, result);
 });
 ```
 ### Get Trending Categories
-```
+```js
 hive.api.getTrendingCategories(after, limit, function(err, result) {
   console.log(err, result);
 });
 ```
 ### Get Best Categories
-```
+```js
 hive.api.getBestCategories(after, limit, function(err, result) {
   console.log(err, result);
 });
 ```
 ### Get Active Categories
-```
+```js
 hive.api.getActiveCategories(after, limit, function(err, result) {
   console.log(err, result);
 });
 ```
 ### Get Recent Categories
-```
+```js
 hive.api.getRecentCategories(after, limit, function(err, result) {
   console.log(err, result);
 });
