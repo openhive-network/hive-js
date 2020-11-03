@@ -1879,7 +1879,7 @@ hive.broadcast.interest(wif, owner, interest, function(err, result) {
 });
 ```
 ### Limit Order Cancel
-Cancels an open limit order on the [internal market](http://wallet.hive.blog/market). Be aware that the order might be filled, or partially filled, before this call completes.
+Cancels an open limit order on the [internal market](https://wallet.hive.blog/market). Be aware that the order might be filled, or partially filled, before this call completes.
 
 ```js
 hive.broadcast.limitOrderCancel(wif, owner, orderid, function(err, result) {
@@ -1898,11 +1898,31 @@ hive.broadcast.limitOrderCancel(wif, owner, orderid, function(err, result) {
 See also: [getOpenOrders](#get-open-orders), [limitOrderCancel](#limit-order-cancel), [limitOrderCreate2](#limit-order-create2)
 
 ### Limit Order Create
+Creates a limit order on the [internal market](https://wallet.hive.blog/market) to trade one asset for another using a specified minimum. Orders can be set attempt to fill immediately and or to go to the orderbook. Orders in the order book remain until filled or the expiration time is reached.
 ```js
 hive.broadcast.limitOrderCreate(wif, owner, orderid, amountToSell, minToReceive, fillOrKill, expiration, function(err, result) {
   console.log(err, result);
 });
 ```
+
+|Parameter|Description|Datatype|Notes|
+|---|---|---|---|
+|wif|Active private key|String||
+|owner|Account name|String|No leading @ symbol|
+|orderid|User defined ordernumber|Integer|Used to cancel orders|
+|amountToSell|Amount to sell|String|"X.XXX ASSET" must have 3 decimal places. e.g. "25.100 HBD"|
+|minToReceive|Amount desired|String|"X.XXX ASSET" must have 3 decimal places. e.g. "20.120 HIVE"|
+|fillOrKill|Fill order from current order book or kill the order|Boolean|`false` places the order into the Order Book until either cancelled, filled, or the expiration time is reached|
+|expiration|Time when order expires|Integer|Unit milliseconds. Zero is UNIX epoch|
+|function()|Your callback|function||
+
+Tip: `expiration` time must always be in the future even if `fillOrKill` is set to `true`.
+
+Risky tip: The Internal Market seems to always try and get the best price from the current orderbook so, to place an at market order, then use the `minToReceive` as `0.001` and `fillOrKill` as `true` (use at own risk).
+
+
+See also: [getOrderBook](#get-order-book), [getOpenOrders](#get-open-orders), [limitOrderCancel](#limit-order-cancel), [limitOrderCreate2](#limit-order-create2)
+
 ### Limit Order Create2
 ```
 hive.broadcast.limitOrderCreate2(wif, owner, orderid, amountToSell, exchangeRate, fillOrKill, expiration, function(err, result) {
