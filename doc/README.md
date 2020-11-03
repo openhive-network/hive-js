@@ -2287,14 +2287,14 @@ Return Example:
 ```
 
 ### Create Suggested Password
-```
+```js
 var password = hive.formatter.createSuggestedPassword();
 console.log(password);
 // => 'GAz3GYFvvQvgm7t2fQmwMDuXEzDqTzn9'
 ```
 
 ### Comment Permlink
-```
+```js
 var parentAuthor = 'hiveio';
 var parentPermlink = 'announcing-the-launch-of-hive-blockchain';
 var commentPermlink = hive.formatter.commentPermlink(parentAuthor, parentPermlink);
@@ -2302,9 +2302,22 @@ console.log(commentPermlink);
 ```
 
 ### Estimate Account Value
-```
+```js
 var hivePower = hive.formatter.estimateAccountValue(account);
 ```
+
+|Parameter|Datatype|Description|
+|---------|--------|-----------|
+|account|object|a hive user object|
+
+
+Call Example:
+```js
+hive.api.getAccounts(["username"], function(e1, accounts) {
+  var accountValueInUSD = hive.formatter.estimateAccountValue(accounts[0])
+    .catch(function (err) { console.log(err); })
+    .then(function (data) { console.log(data); });
+});
 
 ### Reputation
 ```
