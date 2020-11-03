@@ -150,7 +150,7 @@ See also: [getTrendingCategories](#get-trending-categories)
 ### Get Blog
 Gets the last `limit` number of posts of `account` before the post with index `entryId`
 
-```
+```js
 hive.api.getBlog(account, entryId, limit, callback);
 ```
 
@@ -163,7 +163,7 @@ hive.api.getBlog(account, entryId, limit, callback);
 
 
 Call Example:
-```
+```js
 hive.api.getBlog("username", 10, 3, function(err, data) {
 	console.log(err, data);
 });
@@ -174,7 +174,7 @@ hive.api.getBlog("username", 10, 3, function(err, data) {
 ```
 
 Return Example:
-```
+```js
 [
   {
 		blog:"username"
@@ -198,7 +198,7 @@ Return Example:
 ```
 
 ### Get Discussions By Trending
-```
+```js
 hive.api.getDiscussionsByTrending(query, function(err, result) {
   console.log(err, result);
 });
