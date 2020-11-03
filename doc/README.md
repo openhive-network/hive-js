@@ -1289,7 +1289,7 @@ hive.api.getActiveVotes(author, permlink, function(err, result) {
 });
 ```
 ### Get Account Votes
-```
+```js
 hive.api.getAccountVotes(voter, function(err, result) {
   console.log(err, result);
 });
@@ -1299,25 +1299,25 @@ hive.api.getAccountVotes(voter, function(err, result) {
 
 
 ### Get Content
-```
+```js
 hive.api.getContent(author, permlink, function(err, result) {
   console.log(err, result);
 });
 ```
 ### Get Content Replies
-```
+```js
 hive.api.getContentReplies(author, permlink, function(err, result) {
   console.log(err, result);
 });
 ```
 ### Get Discussions By Author Before Date
-```
+```js
 hive.api.getDiscussionsByAuthorBeforeDate(author, startPermlink, beforeDate, limit, function(err, result) {
   console.log(err, result);
 });
 ```
 ### Get Replies By Last Update
-```
+```js
 hive.api.getRepliesByLastUpdate(startAuthor, startPermlink, limit, function(err, result) {
   console.log(err, result);
 });
@@ -1327,43 +1327,43 @@ hive.api.getRepliesByLastUpdate(startAuthor, startPermlink, limit, function(err,
 
 
 ### Get Witnesses
-```
+```js
 hive.api.getWitnesses(witnessIds, function(err, result) {
   console.log(err, result);
 });
 ```
 ### Get Witness By Account
-```
+```js
 hive.api.getWitnessByAccount(accountName, function(err, result) {
   console.log(err, result);
 });
 ```
 ### Get Witnesses By Vote
-```
+```js
 hive.api.getWitnessesByVote(from, limit, function(err, result) {
   console.log(err, result);
 });
 ```
 ### Lookup Witness Accounts
-```
+```js
 hive.api.lookupWitnessAccounts(lowerBoundName, limit, function(err, result) {
   console.log(err, result);
 });
 ```
 ### Get Witness Count
-```
+```js
 hive.api.getWitnessCount(function(err, result) {
   console.log(err, result);
 });
 ```
 ### Get Active Witnesses
-```
+```js
 hive.api.getActiveWitnesses(function(err, result) {
   console.log(err, result);
 });
 ```
 ### Get Miner Queue
-```
+```js
 hive.api.getMinerQueue(function(err, result) {
   console.log(err, result);
 });
@@ -1375,14 +1375,14 @@ hive.api.getMinerQueue(function(err, result) {
 
 /!\ It's **not safe** to use this method with your username and password. This method always return `true` and is only used in intern with empty values to enable broadcast.
 
-```
+```js
 hive.api.login('', '', function(err, result) {
   console.log(err, result);
 });
 ```
 
 ### Get Api By Name
-```
+```js
 hive.api.getApiByName(apiName, function(err, result) {
   console.log(err, result);
 });
