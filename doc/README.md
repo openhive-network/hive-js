@@ -226,6 +226,52 @@ Return Example:
   [ 'username5', 1 ] ]
 ```
 
+### Get Blog Entries
+Gets the last `limit` number of posts of `account` before the post with index `entryId`
+Very similar to hive.api.getBlog but with much simpler result objects
+
+```js
+hive.api.getBlogEntries(account, entryId, limit, callback);
+```
+
+|Parameter|Datatype|Description|
+|---------|--------|-----------|
+|account|string|a hive username|
+|entryId|number|a positive number - the index from which to start counting (the index is zero based)|
+|limit|number|a positive number - the max count of posts to be returned|
+|callback|function|function(err, data) {/*code*/}|
+
+
+Call Example:
+```js
+hive.api.getBlogEntries("username", 10, 3, function(err, data) {
+	console.log(err, data);
+});
+
+// In this case we have a call to get [3] posts, the newest of which is the one with index [10]
+//			(that's the 11-th post, because the post indexes are zero based)
+// That means that the results will be posts [10, 9 and 8]
+```
+
+Return Example:
+```js
+[ { author: 'username',
+    permlink: 'post-permlink-10',
+    blog: 'username',
+    reblog_on: '1970-01-01T00:00:00',
+    entry_id: 10 },
+  { author: 'username',
+    permlink: 'post-permlink-9',
+    blog: 'username',
+    reblog_on: '1970-01-01T00:00:00',
+    entry_id: 9 },
+  { author: 'username',
+    permlink: 'post-permlink-8',
+    blog: 'username',
+    reblog_on: '1970-01-01T00:00:00',
+    entry_id: 8 } ]
+```
+
 ### Get Discussions By Trending
 ```js
 hive.api.getDiscussionsByTrending(query, function(err, result) {
