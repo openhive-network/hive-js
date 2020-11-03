@@ -1584,6 +1584,26 @@ hive.api.getFollowCount(account, function(err, result) {
 });
 ```
 
+|Parameter|Description|Datatype|Notes|
+|---|---|---|---|
+|account|The name for get the follow ccount for|String|No leading @ symbol|
+|function()|Your callback|function|Tip: use `console.log(err, result)` to see the result|
+
+
+Call Example:
+```js
+hive.api.getFollowCount('username', function(err, result) {
+  console.log(err, result);
+});
+```
+
+Return Example:
+```js
+{ account: 'username', follower_count: 16790, following_count: 913 }
+```
+
+See also: [getFollowers](#get-followers), [getFollowing](#get-following)
+
 ## Broadcast API
 
 ### Broadcast Transaction Synchronous
