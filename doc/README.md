@@ -1379,6 +1379,86 @@ hive.api.lookupWitnessAccounts(lowerBoundName, limit, function(err, result) {
   console.log(err, result);
 });
 ```
+### Get Witness Schedule
+Gets some general information about the witnesses.
+
+```js
+hive.api.getWitnessSchedule(callback);
+```
+
+|Parameter|Datatype|Description|
+|---------|--------|-----------|
+|callback|function|function(err, data) {/*code*/}|
+
+
+Call Example:
+```js
+hive.api.getWitnessSchedule(function(err, data) {
+  console.log(err,data);
+})
+```
+
+Return Example:
+```js
+{
+  id: 0,
+  current_virtual_time: '576908375209337450843859945',
+  next_shuffle_block_num: 48367095,
+  current_shuffled_witnesses: [
+    'cervantes',   'themarkymark',
+    'pharesim',    'stoodkev',
+    'ausbitbank',  'followbtcnews',
+    'anyx',        'gtg',
+    'steempeak',   'therealwolf',
+    'drakos',      'good-karma',
+    'blocktrades', 'roelandp',
+    'emrebeyler',  'ocd-witness',
+    'arcange',     'someguy123',
+    'steempress',  'yabapmatt',
+    'abit'
+  ],
+  num_scheduled_witnesses: 21,
+  elected_weight: 1,
+  timeshare_weight: 5,
+  miner_weight: 1,
+  witness_pay_normalization_factor: 25,
+  median_props: {
+    account_creation_fee: '3.000 HIVE',
+    maximum_block_size: 65536,
+    hbd_interest_rate: 0,
+    account_subsidy_budget: 797,
+    account_subsidy_decay: 347321
+  },
+  majority_version: '1.24.2',
+  max_voted_witnesses: 20,
+  max_miner_witnesses: 0,
+  max_runner_witnesses: 1,
+  hardfork_required_witnesses: 17,
+  account_subsidy_rd: {
+    resource_unit: 10000,
+    budget_per_time_unit: 797,
+    pool_eq: 157691079,
+    max_pool_size: 157691079,
+    decay_params: {
+      decay_per_time_unit: 347321,
+      decay_per_time_unit_denom_shift: 36
+    },
+    min_decay: 0
+  },
+  account_subsidy_witness_rd: {
+    resource_unit: 10000,
+    budget_per_time_unit: 996,
+    pool_eq: 9384019,
+    max_pool_size: 9384019,
+    decay_params: {
+      decay_per_time_unit: 7293741,
+      decay_per_time_unit_denom_shift: 36
+    },
+    min_decay: 216
+  },
+  min_witness_account_subsidy_decay: 0
+}
+```
 ### Get Witness Count
 ```js
 hive.api.getWitnessCount(function(err, result) {
