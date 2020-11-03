@@ -1163,6 +1163,49 @@ Return Example:
   ]
 }
 ```
+### Get Market Order Book With Options
+Takes the top-most `limit` entries in the market order book for both buy and sell orders.
+
+```js
+hive.api.getMarketOrderBookWith(options, callback);
+```
+
+|Parameter|Datatype|Description|
+|---------|--------|-----------|
+|options|object|like { limit:number }|
+|callback|function|function(err, data) {/*code*/}|
+
+
+Call Example:
+```js
+hive.api.getMarketOrderBookWith({ limit: 1 }, function(err, data) {
+	console.log(err, data);
+});
+```
+
+Return Example:
+```js
+{
+  asks: [
+    {
+      created: '2020-11-03T15:24:54',
+      hbd: 227,
+      hive: 1915,
+      order_price: [Object],
+      real_price: '0.11853785900783290'
+    }
+  ],
+  bids: [
+    {
+      created: '2020-11-03T15:29:30',
+      hbd: 5990,
+      hive: 50533,
+      order_price: [Object],
+      real_price: '0.11853640195515802'
+    }
+  ]
+}
+```
 ### Get Open Orders
 ```js
 hive.api.getOpenOrders(owner, function(err, result) {
