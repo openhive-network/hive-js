@@ -980,7 +980,7 @@ See also: [accountCreateWithDelegation](#account-create-with-delegation), [deleg
 ## Keys
 
 ### Get Key References
-```
+```js
 hive.api.getKeyReferences(key, function(err, result) {
   console.log(err, result);
 });
@@ -989,50 +989,50 @@ hive.api.getKeyReferences(key, function(err, result) {
 ## Accounts
 
 ### Get Accounts
-```
+```js
 hive.api.getAccounts(names, function(err, result) {
   console.log(err, result);
 });
 ```
 ### Get Account References
-```
+```js
 hive.api.getAccountReferences(accountId, function(err, result) {
   console.log(err, result);
 });
 ```
 ### Lookup Account Names
-```
+```js
 hive.api.lookupAccountNames(accountNames, function(err, result) {
   console.log(err, result);
 });
 ```
 ### Lookup Accounts
-```
+```js
 hive.api.lookupAccounts(lowerBoundName, limit, function(err, result) {
   console.log(err, result);
 });
 ```
 ### Get Account Count
-```
+```js
 hive.api.getAccountCount(function(err, result) {
   console.log(err, result);
 });
 ```
 ### Get Conversion Requests
-```
+```js
 hive.api.getConversionRequests(accountName, function(err, result) {
   console.log(err, result);
 });
 ```
 ### Get Account History
-```
+```js
 hive.api.getAccountHistory(account, from, limit, operation_filter_low, operation_filter_high, function(err, result) {
   console.log(err, result);
 });
 ```  
 Example:  
 
-```
+```js
 const { ChainTypes, makeBitMaskFilter } = require('@hiveio/hive-js/lib/auth/serializer')
 const op = ChainTypes.operations
 const walletOperationsBitmask = makeBitMaskFilter([
@@ -1059,13 +1059,13 @@ hive.api.getAccountHistory(account, from, limit, ...walletOperationsBitmask, fun
 
 
 ### Get Owner History
-```
+```js
 hive.api.getOwnerHistory(account, function(err, result) {
   console.log(err, result);
 });
 ```
 ### Get Recovery Request
-```
+```js
 hive.api.getRecoveryRequest(account, function(err, result) {
   console.log(err, result);
 });
@@ -1074,19 +1074,19 @@ hive.api.getRecoveryRequest(account, function(err, result) {
 ## Market
 
 ### Get Order Book
-```
+```js
 hive.api.getOrderBook(limit, function(err, result) {
   console.log(err, result);
 });
 ```
 ### Get Open Orders
-```
+```js
 hive.api.getOpenOrders(owner, function(err, result) {
   console.log(err, result);
 });
 ```
 ### Get Liquidity Queue
-```
+```js
 hive.api.getLiquidityQueue(startAccount, limit, function(err, result) {
   console.log(err, result);
 });
