@@ -2002,12 +2002,35 @@ hive.broadcast.transfer(wif, from, to, amount, memo, function(err, result) {
   console.log(err, result);
 });
 ```
+
+|Parameter|Description|Datatype|Notes|
+|---|---|---|---|
+|wif|Active private key for the `from` account|String||
+|from|Account name to take asset from|String|No leading @ symbol|
+|to|Account name to place asset into|String|No leading @ symbol|
+|amount|Amount of of asset to transfer|String|"X.XXX ASSET" must have 3 decimal places. e.g. "5.150 HBD"|
+|function()|Your callback|function||
+
+See also: [transferToVesting](#transfer-to-vesting)
+
 ### Transfer To Vesting
+Vests HIVE into HIVE POWER. This method supports powering up one account from another.
 ```js
 hive.broadcast.transferToVesting(wif, from, to, amount, function(err, result) {
   console.log(err, result);
 });
 ```
+
+|Parameter|Description|Datatype|Notes|
+|---|---|---|---|
+|wif|Active private key for the `from` account|String||
+|from|Account name to take HIVE from|String|No leading @ symbol|
+|to|Account name to vest HIVE POWER into|String|No leading @ symbol. Can be the same account as `to`|
+|amount|Amount of HIVE to vest/power up|String|"X.XXX HIVE" must have 3 decimal places. e.g. "25.100 HIVE". Must be denominated in HIVE|
+|function()|Your callback|function||
+
+See also: [transfer](#transfer)
+
 ### Vote
 ```js
 hive.broadcast.vote(wif, voter, author, permlink, weight, function(err, result) {
