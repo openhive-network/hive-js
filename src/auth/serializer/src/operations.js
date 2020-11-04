@@ -713,7 +713,7 @@ let remove_proposal = new Serializer(
 let update_proposal = new Serializer(
   "update_proposal", {
     creator: string,
-    proposal_id: string,
+    proposal_id: uint64,
     daily_pay: asset,
     subject: string,
     permlink: string,
