@@ -712,13 +712,13 @@ let remove_proposal = new Serializer(
 
 let update_proposal = new Serializer(
   "update_proposal", {
-  creator: string,
-  proposal_id: string,
-  daily_pay: asset,
-  subject: string,
-  permlink: string,
-  extensions: set(future_extensions)
-}
+    creator: string,
+    proposal_id: string,
+    daily_pay: asset,
+    subject: string,
+    permlink: string,
+    extensions: set(future_extensions)
+  }
 );
 
 let claim_reward_balance2 = new Serializer(
