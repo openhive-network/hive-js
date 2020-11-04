@@ -710,6 +710,17 @@ let remove_proposal = new Serializer(
 }
 );
 
+let update_proposal = new Serializer(
+  "update_proposal", {
+  creator: string,
+  proposal_id: string,
+  daily_pay: asset,
+  subject: string,
+  permlink: string,
+  extensions: set(future_extensions)
+}
+);
+
 let claim_reward_balance2 = new Serializer(
   "claim_reward_balance2", {
   account: string,
@@ -983,6 +994,7 @@ operation.st_operations = [
     create_proposal,
     update_proposal_votes,
     remove_proposal,
+    update_proposal,
     claim_reward_balance2,
     vote2,
     smt_setup,
