@@ -493,8 +493,8 @@ module.exports = [
     "roles": ["active", "owner"],
     "operation": "update_proposal",
     "params": [
-      "creator",
       "proposal_id",
+      "creator",
       "daily_pay",
       "subject",
       "permlink",
