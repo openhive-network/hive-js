@@ -490,6 +490,18 @@ module.exports = [
     ]
   },
   {
+    "roles": ["active", "owner"],
+    "operation": "update_proposal",
+    "params": [
+      "proposal_id",
+      "creator",
+      "daily_pay",
+      "subject",
+      "permlink",
+      "extensions"
+    ]
+  },
+  {
     "roles": ["posting", "active", "owner"],
     "operation": "claim_reward_balance2",
     "params": [
