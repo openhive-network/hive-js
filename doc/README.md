@@ -2385,7 +2385,7 @@ const props = {
 
 const witnessOps = hive.utils.buildWitnessUpdateOp(owner, props);
 
-hive.broadcast.witnessSetProperties('Private Signing Key', owner, witnessOps.props, [], function(err, result) {
+hive.broadcast.witnessSetProperties('Private Signing Key', owner, witnessOps[1].props, [], function(err, result) {
   console.log(err, result);
 });
 ```
