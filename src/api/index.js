@@ -43,6 +43,10 @@ class Hive extends EventEmitter {
             };
 
             this[methodName] = (...args) => {
+                if (methodName === 'getAccountHistory' && args.length < 5) {
+                  methodParams.pop();
+                  methodParams.pop();
+                }
                 const options = methodParams.reduce((memo, param, i) => {
                     memo[param] = args[i]; // eslint-disable-line no-param-reassign
                     return memo;
