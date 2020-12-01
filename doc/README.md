@@ -2347,7 +2347,7 @@ console.log(reputation);
 
 ### Vest To Hive
 
-**Warning:** hive.formatter.vestToHive() is deprecated and will be removed in the future releases.
+**Warning:** hive.formatter.vestToSteem() is deprecated and will be removed in the future releases.
 Use the following method instead:
 
 ```js
