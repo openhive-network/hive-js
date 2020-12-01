@@ -1523,13 +1523,13 @@ hive.api.getFollowers(following, startFollower, followType, limit, function(err,
 |---|---|---|---|
 |following|The followers of which account|String|No leading @ symbol|
 |startFollower|Start the list from which follower?|String|No leading @symbol. Use the empty string `''` to start the list. Subsequent calls can use the name of the last follower|
-|followType|??|??|Set to 0 or 'blog' - either works|
-|limit|The maximum number of followers to return|Integer||
+|followType|Follow or mute|String|Set to 'blog' for followers or 'ignore' for mutes|
+|limit|The maximum number of followers to return|Integer|1000 is maximum|
 |function()|Your callback|function|Tip: use `console.log(err, result)` to see the result|
 
 Call Example:
 ```js
-steem.api.getFollowers('username', '', 'blog', 2, function(err, result) {
+hive.api.getFollowers('username', '', 'blog', 2, function(err, result) {
   console.log(err, result);
 });
 ```
@@ -1569,8 +1569,8 @@ hive.api.getFollowing(follower, startFollowing, followType, limit, function(err,
 |---|---|---|---|
 |follower|The account to get the following for|String|No leading @ symbol|
 |startFollowing|Start the list at which followed account?|String|No leading @symbol. Use the empty string `''` to start the list|
-|followType|??|??|Set to 0 or 'blog' - either works|
-|limit|The maximum number of items to return|Integer||
+|followType|Follow or mute|String|Set to 'blog' for following or 'ignore' for muted|
+|limit|The maximum number of items to return|Integer|1000 is maximum|
 |function()|Your callback|function|Tip: use `console.log(err, result)` to see the result|
 
 Call Example:
@@ -1672,7 +1672,7 @@ hive.api.broadcastBlock(b, function(err, result) {
 ```
 
 # Broadcast
-The `steem.broadcast` methods cause permanent changes on the blockchain.
+The `hive.broadcast` methods cause permanent changes on the blockchain.
 ### Account Create
 ```js
 hive.broadcast.accountCreate(wif, fee, creator, newAccountName, owner, active, posting, memoKey, jsonMetadata, function(err, result) {
@@ -1686,7 +1686,7 @@ hive.broadcast.accountCreateWithDelegation(wif, fee, delegation, creator, newAcc
 });
 ```
 ### Delegate Vesting Shares
-Delegates STEEM POWER, denominated in VESTS, from a `delegator` to the `delegatee`. Requires the `delegator`'s private WIF key. Set the delegation to 0 to undelegate.
+Delegates HIVE POWER, denominated in VESTS, from a `delegator` to the `delegatee`. Requires the `delegator`'s private WIF key. Set the delegation to 0 to undelegate.
 ```js
 hive.broadcast.delegateVestingShares(wif, delegator, delegatee, vesting_shares, function(err, result) {
   console.log(err, result);
@@ -2347,7 +2347,7 @@ console.log(reputation);
 
 ### Vest To Hive
 
-**Warning:** hive.formatter.vestToSteem() is deprecated and will be removed in the future releases.
+**Warning:** hive.formatter.vestToHive() is deprecated and will be removed in the future releases.
 Use the following method instead:
 
 ```js
