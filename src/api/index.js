@@ -43,7 +43,7 @@ class Hive extends EventEmitter {
             };
 
             this[methodName] = (...args) => {
-                if (methodName === 'getAccountHistory' && args.length < 5) {
+                if (methodName === 'getAccountHistory' && args.length < 5 && methodParams.length > 4) {
                   methodParams.pop();
                   methodParams.pop();
                 }
