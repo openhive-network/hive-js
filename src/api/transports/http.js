@@ -99,6 +99,7 @@ export default class HttpTransport extends Transport {
       'broadcast_transaction_with_callback',
       'broadcast_transaction_synchronous',
       'broadcast_block',
+      'get_account_history'
     ];
   }
 
