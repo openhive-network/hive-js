@@ -510,5 +510,60 @@ export default [
       "api": "database_api",
       "method": "get_nai_pool",
       "params": []
+    },
+    {
+      "api": "bridge",
+      "method": "get_community",
+      "params": ["name", "observer"]
+    },
+    {
+      "api": "bridge",
+      "method": "list_communities",
+      "params": ["last", "limit", "query", "sort", "observer"]
+    },
+    {
+      "api": "bridge",
+      "method": "get_discussion",
+      "params": ["author", "permlink"]
+    },
+    {
+      "api": "bridge",
+      "method": "get_post",
+      "params": ["author", "permlink", "observer"]
+    },
+    {
+      "api": "bridge",
+      "method": "get_account_posts",
+      "params": ["sort", "account", "start_author", "start_permlink", "limit", "observer"]
+    },
+    {
+      "api": "bridge",
+      "method": "get_ranked_posts",
+      "params": ["sort", "start_author", "start_permlink", "limit", "tag", "observer"]
+    },
+    {
+      "api": "bridge",
+      "method": "account_notifications",
+      "params": ["account", "last_id", "limit"]
+    },
+    {
+      "api": "bridge",
+      "method": "normalize_post",
+      "params": ["post"]
+    },
+    {
+      "api": "bridge",
+      "method": "list_all_subscriptions",
+      "params": ["account"]
+    },
+    {
+      "api": "bridge",
+      "method": "list_subscribers",
+      "params": ["community"]
+    },
+    {
+      "api": "bridge",
+      "method": "get_relationship_between_accounts",
+      "params": ["follower", "following"]
     }
 ];

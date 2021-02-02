@@ -2,6 +2,7 @@ require('babel-polyfill');
 import assert from 'assert';
 import should from 'should';
 import testPost from './test-post.json';
+import testCommunity from './test-community.json';
 import steem from '../src';
 import api from '../src/api';
 
@@ -48,6 +49,22 @@ describe('steem.api:', function () {
 
       it('clears listeners', async () => {
         steem.api.listeners('message').should.have.lengthOf(0);
+      });
+    });
+  });
+  
+  describe('getCommunity', () => {
+    describe('getting a random community', () => {
+      let result;
+      it('works', async() => {
+        result = await steem.api.getCommunityAsync('hive-125125');
+        result.should.have.properties(testCommunity);
+      });
+      it('clears listeners', async () => {
+        steem.api.listeners('message').should.have.lengthOf(0);
+      });
+      it("visual check", () => {
+        console.log(result);
       });
     });
   });
