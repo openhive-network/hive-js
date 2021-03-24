@@ -1,5 +1,4 @@
-
-// This file is merge updated from steemd's js_operation_serializer program.
+// This file is merge updated from hived's js_operation_serializer program.
 /*
 
 ./js_operation_serializer |
@@ -127,6 +126,11 @@ const smt_param_rewards_v1 = new Serializer(2, {
 const smt_param_allow_downvotes = new Serializer(3, {
   value: bool
 });
+
+var update_proposal_end_date = new Serializer(1, {
+    end_date: time_point_sec
+});
+
 
 // Custom-types after Generated code
 
@@ -717,7 +721,7 @@ let update_proposal = new Serializer(
     daily_pay: asset,
     subject: string,
     permlink: string,
-    extensions: set(future_extensions)
+    extensions: set(static_variant([future_extensions, update_proposal_end_date]))
   }
 );
 
