@@ -1009,6 +1009,7 @@ operation.st_operations = [
     update_proposal_votes,
     remove_proposal,
     update_proposal,
+    collateralized_convert,
     claim_reward_balance2,
     vote2,
     smt_setup,
