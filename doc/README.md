@@ -1766,6 +1766,23 @@ hive.broadcast.convert(wif, owner, requestid, amount, function(err, result) {
   console.log(err, result);
 });
 ```
+### Collateralized Convert
+
+```js
+hive.broadcast.collateralizedConvert(wif, owner, collateral_amount, converted_amount, requestid, conversion_date, function(err, result) {
+  console.log(err, result);
+});
+```
+|Parameter|Datatype|Description|
+|---------|--------|-----------|
+|wif|string|Active private key|
+|owner|string|Hive username. "guest123"|
+|collateral_amount|string|Hive to be used as collateral for the conversion. "100.000 HIVE"|
+|converted_amount|string|Amount of HBD to be converted. "10.000 HBD"|
+|requestid|integer|Identifier for the conversion transactions from same account. 1|
+|conversion_date|string|Time at which the conversion should take place. "2020/10/10 10:00"|
+|callback|function|function(err, data) {/*code*/}|
+
 ### Curate Reward
 ```js
 hive.broadcast.curateReward(wif, curator, reward, commentAuthor, commentPermlink, function(err, result) {
