@@ -301,6 +301,16 @@ let convert = new Serializer(
 }
 );
 
+let collateralized_convert = new Serializer(
+    "collateralized_convert",{
+    owner: string,
+    collateral_amount: asset,
+    converted_amount: asset,
+    requestid: uint32,
+    conversion_date: time_point_sec
+}
+);
+
 var authority = new Serializer(
     "authority", {
     weight_threshold: uint32,
