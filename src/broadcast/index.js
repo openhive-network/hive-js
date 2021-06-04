@@ -27,6 +27,10 @@ const hiveBroadcast = {};
 hiveBroadcast.send = function hiveBroadcast$send(tx, privKeys, callback) {
   const resultP = hiveBroadcast._prepareTransaction(tx)
     .then((transaction) => {
+      if (config.get("address_prefix") === "TST") {
+        transaction.operations = JSON.parse(JSON.stringify(transaction.operations).replace(' HIVE', ' TESTS'))
+        transaction.operations = JSON.parse(JSON.stringify(transaction.operations).replace(' HBD', ' TBD'))
+      }
       debug(
         'Signing transaction (transaction, transaction.operations)',
         transaction, transaction.operations
@@ -88,10 +92,7 @@ operations.forEach((operation) => {
       if (operation.roles && operation.roles.length) {
         keys[operation.roles[0]] = wif; // TODO - Automatically pick a role? Send all?
       }
-      if (config.get("address_prefix") !== "STM") {
-        options = JSON.parse(JSON.stringify(options).replace(' HIVE', ' TESTS'))
-        options = JSON.parse(JSON.stringify(options).replace(' HBD', ' TBD'))
-      }
+
       return hiveBroadcast.send({
         extensions: [],
         operations: [[operation.operation, Object.assign(
