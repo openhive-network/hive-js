@@ -511,6 +511,19 @@ module.exports = [
     ]
   },
   {
+    "roles": ["active", "owner"],
+    "operation": "recurrent_transfer",
+    "params": [
+      "from",
+      "to",
+      "amount",
+      "memo",
+      "recurrence",
+      "executions",
+      "extensions"
+    ]
+  },
+  {
     "roles": ["posting", "active", "owner"],
     "operation": "claim_reward_balance2",
     "params": [

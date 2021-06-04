@@ -733,6 +733,18 @@ let update_proposal = new Serializer(
   }
 );
 
+let recurrent_transfer = new Serializer(
+  "recurrent_transfer", {
+    from: string,
+    to: string,
+    amount: asset,
+    memo: string,
+    recurrence: uint16,
+    executions: uint16,
+    extensions: set(future_extensions)
+  }
+);
+
 let claim_reward_balance2 = new Serializer(
   "claim_reward_balance2", {
   account: string,
@@ -1008,6 +1020,7 @@ operation.st_operations = [
     remove_proposal,
     update_proposal,
     collateralized_convert,
+    recurrent_transfer,
     claim_reward_balance2,
     vote2,
     smt_setup,

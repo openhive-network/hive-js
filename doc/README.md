@@ -2044,6 +2044,26 @@ hive.broadcast.transfer(wif, from, to, amount, memo, function(err, result) {
 |amount|Amount of of asset to transfer|String|"X.XXX ASSET" must have 3 decimal places. e.g. "5.150 HBD"|
 |function()|Your callback|function||
 
+See also: [recurrentTransfer](#recurrent-transfer)
+
+### Recurrent Transfer
+Transfers assets, such as HIVE or HBD, from one account to another.
+```js
+hive.broadcast.recurrentTransfer(wif, from, to, amount, memo, recurrence, executions, extensions, function(err, result) {
+  console.log(err, result);
+});
+```
+
+|Parameter|Description|Datatype|Notes|
+|---|---|---|---|
+|wif|Active private key for the `from` account|String||
+|from|Account name to take asset from|String|No leading @ symbol|
+|to|Account name to place asset into|String|No leading @ symbol|
+|amount|Amount of of asset to transfer|String|"X.XXX ASSET" must have 3 decimal places. e.g. "5.150 HBD"|
+|recurrence|How often will the payment be triggered|Integer|e.g. 48 - unit: hours|
+|executions|The times the recurrent payment will be executed|Integer|e.g. 10 - one tranfer per recurrence|
+|function()|Your callback|function||
+
 See also: [transferToVesting](#transfer-to-vesting)
 
 ### Transfer To Vesting
