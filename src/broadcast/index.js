@@ -88,6 +88,10 @@ operations.forEach((operation) => {
       if (operation.roles && operation.roles.length) {
         keys[operation.roles[0]] = wif; // TODO - Automatically pick a role? Send all?
       }
+      if (config.get("address_prefix") !== "STM") {
+        options = JSON.parse(JSON.stringify(options).replace(' HIVE', ' TESTS'))
+        options = JSON.parse(JSON.stringify(options).replace(' HBD', ' TBD'))
+      }
       return hiveBroadcast.send({
         extensions: [],
         operations: [[operation.operation, Object.assign(
