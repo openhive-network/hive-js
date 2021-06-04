@@ -101,10 +101,8 @@ module.exports = [
     "operation": "collateralized_convert",
     "params": [
       "owner",
-      "collateral_amount",
-      "converted_amount",
       "requestid",
-      "conversion_date"
+      "amount"
     ]
   },
   {
