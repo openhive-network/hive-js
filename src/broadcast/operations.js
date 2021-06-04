@@ -97,6 +97,15 @@ module.exports = [
     ]
   },
   {
+    "roles": ["active","owner"],
+    "operation": "collateralized_convert",
+    "params": [
+      "owner",
+      "requestid",
+      "amount"
+    ]
+  },
+  {
     "roles": ["active", "owner"],
     "operation": "account_create",
     "params": [

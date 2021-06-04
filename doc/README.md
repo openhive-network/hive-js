@@ -1766,6 +1766,21 @@ hive.broadcast.convert(wif, owner, requestid, amount, function(err, result) {
   console.log(err, result);
 });
 ```
+### Collateralized Convert
+
+```js
+hive.broadcast.collateralizedConvert(wif, owner, requestid, amount, function(err, result) {
+  console.log(err, result);
+});
+```
+|Parameter|Datatype|Description|
+|---------|--------|-----------|
+|wif|string|Active private key. "5xx...xxxx"|
+|owner|string|Hive username. "guest123"|
+|requestid|integer|Identifier for the conversion transactions from same account. 1|
+|amount|string|Hive to be used as collateral for the conversion. "100.000 HIVE"|
+|callback|function|function(err, data) {/*code*/}|
+
 ### Curate Reward
 ```js
 hive.broadcast.curateReward(wif, curator, reward, commentAuthor, commentPermlink, function(err, result) {
