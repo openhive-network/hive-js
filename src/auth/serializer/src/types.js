@@ -159,9 +159,9 @@ Types.asset = {
 
             // Hive workaround for now
             symbol = symbol == "HIVE" ? "STEEM" : symbol == "HBD" ? "SBD" : symbol
-            if (symbol == "STEEM" && "address_prefix" ) != "STM") {
+            if (symbol == "STEEM" && "address_prefix" != "STM") {
               symbol = "TESTS"
-            } else if (symbol == "SBD" && "address_prefix" ) != "STM") {
+            } else if (symbol == "SBD" && "address_prefix" != "STM") {
               symbol = "TBD"
             }
 
