@@ -83,6 +83,16 @@ ChainTypes.operations= {
     effective_comment_vote: 72,
     ineffective_delete_comment: 73,
     sps_convert: 74,
+    expired_account_notification: 75,
+    changed_recovery_account: 76,
+    transfer_to_vesting_completed: 77,
+    pow_reward: 78,
+    vesting_shares_split: 79,
+    account_created: 80,
+    fill_collateralized_convert_request: 81,
+    system_warning: 82,
+    fill_recurrent_transfer: 83,
+    failed_recurrent_transfer: 84
  };
 
 //types.hpp
