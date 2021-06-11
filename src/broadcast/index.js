@@ -28,8 +28,8 @@ hiveBroadcast.send = function hiveBroadcast$send(tx, privKeys, callback) {
   const resultP = hiveBroadcast._prepareTransaction(tx)
     .then((transaction) => {
       if (config.get("address_prefix") === "TST") {
-        transaction.operations = JSON.parse(JSON.stringify(transaction.operations).replace(' HIVE', ' TESTS'))
-        transaction.operations = JSON.parse(JSON.stringify(transaction.operations).replace(' HBD', ' TBD'))
+        transaction.operations = JSON.parse(JSON.stringify(transaction.operations).replaceAll(' HIVE', ' TESTS'))
+        transaction.operations = JSON.parse(JSON.stringify(transaction.operations).replaceAll(' HBD', ' TBD'))
       }
       debug(
         'Signing transaction (transaction, transaction.operations)',
