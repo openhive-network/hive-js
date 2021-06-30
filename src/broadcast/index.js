@@ -9,9 +9,6 @@ import { camelCase } from '../utils';
 var operations = require('./operations');
 const config = require('../config')
 
-const HF23_CHAIN_ID = '0000000000000000000000000000000000000000000000000000000000000000'
-const HF24_CHAIN_ID = 'beeab0de00000000000000000000000000000000000000000000000000000000'
-
 const debug = newDebug('hive:broadcast');
 const noop = function() {}
 const formatter = formatterFactory(hiveApi);
@@ -28,8 +25,8 @@ hiveBroadcast.send = function hiveBroadcast$send(tx, privKeys, callback) {
   const resultP = hiveBroadcast._prepareTransaction(tx)
     .then((transaction) => {
       if (config.get("address_prefix") === "TST") {
-        transaction.operations = JSON.parse(JSON.stringify(transaction.operations).replaceAll(' HIVE', ' TESTS'))
-        transaction.operations = JSON.parse(JSON.stringify(transaction.operations).replaceAll(' HBD', ' TBD'))
+        transaction.operations = JSON.parse(JSON.stringify(transaction.operations).replace(/ HIVE/g, ' TESTS'))
+        transaction.operations = JSON.parse(JSON.stringify(transaction.operations).replace(/ HBD/g, ' TBD'))
       }
       debug(
         'Signing transaction (transaction, transaction.operations)',

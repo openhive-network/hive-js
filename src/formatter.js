@@ -207,7 +207,7 @@ module.exports = hiveAPI => {
         .replace(/[^a-zA-Z0-9]+/g, "")
         .toLowerCase();
       parentPermlink = parentPermlink.replace(/(-\d{8}t\d{9}z)/g, "");
-      return ("re-" + parentAuthor + "-" + parentPermlink + "-" + timeStr).replaceAll(".", "");
+      return ("re-" + parentAuthor + "-" + parentPermlink + "-" + timeStr).replace(".", "");
     },
 
     amount: function(amount, asset) {
