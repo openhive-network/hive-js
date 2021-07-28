@@ -42,7 +42,7 @@ hiveBroadcast.send = function hiveBroadcast$send(tx, privKeys, callback) {
         'Broadcasting transaction (transaction, transaction.operations)',
         transaction, transaction.operations
       );
-      return hiveApi.broadcastTransactionSynchronousAsync(
+      return hiveApi.broadcastTransactionAsync(
         signedTransaction
       ).then((result) => {
         return Object.assign({}, result, signedTransaction);
