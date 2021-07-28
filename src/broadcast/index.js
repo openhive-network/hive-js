@@ -5,7 +5,8 @@ import formatterFactory from '../formatter';
 import hiveApi from '../api';
 import hiveAuth from '../auth';
 import { camelCase } from '../utils';
-
+import { transaction as trxSerializer } from '../auth/serializer/src/operations'
+import { hash } from '../auth/ecc';
 var operations = require('./operations');
 const config = require('../config')
 
@@ -22,6 +23,7 @@ const hiveBroadcast = {};
  */
 
 hiveBroadcast.send = function hiveBroadcast$send(tx, privKeys, callback) {
+  let trxId
   const resultP = hiveBroadcast._prepareTransaction(tx)
     .then((transaction) => {
       if (config.get("address_prefix") === "TST") {
@@ -32,6 +34,8 @@ hiveBroadcast.send = function hiveBroadcast$send(tx, privKeys, callback) {
         'Signing transaction (transaction, transaction.operations)',
         transaction, transaction.operations
       );
+      const buf = trxSerializer.toBuffer(trx);
+      trxId = hash.sha256(buf).toString('hex').slice(0, 40);
       return Promise.join(
         transaction,
         hiveAuth.signTransaction(transaction, privKeys)
@@ -45,7 +49,8 @@ hiveBroadcast.send = function hiveBroadcast$send(tx, privKeys, callback) {
       return hiveApi.broadcastTransactionAsync(
         signedTransaction
       ).then((result) => {
-        return Object.assign({}, result, signedTransaction);
+        // TODO tomorrow: check transaction status then return status
+        return Object.assign({ id: trxId }, result, signedTransaction);
       });
     });
 
