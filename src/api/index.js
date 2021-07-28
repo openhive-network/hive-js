@@ -355,7 +355,7 @@ class Hive extends EventEmitter {
     const trx = options.trx;
     return this.send(
         'network_broadcast_api', {
-            method: 'broadcast_transaction',
+            method: 'broadcast_transaction_synchronous',
             params: [trx],
         },
         (err, result) => {
