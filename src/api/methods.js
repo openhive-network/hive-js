@@ -431,7 +431,7 @@ export default [
       "params": ["blogAccount"]
     },
     {
-      "api": "network_broadcast_api",
+      "api": "condenser_api",
       "method": "broadcast_transaction",
       "params": ["trx"]
     },
