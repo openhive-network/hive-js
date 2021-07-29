@@ -36,9 +36,14 @@ class Hive extends EventEmitter {
             const methodParams = method.params || [];
 
             this[`${methodName}With`] = (options, callback) => {
+                const params = {}
+                for (let i = 0; i < methodParams.length; i++) {
+                  params[methodParams[i]] = options[methodParams[i]]
+                }
                 return this.send(method.api, {
                     method: method.method,
-                    params: methodParams.map(param => options[param])
+                    paramsCondenserApi: methodParams.map(param => options[param]),
+                    params
                 }, callback);
             };
 

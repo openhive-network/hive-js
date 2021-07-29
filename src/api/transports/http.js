@@ -53,29 +53,20 @@ export function jsonRpc(uri, {method, id, params, fetchMethod=fetch}) {
 
 export default class HttpTransport extends Transport {
   send(api, data, callback) {
+    let params = data.params
     if (this.options.useAppbaseApi) {
       api = 'condenser_api';
+      params = data.paramsCondenserApi
     }
     debug('Steem::send', api, data);
     const id = data.id || this.id++;
-    let params = [api, data.method, data.params];
-    //SPECIAL CODE - can be removed after all API node operators upgrade to get the updated get_account_history api call
-    // if (this.options.uri !== 'https://api.hive.blog' && data.method === 'get_account_history' && data.params.length >= 4)
-    // {
-    //     //We are experimenting with a new version of get_account_history that can now take up to 5 params
-    //     //but this is only deployed on api.hive.blog nodes, so if this particular request is going to a different
-    //     //backend, just strip the extra parameters off the call to avoid breaking it. Once all API nodes have upgraded
-    //     //this code can be removed.
-    //     while (data.params.length > 3)
-    //         data.params.pop();
-    //     params = [api, data.method, data.params];
-    // }
-    //END SPECIAL CODE
+    const method = data.method
+
     const retriable = this.retriable(api, data);
     const fetchMethod = this.options.fetchMethod;
     if (retriable) {
       retriable.attempt((currentAttempt) => {
-        jsonRpc(this.options.uri, { method: 'call', id, params, fetchMethod }).then(
+        jsonRpc(this.options.uri, { method, id, params, fetchMethod }).then(
           res => { callback(null, res); },
           err => {
             if (retriable.retry(err)) {
@@ -86,7 +77,7 @@ export default class HttpTransport extends Transport {
         );
       });
     } else {
-      jsonRpc(this.options.uri, { method: 'call', id, params, fetchMethod }).then(
+      jsonRpc(this.options.uri, { method, id, params, fetchMethod }).then(
         res => { callback(null, res); },
         err => { callback(err); }
       );
