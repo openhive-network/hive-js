@@ -1,105 +1,76 @@
 export default [
     {
-      "api": "database_api",
-      "method": "set_subscribe_callback",
-      "params": ["callback", "clearFilter"]
-    },
-    {
-      "api": "database_api",
-      "method": "set_pending_transaction_callback",
-      "params": ["cb"]
-    },
-    {
-      "api": "database_api",
-      "method": "set_block_applied_callback",
-      "params": ["cb"]
-    },
-    {
-      "api": "database_api",
-      "method": "cancel_all_subscriptions"
-    },
-    {
-      "api": "database_api",
+      "api": "condenser_api",
       "method": "get_trending_tags",
-      "params": ["afterTag", "limit"]
+      "params": ["tag", "limit"]
     },
     {
-      "api": "database_api",
+      "api": "condenser_api",
       "method": "get_tags_used_by_author",
-      "params": ["author"]
+      "params": ["account"]
     },
     {
-      "api": "database_api",
+      "api": "condenser_api",
       "method": "get_post_discussions_by_payout",
       "params": ["query"]
     },
     {
-      "api": "database_api",
+      "api": "condenser_api",
       "method": "get_comment_discussions_by_payout",
       "params": ["query"]
     },
     {
-      "api": "database_api",
+      "api": "condenser_api",
       "method": "get_discussions_by_trending",
       "params": ["query"]
     },
     {
-      "api": "database_api",
-      "method": "get_discussions_by_trending30",
-      "params": ["query"]
-    },
-    {
-      "api": "database_api",
+      "api": "condenser_api",
       "method": "get_discussions_by_created",
       "params": ["query"]
     },
     {
-      "api": "database_api",
+      "api": "condenser_api",
       "method": "get_discussions_by_active",
       "params": ["query"]
     },
     {
-      "api": "database_api",
+      "api": "condenser_api",
       "method": "get_discussions_by_cashout",
       "params": ["query"]
     },
     {
-      "api": "database_api",
-      "method": "get_discussions_by_payout",
-      "params": ["query"]
-    },
-    {
-      "api": "database_api",
+      "api": "condenser_api",
       "method": "get_discussions_by_votes",
       "params": ["query"]
     },
     {
-      "api": "database_api",
+      "api": "condenser_api",
       "method": "get_discussions_by_children",
       "params": ["query"]
     },
     {
-      "api": "database_api",
+      "api": "condenser_api",
       "method": "get_discussions_by_hot",
       "params": ["query"]
     },
     {
-      "api": "database_api",
+      "api": "condenser_api",
       "method": "get_discussions_by_feed",
       "params": ["query"]
     },
     {
-      "api": "database_api",
+      "api": "condenser_api",
       "method": "get_discussions_by_blog",
       "params": ["query"]
     },
     {
-      "api": "database_api",
+      "api": "condenser_api",
       "method": "get_discussions_by_comments",
       "params": ["query"]
     },
     {
-      "api": "database_api",
+      "api": "condenser_api",
       "method": "get_discussions_by_promoted",
       "params": ["query"]
     },
@@ -114,34 +85,14 @@ export default [
       "params": ["block_num"]
     },
     {
-      "api": "database_api",
+      "api": "account_history_api",
       "method": "get_ops_in_block",
-      "params": ["blockNum", "onlyVirtual"]
+      "params": ["block_num", "only_virtual"]
     },
     {
-      "api": "database_api",
+      "api": "condenser_api",
       "method": "get_state",
       "params": ["path"]
-    },
-    {
-      "api": "database_api",
-      "method": "get_trending_categories",
-      "params": ["after", "limit"]
-    },
-    {
-      "api": "database_api",
-      "method": "get_best_categories",
-      "params": ["after", "limit"]
-    },
-    {
-      "api": "database_api",
-      "method": "get_active_categories",
-      "params": ["after", "limit"]
-    },
-    {
-      "api": "database_api",
-      "method": "get_recent_categories",
-      "params": ["after", "limit"]
     },
     {
       "api": "database_api",
@@ -152,7 +103,7 @@ export default [
       "method": "get_dynamic_global_properties"
     },
     {
-      "api": "database_api",
+      "api": "condenser_api",
       "method": "get_chain_properties"
     },
     {
@@ -160,7 +111,7 @@ export default [
       "method": "get_feed_history"
     },
     {
-      "api": "database_api",
+      "api": "condenser_api",
       "method": "get_current_median_history_price"
     },
     {
@@ -168,101 +119,91 @@ export default [
       "method": "get_witness_schedule"
     },
     {
-      "api": "database_api",
+      "api": "condenser_api",
       "method": "get_hardfork_version"
     },
     {
-      "api": "database_api",
+      "api": "condenser_api",
       "method": "get_next_scheduled_hardfork"
     },
     {
       "api": "account_by_key_api",
       "method": "get_key_references",
-      "params": ["key"]
+      "params": ["keys"]
     },
     {
-      "api": "database_api",
+      "api": "condenser_api",
       "method": "get_accounts",
       "params": ["names"]
     },
     {
-      "api": "database_api",
+      "api": "condenser_api",
       "method": "get_account_references",
       "params": ["accountId"]
     },
     {
-      "api": "database_api",
+      "api": "condenser_api",
       "method": "lookup_account_names",
-      "params": ["accountNames"]
+      "params": ["accounts"]
     },
     {
-      "api": "database_api",
+      "api": "condenser_api",
       "method": "lookup_accounts",
-      "params": ["lowerBoundName", "limit"]
+      "params": ["lower_bound_name", "limit"]
     },
     {
-      "api": "database_api",
+      "api": "condenser_api",
       "method": "get_account_count"
     },
     {
-      "api": "database_api",
+      "api": "condenser_api",
       "method": "get_conversion_requests",
       "params": ["accountName"]
     },
     {
-      "api": "database_api",
+      "api": "account_history_api",
       "method": "get_account_history",
       "params": ["account", "from", "limit", "operation_filter_low", "operation_filter_high"],
     },
     {
-      "api": "database_api",
+      "api": "condenser_api",
       "method": "get_owner_history",
       "params": ["account"]
     },
     {
-      "api": "database_api",
+      "api": "condenser_api",
       "method": "get_recovery_request",
       "params": ["account"]
     },
     {
-      "api": "database_api",
+      "api": "condenser_api",
       "method": "get_escrow",
-      "params": ["from", "escrowId"]
+      "params": ["from", "escrow_id"]
     },
     {
-      "api": "database_api",
+      "api": "condenser_api",
       "method": "get_withdraw_routes",
-      "params": ["account", "withdrawRouteType"]
+      "params": ["account", "withdraw_route_type"]
     },
     {
-      "api": "database_api",
-      "method": "get_account_bandwidth",
-      "params": ["account", "bandwidthType"]
-    },
-    {
-      "api": "database_api",
+      "api": "condenser_api",
       "method": "get_savings_withdraw_from",
       "params": ["account"]
     },
     {
-      "api": "database_api",
+      "api": "condenser_api",
       "method": "get_savings_withdraw_to",
       "params": ["account"]
     },
     {
-      "api": "database_api",
+      "api": "condenser_api",
       "method": "get_order_book",
       "params": ["limit"]
     },
     {
-      "api": "database_api",
+      "api": "condenser_api",
       "method": "get_open_orders",
       "params": ["owner"]
-    },
-    {
-      "api": "database_api",
-      "method": "get_liquidity_queue",
-      "params": ["startAccount", "limit"]
     },
     {
       "api": "database_api",
@@ -270,14 +211,14 @@ export default [
       "params": ["trx"]
     },
     {
-      "api": "database_api",
+      "api": "condenser_api",
       "method": "get_transaction",
-      "params": ["trxId"]
+      "params": ["trx_id"]
     },
     {
       "api": "database_api",
       "method": "get_required_signatures",
-      "params": ["trx", "availableKeys"]
+      "params": ["trx", "available_keys"]
     },
     {
       "api": "database_api",
@@ -292,60 +233,60 @@ export default [
     {
       "api": "database_api",
       "method": "verify_account_authority",
-      "params": ["nameOrId", "signers"]
+      "params": ["account", "signers"]
     },
     {
-      "api": "database_api",
+      "api": "condenser_api",
       "method": "get_active_votes",
       "params": ["author", "permlink"]
     },
     {
       "api": "database_api",
-      "method": "get_account_votes",
+      "method": "list_votes",
       "params": ["voter"]
     },
     {
-      "api": "database_api",
+      "api": "condenser_api",
       "method": "get_content",
       "params": ["author", "permlink"]
     },
     {
-      "api": "database_api",
+      "api": "condenser_api",
       "method": "get_content_replies",
       "params": ["author", "permlink"]
     },
     {
-      "api": "database_api",
+      "api": "condenser_api",
       "method": "get_discussions_by_author_before_date",
-      "params": ["author", "startPermlink", "beforeDate", "limit"]
+      "params": ["author", "start_permlink", "before_date", "limit"]
     },
     {
-      "api": "database_api",
+      "api": "condenser_api",
       "method": "get_replies_by_last_update",
-      "params": ["startAuthor", "startPermlink", "limit"]
+      "params": ["start_author", "start_permlink", "limit"]
     },
     {
-      "api": "database_api",
+      "api": "condenser_api",
       "method": "get_witnesses",
       "params": ["witnessIds"]
     },
     {
-      "api": "database_api",
+      "api": "condenser_api",
       "method": "get_witness_by_account",
-      "params": ["accountName"]
+      "params": ["account"]
     },
     {
-      "api": "database_api",
+      "api": "condenser_api",
       "method": "get_witnesses_by_vote",
       "params": ["from", "limit"]
     },
     {
-      "api": "database_api",
+      "api": "condenser_api",
       "method": "lookup_witness_accounts",
-      "params": ["lowerBoundName", "limit"]
+      "params": ["lower_bound_name", "limit"]
     },
     {
-      "api": "database_api",
+      "api": "condenser_api",
       "method": "get_witness_count"
     },
     {
@@ -353,82 +294,72 @@ export default [
       "method": "get_active_witnesses"
     },
     {
-      "api": "database_api",
-      "method": "get_miner_queue"
-    },
-    {
-      "api": "database_api",
+      "api": "condenser_api",
       "method": "get_reward_fund",
       "params": ["name"]
     },
     {
       "api": "database_api",
+      "method": "get_reward_funds"
+    },
+    {
+      "api": "condenser_api",
       "method": "get_vesting_delegations",
       "params": ["account", "from", "limit"]
     },
     {
-      "api": "login_api",
-      "method": "login",
-      "params": ["username", "password"]
-    },
-    {
-      "api": "login_api",
-      "method": "get_api_by_name",
-      "params": ["database_api"]
-    },
-    {
-      "api": "login_api",
+      "api": "database_api",
       "method": "get_version"
     },
     {
-      "api": "follow_api",
+      "api": "condenser_api",
       "method": "get_followers",
-      "params": ["following", "startFollower", "followType", "limit"]
+      "params": ["account", "start", "type", "limit"]
     },
     {
-      "api": "follow_api",
+      "api": "condenser_api",
       "method": "get_following",
-      "params": ["follower", "startFollowing", "followType", "limit"]
+      "params": ["account", "start", "type", "limit"]
     },
     {
-      "api": "follow_api",
+      "api": "condenser_api",
       "method": "get_follow_count",
       "params": ["account"]
     },
     {
-      "api": "follow_api",
+      "api": "condenser_api",
       "method": "get_feed_entries",
-      "params": ["account", "entryId", "limit"]
+      "params": ["account", "start_entry_id", "limit"]
     },
     {
-      "api": "follow_api",
+      "api": "condenser_api",
       "method": "get_feed",
-      "params": ["account", "entryId", "limit"]
+      "params": ["account", "start_entry_id", "limit"]
     },
     {
-      "api": "follow_api",
+      "api": "condenser_api",
       "method": "get_blog_entries",
-      "params": ["account", "entryId", "limit"]
+      "params": ["account", "start_entry_id", "limit"]
     },
     {
-      "api": "follow_api",
+      "api": "condenser_api",
       "method": "get_blog",
-      "params": ["account", "entryId", "limit"]
+      "params": ["account", "start_entry_id", "limit"]
     },
     {
-      "api": "follow_api",
+      "api": "condenser_api",
       "method": "get_account_reputations",
-      "params": ["lowerBoundName", "limit"]
+      "params": ["lower_bound_name", "limit"]
     },
     {
-      "api": "follow_api",
+      "api": "condenser_api",
       "method": "get_reblogged_by",
       "params": ["author", "permlink"]
     },
     {
-      "api": "follow_api",
+      "api": "condenser_api",
       "method": "get_blog_authors",
-      "params": ["blogAccount"]
+      "params": ["account"]
     },
     {
       "api": "condenser_api",
@@ -436,24 +367,14 @@ export default [
       "params": ["trx"]
     },
     {
-      "api": "network_broadcast_api",
-      "method": "broadcast_transaction_with_callback",
-      "params": ["confirmationCallback", "trx"]
-    },
-    {
-      "api": "network_broadcast_api",
+      "api": "condenser_api",
       "method": "broadcast_transaction_synchronous",
       "params": ["trx"]
     },
     {
       "api": "network_broadcast_api",
       "method": "broadcast_block",
-      "params": ["b"]
-    },
-    {
-      "api": "network_broadcast_api",
-      "method": "set_max_block_age",
-      "params": ["maxBlockAge"]
+      "params": ["block"]
     },
     {
       "api": "transaction_status_api",
@@ -494,26 +415,24 @@ export default [
     {
       "api": "market_history_api",
       "method": "get_market_history_buckets",
-      "params": []
     },
     {
       "api": "database_api",
       "method": "find_proposals",
-      "params": ["id_set"]
+      "params": ["proposal_ids"]
     },
     {
       "api": "database_api",
       "method": "list_proposals",
-      "params": ["start", "limit", "order_by", "order_direction", "status"]
+      "params": ["start", "limit", "order", "order_direction", "status"]
     },
     {
       "api": "database_api",
       "method": "list_proposal_votes",
-      "params": ["start", "limit", "order_by", "order_direction", "status"]
+      "params": ["start", "limit", "order", "order_direction", "status"]
     },
     {
       "api": "database_api",
       "method": "get_nai_pool",
-      "params": []
     }
 ];
