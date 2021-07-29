@@ -14,6 +14,16 @@ const debug = newDebug('hive:broadcast');
 const noop = function() {}
 const formatter = formatterFactory(hiveApi);
 
+function getTransactionStatus(trxId, expiration, time = 3000) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      hiveApi.findTransactionAsync(trxId, expiration).then(res => {
+        resolve(res)
+      })
+    }, time)
+  })
+}
+
 const hiveBroadcast = {};
 
 // Base transaction logic -----------------------------------------------------
@@ -49,8 +59,14 @@ hiveBroadcast.send = function hiveBroadcast$send(tx, privKeys, callback) {
       return hiveApi.broadcastTransactionAsync(
         signedTransaction
       ).then((result) => {
-        // TODO tomorrow: check transaction status then return status
-        return Object.assign({ id: trxId }, result, signedTransaction);
+        const expiration = signedTransaction.expiration
+        return getTransactionStatus(trxId, expiration).then(res => {
+          const obj = { id: trxId, status: res.status }
+          if (res.block_num) {
+            obj.block_num = res.block_num
+          }
+          return Object.assign(obj, result, signedTransaction);
+        })
       });
     });
 
