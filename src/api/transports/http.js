@@ -56,6 +56,8 @@ export default class HttpTransport extends Transport {
     let params = data.params
     if (this.options.useAppbaseApi) {
       api = 'condenser_api';
+    }
+    if (api === 'condenser_api') {
       params = data.paramsCondenserApi
     }
     debug('Steem::send', api, data);
