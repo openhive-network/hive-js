@@ -104,14 +104,14 @@ export default [
       "params": ["query"]
     },
     {
-      "api": "database_api",
+      "api": "condenser_api",
       "method": "get_block_header",
-      "params": ["blockNum"]
+      "params": ["block_num"]
     },
     {
-      "api": "database_api",
+      "api": "block_api",
       "method": "get_block",
-      "params": ["blockNum"]
+      "params": ["block_num"]
     },
     {
       "api": "database_api",
