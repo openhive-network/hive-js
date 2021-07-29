@@ -104,14 +104,14 @@ export default [
       "params": ["query"]
     },
     {
-      "api": "database_api",
+      "api": "condenser_api",
       "method": "get_block_header",
-      "params": ["blockNum"]
+      "params": ["block_num"]
     },
     {
-      "api": "database_api",
+      "api": "block_api",
       "method": "get_block",
-      "params": ["blockNum"]
+      "params": ["block_num"]
     },
     {
       "api": "database_api",
@@ -431,7 +431,7 @@ export default [
       "params": ["blogAccount"]
     },
     {
-      "api": "network_broadcast_api",
+      "api": "condenser_api",
       "method": "broadcast_transaction",
       "params": ["trx"]
     },
@@ -454,6 +454,11 @@ export default [
       "api": "network_broadcast_api",
       "method": "set_max_block_age",
       "params": ["maxBlockAge"]
+    },
+    {
+      "api": "transaction_status_api",
+      "method": "find_transaction",
+      "params": ["transaction_id", "expiration"]
     },
     {
       "api": "market_history_api",

@@ -5,13 +5,24 @@ import formatterFactory from '../formatter';
 import hiveApi from '../api';
 import hiveAuth from '../auth';
 import { camelCase } from '../utils';
-
+import { transaction as trxSerializer } from '../auth/serializer/src/operations'
+import { hash } from '../auth/ecc';
 var operations = require('./operations');
 const config = require('../config')
 
 const debug = newDebug('hive:broadcast');
 const noop = function() {}
 const formatter = formatterFactory(hiveApi);
+
+function getTransactionStatus(trxId, expiration, time = 3000) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      hiveApi.findTransactionAsync(trxId, expiration).then(res => {
+        resolve(res)
+      })
+    }, time)
+  })
+}
 
 const hiveBroadcast = {};
 
@@ -22,6 +33,7 @@ const hiveBroadcast = {};
  */
 
 hiveBroadcast.send = function hiveBroadcast$send(tx, privKeys, callback) {
+  let trxId
   const resultP = hiveBroadcast._prepareTransaction(tx)
     .then((transaction) => {
       if (config.get("address_prefix") === "TST") {
@@ -32,6 +44,8 @@ hiveBroadcast.send = function hiveBroadcast$send(tx, privKeys, callback) {
         'Signing transaction (transaction, transaction.operations)',
         transaction, transaction.operations
       );
+      const buf = trxSerializer.toBuffer(transaction);
+      trxId = hash.sha256(buf).toString('hex').slice(0, 40);
       return Promise.join(
         transaction,
         hiveAuth.signTransaction(transaction, privKeys)
@@ -42,10 +56,17 @@ hiveBroadcast.send = function hiveBroadcast$send(tx, privKeys, callback) {
         'Broadcasting transaction (transaction, transaction.operations)',
         transaction, transaction.operations
       );
-      return hiveApi.broadcastTransactionSynchronousAsync(
+      return hiveApi.broadcastTransactionAsync(
         signedTransaction
       ).then((result) => {
-        return Object.assign({}, result, signedTransaction);
+        const expiration = signedTransaction.expiration
+        return getTransactionStatus(trxId, expiration).then(res => {
+          const obj = { id: trxId, status: res.status }
+          if (res.block_num) {
+            obj.block_num = res.block_num
+          }
+          return Object.assign(obj, result, signedTransaction);
+        })
       });
     });
 
