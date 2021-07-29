@@ -34,7 +34,7 @@ hiveBroadcast.send = function hiveBroadcast$send(tx, privKeys, callback) {
         'Signing transaction (transaction, transaction.operations)',
         transaction, transaction.operations
       );
-      const buf = trxSerializer.toBuffer(trx);
+      const buf = trxSerializer.toBuffer(transaction);
       trxId = hash.sha256(buf).toString('hex').slice(0, 40);
       return Promise.join(
         transaction,
