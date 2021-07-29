@@ -456,6 +456,11 @@ export default [
       "params": ["maxBlockAge"]
     },
     {
+      "api": "transaction_status_api",
+      "method": "find_transaction",
+      "params": ["transaction_id", "expiration"]
+    },
+    {
       "api": "market_history_api",
       "method": "get_ticker",
       "params": []
