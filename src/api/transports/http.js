@@ -54,7 +54,7 @@ export function jsonRpc(uri, {method, id, params, fetchMethod=fetch}) {
 export default class HttpTransport extends Transport {
   send(api, data, callback) {
     let params = data.params
-    if (this.options.useAppbaseApi) {
+    if (this.options.useAppbaseApi && api !== 'transaction_status_api') {
       api = 'condenser_api';
     }
     if (api === 'condenser_api') {
