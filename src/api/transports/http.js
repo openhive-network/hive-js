@@ -58,11 +58,11 @@ export default class HttpTransport extends Transport {
       api = 'condenser_api';
     }
     if (api === 'condenser_api') {
-      params = data.paramsCondenserApi
+      params = data.paramsCondenserApi;
     }
     debug('Steem::send', api, data);
     const id = data.id || this.id++;
-    const method = data.method
+    const method = api + '.' + data.method;
 
     const retriable = this.retriable(api, data);
     const fetchMethod = this.options.fetchMethod;
