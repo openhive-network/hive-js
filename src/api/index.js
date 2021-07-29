@@ -196,6 +196,8 @@ class Hive extends EventEmitter {
     setOptions(options) {
         Object.assign(this.options, options);
 
+        if (options.hasOwnProperty('useAppbaseApi'))
+            config.set('useAppbaseApi', options.useAppbaseApi)
         if (options.hasOwnProperty('failover_threshold'))
             this.failover_threshold = options.failover_threshold;
         if (options.hasOwnProperty('alternative_api_endpoints'))
