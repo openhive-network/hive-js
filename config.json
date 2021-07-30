@@ -8,5 +8,6 @@
   "address_prefix": "STM",
   "chain_id": "beeab0de00000000000000000000000000000000000000000000000000000000",
   "alternative_api_endpoints": ["https://api.hive.blog", "https://anyx.io"],
-  "failover_threshold": 3
+  "failover_threshold": 3,
+  "useAppbaseApi": true
 }
