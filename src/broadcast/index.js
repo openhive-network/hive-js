@@ -60,7 +60,6 @@ hiveBroadcast.send = function hiveBroadcast$send(tx, privKeys, callback) {
         signedTransaction
       ).then((result) => {
         return Object.assign({ id: trxId }, result, signedTransaction);
-        })
       });
     });
 
