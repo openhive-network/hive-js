@@ -59,13 +59,7 @@ hiveBroadcast.send = function hiveBroadcast$send(tx, privKeys, callback) {
       return hiveApi.broadcastTransactionAsync(
         signedTransaction
       ).then((result) => {
-        const expiration = signedTransaction.expiration
-        return getTransactionStatus(trxId, expiration).then(res => {
-          const obj = { id: trxId, status: res.status }
-          if (res.block_num) {
-            obj.block_num = res.block_num
-          }
-          return Object.assign(obj, result, signedTransaction);
+        return Object.assign({ id: trxId }, result, signedTransaction);
         })
       });
     });
