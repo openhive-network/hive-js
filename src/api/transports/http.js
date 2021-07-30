@@ -2,6 +2,7 @@ import fetch from 'cross-fetch';
 import newDebug from 'debug';
 import retry from 'retry';
 import Transport from './base';
+import config from '../../config';
 
 const debug = newDebug('steem:http');
 
@@ -54,7 +55,7 @@ export function jsonRpc(uri, {method, id, params, fetchMethod=fetch}) {
 export default class HttpTransport extends Transport {
   send(api, data, callback) {
     let params = data.params
-    if (this.options.useAppbaseApi && api !== 'transaction_status_api') {
+    if ((config.get('useAppbaseApi') || this.options.useAppbaseApi) && api !== 'transaction_status_api') {
       api = 'condenser_api';
     }
     if (api === 'condenser_api') {
