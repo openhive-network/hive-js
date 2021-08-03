@@ -7,7 +7,7 @@
   "stage_uri": "",
   "address_prefix": "STM",
   "chain_id": "beeab0de00000000000000000000000000000000000000000000000000000000",
-  "alternative_api_endpoints": ["https://api.hive.blog", "https://anyx.io"],
+  "alternative_api_endpoints": ["https://api.hive.blog", "https://api.ha.deathwing.me"],
   "failover_threshold": 3,
   "useAppbaseApi": true
 }
