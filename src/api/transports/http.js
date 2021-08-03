@@ -28,6 +28,7 @@ export class RPCError extends Error {
  */
 export function jsonRpc(uri, {method, id, params, fetchMethod=fetch}) {
   const payload = {id, jsonrpc: '2.0', method, params};
+  console.log("making jsonRpc call. uri is: ", uri, "     payload is: ", payload);
   return fetchMethod(uri, {
     body: JSON.stringify(payload),
     method: 'post',
@@ -46,6 +47,11 @@ export function jsonRpc(uri, {method, id, params, fetchMethod=fetch}) {
       throw new Error(`Invalid response id: ${ rpcRes.id }`);
     }
     if (rpcRes.error) {
+      if (rpcRes.error.data.toString().includes('does not exist'))
+      {
+        console.log("avoiding a 500 by returning empty after error: ", rpcRes.error.data);
+        return "";
+      }
       throw new RPCError(rpcRes.error);
     }
     return rpcRes.result
