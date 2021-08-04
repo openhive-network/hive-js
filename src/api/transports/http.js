@@ -46,6 +46,12 @@ export function jsonRpc(uri, {method, id, params, fetchMethod=fetch}) {
       throw new Error(`Invalid response id: ${ rpcRes.id }`);
     }
     if (rpcRes.error) {
+        if (rpcRes.error.data.toString().includes('does not exist'))
+        {
+            //hivemind returns an error when tags aren't found, but it's not really an error
+            //because the http return code was ok, so just return an empty response instead
+            return "";
+        }
       throw new RPCError(rpcRes.error);
     }
     return rpcRes.result
