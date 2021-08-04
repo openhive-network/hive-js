@@ -50,7 +50,7 @@ export function jsonRpc(uri, {method, id, params, fetchMethod=fetch}) {
         {
             //hivemind returns an error when tags aren't found, but it's not really an error
             //because the http return code was ok, so just return an empty response instead
-            return "";
+            return "{\"id\":" + rpcRes.id + ", \"result\":[], \"jsonrpc\":\"2.0\"}";
         }
       throw new RPCError(rpcRes.error);
     }
