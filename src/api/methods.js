@@ -434,5 +434,28 @@ export default [
     {
       "api": "database_api",
       "method": "get_nai_pool",
-    }
+    },
+    {
+      "api": "rc_api",
+      "method": "find_rc_accounts",
+      "params": ["accounts"]
+    },
+    {
+      "api": "rc_api",
+      "method": "list_rc_accounts",
+      "params": ["start", "limit"]
+    },
+    {
+      "api": "rc_api",
+      "method": "list_rc_direct_delegations",
+      "params": ["start", "limit"]
+    },
+    {
+      "api": "rc_api",
+      "method": "get_resource_params",
+    },
+    {
+      "api": "rc_api",
+      "method": "get_resource_pool",
+    },
 ];
