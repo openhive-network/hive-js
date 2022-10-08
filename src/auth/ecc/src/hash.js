@@ -1,5 +1,6 @@
 import createHash from 'create-hash';
 import createHmac from 'create-hmac';
+import rmd160 from 'ripemd160';
 
 /** @arg {string|Buffer} data
     @arg {string} [digest = null] - 'hex', 'binary' or 'base64'
@@ -30,7 +31,7 @@ function HmacSHA256(buffer, secret) {
 }
 
 function ripemd160(data) {
-    return createHash('rmd160').update(data).digest()
+    return new rmd160().update(data).digest();
 }
 
 // function hash160(buffer) {
