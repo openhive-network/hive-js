@@ -1,6 +1,6 @@
 {
   "name": "@hiveio/hive-js",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "Hive.js the JavaScript API for Hive blockchain",
   "main": "lib/index.js",
   "scripts": {
@@ -49,6 +49,7 @@
     "jsbi": "^3.1.4",
     "lodash": "^4.16.4",
     "retry": "^0.12.0",
+    "ripemd160": "^2.0.2",
     "secure-random": "^1.1.2",
     "ws": "^3.3.2"
   },
