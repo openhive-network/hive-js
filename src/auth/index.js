@@ -10,7 +10,7 @@ var bigi = require('bigi'),
 	PublicKey = require('./ecc/src/key_public'),
   hash = require('./ecc/src/hash');
 
-var Auth = {};
+var Auth = { Signature };
 var transaction = operations.transaction;
 var signed_transaction = operations.signed_transaction;
 
