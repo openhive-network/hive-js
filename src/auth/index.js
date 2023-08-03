@@ -10,7 +10,7 @@ var bigi = require('bigi'),
 	PublicKey = require('./ecc/src/key_public'),
   hash = require('./ecc/src/hash');
 
-var Auth = { Signature };
+var Auth = {};
 var transaction = operations.transaction;
 var signed_transaction = operations.signed_transaction;
 
@@ -98,9 +98,13 @@ Auth.wifToPublic = function (privWif) {
 	return pubWif;
 };
 
-Auth.isPubkey = function(pubkey, address_prefix) {
+Auth.isPubkey = function (pubkey, address_prefix) {
 	return PublicKey.fromString(pubkey, address_prefix) != null
-}
+};
+
+Auth.signMessage = function (msg, privWif) {
+	return Signature.sign(msg, privWif).toHex();
+};
 
 Auth.signTransaction = function (trx, keys) {
 	var signatures = [];
