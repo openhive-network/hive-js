@@ -2289,6 +2289,11 @@ hive.auth.wifToPublic(privWif);
 hive.auth.signTransaction(trx, keys);
 ```
 
+### Sign a message
+```js
+hive.auth.signMessage(message, privateKey)
+```
+
 # Formatter
 
 ### Amount
