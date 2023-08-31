@@ -2041,7 +2041,7 @@ hive.broadcast.transfer(wif, from, to, amount, memo, function(err, result) {
 |wif|Active private key for the `from` account|String||
 |from|Account name to take asset from|String|No leading @ symbol|
 |to|Account name to place asset into|String|No leading @ symbol|
-|amount|Amount of of asset to transfer|String|"X.XXX ASSET" must have 3 decimal places. e.g. "5.150 HBD"|
+|amount|Amount of asset to transfer|String|"X.XXX ASSET" must have 3 decimal places. e.g. "5.150 HBD"|
 |function()|Your callback|function||
 
 See also: [recurrentTransfer](#recurrent-transfer)
@@ -2297,7 +2297,7 @@ hive.auth.signMessage(message, privateKey)
 # Formatter
 
 ### Amount
-Formats number and currency to the valid way for sending (for example - it trims the number's floating point remainer to 3 digits only).
+Formats number and currency to the valid way for sending (for example - it trims the number's floating point remainder to 3 digits only).
 
 ```js
 hive.formatter.amount(_amount, asset);
