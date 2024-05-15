@@ -41,17 +41,17 @@ export function validateAccountName(value) {
   for (i = 0, len = ref.length; i < len; i++) {
     label = ref[i];
     if (!/^[a-z]/.test(label)) {
-      return suffix + "start with a letter.";
+      return suffix + "start with a lowercase letter.";
     }
     if (!/^[a-z0-9-]*$/.test(label)) {
-      return suffix + "have only letters, digits, or dashes.";
+      return suffix + "have only lowercase letters, digits, or dashes.";
     }
     // Multiple dashes in a row is VALID
     // if (/--/.test(label)) {
     //   return suffix + "have only one dash in a row.";
     // }
     if (!/[a-z0-9]$/.test(label)) {
-      return suffix + "end with a letter or digit.";
+      return suffix + "end with a lowercase letter or digit.";
     }
     if (!(label.length >= 3)) {
       return suffix + "be longer";
