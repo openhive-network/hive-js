@@ -2062,6 +2062,7 @@ hive.broadcast.recurrentTransfer(wif, from, to, amount, memo, recurrence, execut
 |amount|Amount of of asset to transfer|String|"X.XXX ASSET" must have 3 decimal places. e.g. "5.150 HBD"|
 |recurrence|How often will the payment be triggered|Integer|e.g. 48 - unit: hours|
 |executions|The times the recurrent payment will be executed|Integer|e.g. 10 - one tranfer per recurrence|
+|extensions|Optionally can be used to set a pair_id|Array[object]|e.g. `[{ type: 1, value: { pair_id: 3 } }]` or `[]`|
 |function()|Your callback|function||
 
 See also: [transferToVesting](#transfer-to-vesting)
