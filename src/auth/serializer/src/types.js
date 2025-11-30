@@ -729,18 +729,8 @@ Types.set = function(st_operation){
         return this.validate(((() => {
             var result = [];
             for (var i = 0, o; i < object.length; i++) {
-              o = object[i];
-              var obj = st_operation.toObject(o, debug);
-              // Convert static_variant array format [type, value] to object format {type, value} ONLY for recurrent_transfer extensions
-              // Detect recurrent_transfer_pair_id by checking if it's a 2-element array with numeric type index 1
-              var isRecurrentTransferExtension = Array.isArray(obj) && obj.length === 2 && obj[0] === 1 &&
-                typeof obj[1] === 'object' && obj[1] !== null && 'pair_id' in obj[1];
-              if (isRecurrentTransferExtension) {
-                obj = { type: obj[0], value: obj[1] };
-                result.push(obj);
-              } else {
-                result.push(o);
-              }
+                o = object[i];
+                result.push(st_operation.toObject(o, debug));
             }
             return result;
         })()));
