@@ -733,8 +733,9 @@ let update_proposal = new Serializer(
   }
 );
 
-let recurrent_transfer_pair_id = new Serializer(1, {
-  pair_id: uint8
+let recurrent_transfer_pair_id = new Serializer(0,{
+  type: uint8,
+  value: new Serializer(0, { pair_id: uint8 })
 });
 
 let recurrent_transfer = new Serializer("recurrent_transfer", {
@@ -744,7 +745,7 @@ let recurrent_transfer = new Serializer("recurrent_transfer", {
     memo: string,
     recurrence: uint16,
     executions: uint16,
-    extensions: set(static_variant([future_extensions, recurrent_transfer_pair_id]))
+    extensions: set(recurrent_transfer_pair_id)
 });
 
 let claim_reward_balance2 = new Serializer(
